@@ -1,10 +1,10 @@
 <template>
   <nav class="navigation">
     <label class="navigation__start logo">SpeedRead</label>
-    <ul>
-      <the-navigation-item v-for="link in links" :key="link.name" :link="link"/>
-    </ul>
     <div class="navigation__end">
+      <ul class="navigation__links">
+        <the-navigation-item v-for="link in links" :key="link.name" :link="link"/>
+      </ul>
       <the-locale-switcher/>
     </div>
   </nav>
@@ -33,6 +33,11 @@ export default {
   padding: 1rem;
   color: #fff;
   background-color: #3d536a;
+}
+
+.navigation__links {
+  display: flex;
+  justify-self: flex-end;
 }
 
 .navigation__start,

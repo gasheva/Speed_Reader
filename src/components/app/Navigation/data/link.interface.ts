@@ -1,6 +1,6 @@
 export interface Link {
     name: string,
-    label: Map<string, string>,
+    label: string,
     route: string,
     icon: string,
 }

@@ -1,3 +1,5 @@
 {
-  "message": "hello i18n !!"
+  "message": "Привет i18n !!",
+  "homePage": "Домашняя страница",
+  "exercisePage": "Упражнения"
 }
