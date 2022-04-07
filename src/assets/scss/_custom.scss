@@ -1,0 +1,17 @@
+* {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// override router-link
+.router-link-exact-active {
+  color: #42b983;
+}
+
+.wrapper {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
