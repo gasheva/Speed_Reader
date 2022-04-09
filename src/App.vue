@@ -1,14 +1,40 @@
 <template>
-  <the-navigation class="wrapper"/>
+  <the-header class="wrapper"/>
   <router-view class="wrapper"/>
 </template>
 
-<script>
-import TheNavigation from '@/components/app/Navigation/TheNavigation';
+<script lang="ts">
+import TheHeader from '@/components/app/Navigation/TheHeader.vue';
+import {computed, onMounted, onUnmounted, ref, watch} from "vue";
+import {getBreakPoint} from "@/utils/utils";
+import {useStore} from "vuex";
 
 export default {
-  components: {TheNavigation},
-};
+  components: {TheHeader},
+  setup() {
+    const store = useStore();
+    const windowWidth = ref(0);
+    let breakpoint = computed(() => store.getters.getBreakpoint);
+    const handleResize = (() => {
+      windowWidth.value = window.innerWidth;
+    });
+
+    watch(windowWidth, (width) => {
+      let br = getBreakPoint(width);
+      if (breakpoint.value !== br) {
+        store.commit('setBreakpoint', br)
+      }
+    }, {immediate: true});
+
+    onMounted(() => {
+      window.addEventListener('resize', handleResize);
+    });
+
+    onUnmounted(() => {
+      window.removeEventListener('resize', handleResize);
+    })
+  },
+}
 </script>
 
 <style lang="scss">
