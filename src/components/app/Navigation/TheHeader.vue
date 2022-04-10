@@ -3,7 +3,7 @@
     <label class="header__start logo">SpeedRead</label>
     <div class="header__end">
       <div v-if="isScreenSmall">
-        <button class="burger">Burger</button>
+        <burger-button/>
       </div>
       <div v-else>
         <ul class="navigation">
@@ -22,22 +22,17 @@
 import links from '@/components/app/Navigation/data/index'
 import TheLocaleSwitcher from "@/components/app/Navigation/TheLocaleSwitcher.vue";
 import {useI18n} from "vue-i18n";
-import {computed} from "vue";
-import {Breakpoints} from "@/constants/breakpoint.constant";
 import TheMobileSidebar from "@/components/app/Navigation/TheMobileSidebar.vue";
-import {useStore} from 'vuex';
+import BurgerButton from "@/components/app/Navigation/BurgerButton.vue";
+import {useBreakpoint} from '@/composable/breakpoint';
 
 export default {
   name: 'TheHeader',
-  components: {TheMobileSidebar, TheLocaleSwitcher},
+  components: {BurgerButton, TheMobileSidebar, TheLocaleSwitcher},
   setup() {
     const {t} = useI18n();
-    const store = useStore();
-    let breakpoint = computed<Breakpoints>(() => store.getters.getBreakpoint)
-    let isScreenSmall = computed<Boolean>(
-        () => {
-          return breakpoint.value === Breakpoints.XS || breakpoint.value === Breakpoints.SM
-        })
+
+    let {isScreenSmall} = useBreakpoint();
     return {
       links,
       t,
