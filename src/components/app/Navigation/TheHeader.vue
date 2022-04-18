@@ -3,7 +3,7 @@
     <label class="header__start logo">SpeedRead</label>
     <div class="header__end">
       <div v-if="isScreenSmall">
-        <burger-button/>
+        <burger-button data-test="burgerButton"/>
       </div>
       <div v-else>
         <ul class="navigation">
@@ -32,11 +32,12 @@ export default {
   setup() {
     const {t} = useI18n();
 
-    let {isScreenSmall} = useBreakpoint();
+    let {isScreenSmall, breakpoint} = useBreakpoint();
     return {
       links,
       t,
       isScreenSmall,
+      breakpoint
     };
   }
 };
