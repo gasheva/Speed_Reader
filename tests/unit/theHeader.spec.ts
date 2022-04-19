@@ -1,10 +1,7 @@
-import {config, shallowMount} from "@vue/test-utils";
+import {shallowMount} from "@vue/test-utils";
 import TheHeader from "@/components/app/Navigation/TheHeader.vue";
 import * as m from "@/composable/breakpoint"; // 1. import module
 import {computed} from "vue";
-import {DataTestIdPlugin} from "./utils";
-
-config.plugins.VueWrapper.install(DataTestIdPlugin);
 
 const mockI18n = {t: (msg: string) => msg};
 
@@ -32,16 +29,10 @@ describe('TheHeader.vue', () => {
         const useBreakpointMockImplementation = {...useBreakpointResult, isScreenSmall: (computed(() => true))};
         mockUseBrekpoint = jest.spyOn(m, 'useBreakpoint').mockImplementation(() => useBreakpointMockImplementation);
         // 4. the order is important
-        const wrapper = shallowMount(TheHeader, {
-            global: {
-                mocks: {
-                    t: (msg: string) => msg,
-                }
-            }
-        });
+        const wrapper = shallowMount(TheHeader);
 
         // expect(wrapper.find('[data-test="burgerButton"]').exists()).toBe(true);
-        expect(wrapper.find('[data-test="burgerButton"]').exists()).toBe(false);
+        expect(wrapper.find('[data-test="burgerButton"]').exists()).toBe(true);
     });
 
     it('should not render burger button', function () {

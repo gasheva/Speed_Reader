@@ -14,5 +14,18 @@ const DataTestIdPlugin = (wrapper: VueWrapper) => {
         findByTestId,
     }
 }
+const setupMock = () => {
+    function mockI18n(jest: any) {
+        const mockI18n = {t: (msg: string) => msg};
 
-export {DataTestIdPlugin}
+        jest.mock('vue-i18n', () => ({
+            useI18n: () => mockI18n,
+        }));
+    }
+
+    return {
+        mockI18n
+    }
+}
+
+export {DataTestIdPlugin, setupMock}
