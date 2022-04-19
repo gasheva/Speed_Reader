@@ -32,12 +32,11 @@ export default {
   setup() {
     const {t} = useI18n();
 
-    let {isScreenSmall, breakpoint} = useBreakpoint();
+    let {isScreenSmall} = useBreakpoint();
     return {
       links,
       t,
       isScreenSmall,
-      breakpoint
     };
   }
 };
