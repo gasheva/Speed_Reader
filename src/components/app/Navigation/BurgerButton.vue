@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button :class="{'burger--active':isActive}" class="burger" @click="toggleSidebar">
+    <button :class="{'burger--active':isActive}" class="burger" data-test="burgerButton" @click="toggleSidebar">
       Burger
     </button>
   </div>

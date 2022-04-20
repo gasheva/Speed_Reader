@@ -28,4 +28,11 @@ const setupMock = () => {
     }
 }
 
-export {DataTestIdPlugin, setupMock}
+function spyOnModule(module: any, methodName: string, override: Object = {}) {
+    if (!module[methodName]) throw (`Module ${module} does not have method ${methodName}`)
+    const useResult = module[methodName]();
+    const useMockImplementation = {...useResult, ...override};
+    return jest.spyOn(module, methodName).mockImplementation(() => useMockImplementation);
+}
+
+export {DataTestIdPlugin, setupMock, spyOnModule}
