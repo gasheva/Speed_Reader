@@ -1,6 +1,6 @@
 import {Breakpoints} from "@/constants/breakpoint.constant";
 
-export function getBreakPoint(windowWidth: Number): Breakpoints | undefined {
+export function getBreakpoint(windowWidth: Number): Breakpoints | undefined {
     switch (true) {
         case windowWidth >= 1400:
             return Breakpoints.XXL;

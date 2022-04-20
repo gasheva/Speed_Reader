@@ -1,23 +1,16 @@
 <template>
-  <div>
-    <the-header class="wrapper"/>
-    <the-mobile-sidebar v-if="isSidebarVisible"/>
-    <router-view class="wrapper"/>
-  </div>
+  <main-layout/>
 </template>
 
 <script lang="ts">
-import TheHeader from '@/components/app/Navigation/TheHeader.vue';
-import {computed, defineAsyncComponent, onMounted, onUnmounted, ref, watch} from "vue";
-import {getBreakPoint} from "@/utils/utils";
+import {computed, onMounted, onUnmounted, ref, watch} from "vue";
+import {getBreakpoint} from "@/utils/utils";
 import {useStore} from "vuex";
+import MainLayout from "@/components/layouts/MainLayout.vue";
 
 export default {
   components: {
-    TheHeader,
-    TheMobileSidebar: defineAsyncComponent(() =>
-        import('@/components/app/Navigation/TheMobileSidebar.vue')
-    )
+    MainLayout,
   },
   setup() {
     const store = useStore();
@@ -28,7 +21,7 @@ export default {
     });
 
     watch(windowWidth, (width) => {
-      let br = getBreakPoint(width);
+      let br = getBreakpoint(width);
       if (breakpoint.value !== br) {
         store.commit('setBreakpoint', br)
       }
@@ -42,11 +35,6 @@ export default {
       window.removeEventListener('resize', handleResize);
     })
 
-
-    let isSidebarVisible = computed(() => store.getters.isSidebarVisible)
-    return {
-      isSidebarVisible
-    }
   },
 }
 </script>
