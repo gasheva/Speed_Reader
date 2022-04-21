@@ -6,12 +6,15 @@
         <burger-button data-test="burgerButton"/>
       </div>
       <div v-else>
-        <ul class="navigation">
+        <ul class="header__navigation navigation">
           <router-link v-for="link in links" :key="link.name" :to="link.route" class="navigation-item">
             <span class="navigation-item__icon icon"></span>
             <span>{{ t(link.label) }}</span>
           </router-link>
         </ul>
+
+        <!-- USER SUBMENU -->
+        <user-box main-text="valhalla2022@g.com" secondary-text="base access"/>
         <the-locale-switcher/>
       </div>
     </div>
@@ -25,10 +28,11 @@ import {useI18n} from "vue-i18n";
 import TheMobileSidebar from "@/components/app/Navigation/TheMobileSidebar.vue";
 import BurgerButton from "@/components/app/Navigation/BurgerButton.vue";
 import {useBreakpoint} from '@/composable/breakpoint';
+import UserBox from "@/components/components/UserBox.vue";
 
 export default {
   name: 'TheHeader',
-  components: {BurgerButton, TheMobileSidebar, TheLocaleSwitcher},
+  components: {UserBox, BurgerButton, TheMobileSidebar, TheLocaleSwitcher},
   setup() {
     const {t} = useI18n();
 
