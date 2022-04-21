@@ -1,5 +1,6 @@
 <template>
-  <div class="home wrapper">
+  <div class="home">
+    HOME
   </div>
 </template>
 
