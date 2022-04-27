@@ -7,7 +7,7 @@
 
 <script>
 import {computed} from "vue";
-import {icons} from "@/constants/icons"
+import {icons} from "@/constants/icons.constants"
 
 export default {
   name: "Bell",
