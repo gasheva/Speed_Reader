@@ -27,6 +27,7 @@ export default {
   position: relative;
   display: inline-block;
   padding: 0.25rem;
+  color: white;
 
   &__count {
     position: absolute;
