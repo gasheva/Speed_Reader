@@ -1,14 +1,11 @@
 import {createStore} from 'vuex'
 import {Breakpoints} from "@/constants/breakpoint.constant";
+import {toaster} from "@/store/modules/toaster";
 
 export default createStore({
     state: {
         breakpoint: Breakpoints.XL,
         isSidebarVisible: false,
-    },
-    getters: {
-        getBreakpoint: state => state.breakpoint,
-        isSidebarVisible: state => state.isSidebarVisible,
     },
     mutations: {
         setBreakpoint(state, breakpoint: Breakpoints) {
@@ -19,5 +16,7 @@ export default createStore({
         }
     },
     actions: {},
-    modules: {}
+    modules: {
+        toaster
+    }
 })

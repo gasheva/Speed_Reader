@@ -2,9 +2,9 @@ import {useBreakpoint} from "@/composable/breakpoint";
 import {Breakpoints} from "@/constants/breakpoint.constant";
 
 const store = {
-    getters: {
-        getBreakpoint: Breakpoints.XS,
-    }
+    state: {
+        breakpoint: Breakpoints.XS,
+    },
 }
 jest.mock('@/store', () => store);
 

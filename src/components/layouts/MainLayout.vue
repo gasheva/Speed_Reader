@@ -8,11 +8,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import {computed, defineAsyncComponent} from "vue";
 import {useStore} from "vuex";
-import TheHeader from "@/components/app/Navigation/TheHeader";
-import TheFooter from "@/components/app/TheFooter";
+import TheHeader from "@/components/app/Navigation/TheHeader.vue";
+import TheFooter from "@/components/app/TheFooter.vue";
 import {useBreakpoint} from "@/composable/breakpoint";
 
 export default {
@@ -25,11 +25,11 @@ export default {
   },
   setup() {
     const store = useStore();
-    let isSidebarVisible = computed(() => store.getters.isSidebarVisible)
+    let isSidebarVisible = computed(() => store.state.isSidebarVisible)
     let {isScreenSmall} = useBreakpoint();
     return {
       isSidebarVisible,
-      isScreenSmall
+      isScreenSmall,
     }
   }
 }

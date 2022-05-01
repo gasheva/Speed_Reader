@@ -15,7 +15,7 @@ export default {
   setup() {
     const store = useStore();
     const windowWidth = ref(window.innerWidth);
-    let breakpoint = computed(() => store.getters.getBreakpoint);
+    let breakpoint = computed(() => store.state.breakpoint);
     const handleResize = (() => {
       windowWidth.value = window.innerWidth;
     });
