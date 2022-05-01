@@ -1,12 +1,18 @@
 <template>
-  <a class="user-box">
-    <div class="user-box__image">
-      <img alt="user logo" src="@/assets/mock/mockUserLogo.png">
+  <div>
+    <a class="user-box">
+      <div class="user-box__image">
+        <img alt="user logo" src="@/assets/mock/mockUserLogo.png">
+      </div>
+      <div>
+        <span v-html="chevronDown"></span>
+      </div>
+    </a>
+    <!--TODO(show dropdown on click)-->
+    <div class="dropdown">
+
     </div>
-    <div>
-      <span v-html="chevronDown"></span>
-    </div>
-  </a>
+  </div>
 </template>
 
 <script lang="ts">
@@ -31,9 +37,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.dropdown {
+  min-height: 4rem;
+}
+
 .user-box {
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   &__image {
     height: 3rem;
