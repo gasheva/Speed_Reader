@@ -1,9 +1,11 @@
 import {shallowMount} from '@vue/test-utils';
 import * as route from 'vue-router';
+import {RouteLocationNormalizedLoaded} from 'vue-router';
 import App from '@/App.vue';
 import MainLayout from '@/components/layouts/MainLayout.vue';
 import {createStore} from 'vuex';
 import {Breakpoints} from '@/constants/breakpoint.constant';
+import EmptyLayout from '@/components/layouts/EmptyLayout.vue';
 
 const store = createStore({
     state() {
@@ -22,18 +24,16 @@ describe('App.vue', () => {
     });
 
     it('should render main layout', function () {
-        const useRouteResults = route.useRoute();
         const useRouteMockImplementation = {meta: {layout: 'main'}};
-        // @ts-ignore
-        mockUseRoute = jest.spyOn(route, 'useRoute').mockImplementation(() => useRouteMockImplementation);
+        mockUseRoute = jest.spyOn(route, 'useRoute').mockReturnValue(useRouteMockImplementation as unknown as RouteLocationNormalizedLoaded);
 
         const wrapper = shallowMount(App, {
             global: {
                 plugins: [store],
             }
         });
-
-        // @ts-ignore
+        
         expect(wrapper.findComponent(MainLayout).exists()).toBe(true);
+        expect(wrapper.findComponent(EmptyLayout).exists()).toBe(false);
     });
 });
