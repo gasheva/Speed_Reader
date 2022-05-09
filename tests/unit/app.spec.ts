@@ -32,8 +32,22 @@ describe('App.vue', () => {
                 plugins: [store],
             }
         });
-        
+
         expect(wrapper.findComponent(MainLayout).exists()).toBe(true);
         expect(wrapper.findComponent(EmptyLayout).exists()).toBe(false);
+    });
+
+    it('should render empty layout', function () {
+        const useRouteMockImplementation = {meta: {layout: 'empty'}};
+        mockUseRoute = jest.spyOn(route, 'useRoute').mockReturnValue(useRouteMockImplementation as unknown as RouteLocationNormalizedLoaded);
+
+        const wrapper = shallowMount(App, {
+            global: {
+                plugins: [store],
+            }
+        });
+
+        expect(wrapper.findComponent(MainLayout).exists()).toBe(false);
+        expect(wrapper.findComponent(EmptyLayout).exists()).toBe(true);
     });
 });
