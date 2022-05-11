@@ -1,8 +1,11 @@
-import {createStore} from 'vuex'
-import {Breakpoints} from "@/constants/breakpoint.constant";
-import {toaster} from "@/store/modules/toaster";
+import {createLogger, createStore} from 'vuex';
+import {Breakpoints} from '@/constants/breakpoint.constant';
+import {toaster} from '@/store/modules/toaster';
+
+const debug = process.env.NODE_ENV !== 'production';
 
 export default createStore({
+    plugins: debug ? [createLogger()] : [],
     state: {
         breakpoint: Breakpoints.XL,
         isSidebarVisible: false,
@@ -19,4 +22,4 @@ export default createStore({
     modules: {
         toaster
     }
-})
+});
