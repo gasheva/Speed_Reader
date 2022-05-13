@@ -26,6 +26,7 @@ describe('BurgerButton.vue', () => {
             }
         });
 
+
         const burgerButton = wrapper.find('[data-test="burgerButton"]');
         expect((burgerButton).attributes().class).not.toMatch('--active');
 

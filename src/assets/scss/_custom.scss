@@ -39,3 +39,34 @@
 .text-big {
 
 }
+
+.link {
+  display: inline-block;
+  color: black;
+  font-family: $roboto;
+  transition: color 250ms;
+
+  &:visited {
+    color: black;
+  }
+
+  &:after {
+    display: block;
+    content: '';
+    border-bottom: 1px solid $blue-1;
+    transform: scaleX(0); // scale from 0...
+    transition: transform 250ms ease-in-out; // to 'hero' (to full width)
+  }
+
+  &:hover:after {
+    transform: scaleX(1);
+  }
+
+  &:hover {
+    color: $blue-1;
+    transition: color 250ms;
+  }
+
+  &:active {
+  }
+}
