@@ -1,22 +1,23 @@
-const {defineConfig} = require('@vue/cli-service')
-module.exports = defineConfig({
+const {defineConfig} = require('@vue/cli-service');
+module.exports       = defineConfig({
     transpileDependencies: true,
-    css: {
+    css:                   {
         loaderOptions: {
             sass: {
-                additionalData: '@import "@/assets/scss/style.scss";'
-            }
-        }
+                // import only variables to use everywhere
+                additionalData: '@import "@/assets/scss/_variables.scss";',
+            },
+        },
     },
-    pluginOptions: {
+    pluginOptions:         {
         i18n: {
-            locale: 'ru',
-            fallbackLocale: 'ru',
-            localeDir: 'locales',
-            enableLegacy: false,
-            runtimeOnly: false,
+            locale:          'ru',
+            fallbackLocale:  'ru',
+            localeDir:       'locales',
+            enableLegacy:    false,
+            runtimeOnly:     false,
             compositionOnly: false,
-            fullInstall: true
-        }
-    }
-})
+            fullInstall:     true,
+        },
+    },
+});
