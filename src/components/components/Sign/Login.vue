@@ -5,20 +5,31 @@
         <input-text :hint="'Password'"/>
 
         <div class="wrapper">
-            <base-button style-btn="black"/>
+            <base-button style-btn="black" @click="login"/>
         </div>
         <a class="link" href="#">Забыли пароль?</a>
     </div>
 </template>
 
-<script>
-import BaseButton from '@/components/app/BaseButton';
-import InputText  from '@/components/app/InputText';
+<script lang="ts">
+import BaseButton from '@/components/app/BaseButton.vue';
+import InputText from '@/components/app/InputText.vue';
+import {defineComponent} from 'vue';
+import {useStore} from 'vuex';
 
-export default {
-    name:       'Login',
+export default defineComponent({
+    name: 'Login',
     components: {BaseButton, InputText},
-};
+    setup() {
+        const store = useStore();
+        const login = () => {
+            store.dispatch('auth/login');
+        };
+        return {
+            login
+        };
+    }
+});
 </script>
 
 <style scoped>

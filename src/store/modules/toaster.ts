@@ -1,5 +1,5 @@
 interface State {
-    isVisible: boolean
+    isVisible: boolean;
 }
 
 const state: State = {
@@ -10,9 +10,10 @@ const mutations = {
     setIsVisible(state: State, isVisible: boolean) {
         state.isVisible = isVisible;
     }
-}
+};
 
 export const toaster = {
+    namespaced: true,
     state,
     mutations,
-}
+};
