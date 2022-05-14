@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper">
+    <div class="main-content wrapper">
         <div v-if="!isScreenSmall" class="black-line"></div>
         <the-header/>
         <template v-if="isScreenSmall">
@@ -38,6 +38,10 @@ export default {
 </script>
 
 <style scoped>
+.main-content {
+    height: 100vh;
+}
+
 .black-line {
     height: 4rem;
     background-color: black;
