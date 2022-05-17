@@ -1,13 +1,14 @@
 <template>
     <div class="user-dropdown">
-        <user-box class="user-dropdown__item"/>
-        <hr class="user-dropdown__separator">
-
-        <router-link v-for="link in links" :key="link.name" :to="link.route">
-            {{ t(link.label) }}
-        </router-link>
-        <hr class="user-dropdown__separator">
-        <a class="bold" href="">Выйти</a>
+        <user-box class="user-dropdown__group"/>
+        <div class="user-dropdown__group">
+            <router-link v-for="link in links" :key="link.name" :to="link.route">
+                {{ t(link.label) }}
+            </router-link>
+        </div>
+        <div class="user-dropdown__group">
+            <a class="bold" href="">Выйти</a>
+        </div>
     </div>
 </template>
 
@@ -36,11 +37,26 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     gap: .5rem;
+    width: 15rem;
     color: black;
     text-decoration: none;
 
-    &__item {
+    &__group {
+        position: relative;
 
+        &:after {
+            content: "";
+            position: absolute;
+            display: block;
+            height: 1px;
+            width: 100%;
+            background: black;
+            bottom: -8px;
+        }
+
+        &:last-child:after {
+            display: none;
+        }
     }
 }
 </style>

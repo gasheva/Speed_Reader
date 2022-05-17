@@ -48,9 +48,18 @@ export default defineComponent({
 .dropdown {
     position: relative;
 
+    &__trigger {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
     &__menu {
         position: absolute;
         right: 0;
+        margin-top: .5rem;
+        box-shadow: 0 0 18px 0 rgb(0 0 0 / 25%);
+        border-radius: 3px;
     }
 }
 
