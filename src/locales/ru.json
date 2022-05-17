@@ -1,5 +1,7 @@
 {
-  "message": "Привет i18n !!",
-  "homePage": "Домашняя страница",
-  "exercisePage": "Упражнения"
+    "message": "Привет i18n !!",
+    "homePage": "Домашняя страница",
+    "exercisePage": "Упражнения",
+    "account": "Личный кабинет",
+    "exit": "Выйти"
 }

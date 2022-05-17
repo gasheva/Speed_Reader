@@ -15,7 +15,16 @@
             <template v-else>
                 <!-- USER SUBMENU -->
                 <bell/>
-                <user-box-dropdown/>
+                <dropdown>
+                    <template #trigger>
+                        <div class="user-box__image">
+                            <img alt="user logo" src="@/assets/mock/mockUserLogo.png">
+                        </div>
+                    </template>
+                    <template #menu>
+                        <dropdown-menu-user/>
+                    </template>
+                </dropdown>
                 <the-locale-switcher/>
             </template>
         </div>
@@ -30,11 +39,12 @@ import TheMobileSidebar from '@/components/app/Navigation/TheMobileSidebar.vue';
 import BurgerButton from '@/components/app/Navigation/BurgerButton.vue';
 import {useBreakpoint} from '@/composable/breakpoint';
 import Bell from '@/components/app/Bell.vue';
-import UserBoxDropdown from '@/components/components/UserBoxDropdown.vue';
+import Dropdown from '@/components/components/Dropdown/Dropdown.vue';
+import DropdownMenuUser from '@/components/components/Dropdown/DropdownMenuUser.vue';
 
 export default {
     name: 'TheHeader',
-    components: {UserBoxDropdown, Bell, BurgerButton, TheMobileSidebar, TheLocaleSwitcher},
+    components: {DropdownMenuUser, Dropdown, Bell, BurgerButton, TheMobileSidebar, TheLocaleSwitcher},
     setup() {
         const {t} = useI18n();
 
@@ -80,6 +90,21 @@ export default {
 
 .logo {
     font-weight: bold;
+}
+
+.user-box {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    &__image {
+        height: 3rem;
+    }
+
+    &__image img {
+        height: 100%;
+        margin-right: 0.875rem;
+    }
 }
 
 </style>
