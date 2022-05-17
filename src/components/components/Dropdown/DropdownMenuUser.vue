@@ -35,7 +35,7 @@ export default defineComponent({
 .user-dropdown {
     display: flex;
     flex-direction: column;
-    gasp: .5rem;
+    gap: .5rem;
     color: black;
     text-decoration: none;
 
