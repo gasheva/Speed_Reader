@@ -14,7 +14,16 @@
             <burger-button v-if="isScreenSmall" data-test="burgerButton"/>
             <template v-else>
                 <!-- USER SUBMENU -->
-                <bell/>
+                <dropdown>
+                    <template #trigger>
+                        <bell/>
+                    </template>
+                    <template #menu>
+                        <dropdown-menu-notification v-for="notification in notifications"
+                                                    :key="notification.uid"
+                                                    :notification="notification"/>
+                    </template>
+                </dropdown>
                 <dropdown>
                     <template #trigger>
                         <div class="user-box__image">
@@ -41,18 +50,38 @@ import {useBreakpoint} from '@/composable/breakpoint';
 import Bell from '@/components/app/Bell.vue';
 import Dropdown from '@/components/components/Dropdown/Dropdown.vue';
 import DropdownMenuUser from '@/components/components/Dropdown/DropdownMenuUser.vue';
+import DropdownMenuNotification from '@/components/components/Dropdown/DropdownMenuNotification.vue';
+import {useStore} from 'vuex';
+import {Notification} from '@/interfaces/notification.interface';
+import {reactive} from 'vue';
 
 export default {
     name: 'TheHeader',
-    components: {DropdownMenuUser, Dropdown, Bell, BurgerButton, TheMobileSidebar, TheLocaleSwitcher},
+    components: {
+        DropdownMenuNotification,
+        DropdownMenuUser,
+        Dropdown,
+        Bell,
+        BurgerButton,
+        TheMobileSidebar,
+        TheLocaleSwitcher
+    },
     setup() {
         const {t} = useI18n();
+        const store = useStore();
+        let notifications = reactive<Notification[]>([]);
 
         let {isScreenSmall} = useBreakpoint();
+
+        const openNotifications = async () => {
+            notifications = await store.dispatch('notification/fetchNotifications');
+        };
+
         return {
             links,
             t,
             isScreenSmall,
+            openNotifications
         };
     }
 };

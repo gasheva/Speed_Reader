@@ -4,7 +4,10 @@ const icons = Object.freeze({
     </svg>`,
     chevronDown: `<svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M7 8C6.73738 8 6.48611 7.89576 6.30411 7.71106L0.269656 1.5936C-0.100135 1.21901 -0.0880662 0.623009 0.296449 0.262771C0.680723 -0.097467 1.29189 -0.0859375 1.66144 0.288889L7 5.70093L12.3386 0.288889C12.7079 -0.0857022 13.319 -0.097467 13.7036 0.262771C14.0881 0.623009 14.1001 1.21901 13.7303 1.5936L7.69589 7.71106C7.51389 7.89576 7.26262 8 7 8Z" fill="black"/>
-    </svg>`
-})
+    </svg>`,
+    envelop: `<svg width="30" height="22" viewBox="0 0 30 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0.230774V21.7693H30V0.230774H0ZM27.5054 2.53849L15 12.9596L2.49469 2.53849H27.5054ZM27.6923 19.4615H2.30771V5.38656L15 15.9635L27.6923 5.38656V19.4615Z" fill="black" fill-opacity="0.6"/>
+    </svg>`,
+});
 
 export {icons};
