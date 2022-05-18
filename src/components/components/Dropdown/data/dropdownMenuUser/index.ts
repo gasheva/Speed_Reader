@@ -1,4 +1,4 @@
-import {Link} from '@/components/components/Dropdown/data/link.interface';
+import {Link} from '@/components/components/Dropdown/data/dropdownMenuUser/link.interface';
 
 const links: Link[] = [
     {name: 'account', label: 'account', route: 'account'},

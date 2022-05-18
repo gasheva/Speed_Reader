@@ -16,7 +16,7 @@
 import UserBox from '@/components/components/UserBox.vue';
 import {defineComponent} from 'vue';
 import {useI18n} from 'vue-i18n';
-import links from '@/components/components/Dropdown/data';
+import links from '@/components/components/Dropdown/data/dropdownMenuUser';
 
 export default defineComponent({
     name: 'DropdownMenuUser',
