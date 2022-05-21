@@ -27,7 +27,13 @@ const routes: Array<RouteRecordRaw> = [
                 meta: {layout: 'empty'},
             }
         ]
-    }
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        name: '404',
+        meta: {layout: 'empty'},
+        component: () => import(/* webpackChunkName: "404" */'@/views/404.vue'),
+    },
 ];
 
 const router = createRouter({
