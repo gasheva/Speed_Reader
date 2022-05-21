@@ -28,7 +28,7 @@ export default defineComponent({
     setup(props) {
         const dateParams: FormatOptions = {
             format: FormatTimeTypes.daysBack,
-            maxFullDay: constants.MAX_DAYS_FOR_FULL_DAY,
+            maxFullDay: constants.MAX_DAYS_FOR_FULL_DAY_FORMAT,
         };
         const date = computed(() => formatTime(props.notification.date, dateParams));
 

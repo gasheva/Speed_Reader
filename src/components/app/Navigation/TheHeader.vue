@@ -14,8 +14,7 @@
             <burger-button v-if="isScreenSmall" data-test="burgerButton"/>
             <template v-else>
                 <!-- USER SUBMENU -->
-                <dropdown
-                    @openMenu="openNotifications">
+                <dropdown>
                     <template #trigger>
                         <bell/>
                     </template>
@@ -52,9 +51,7 @@ import Bell from '@/components/app/Bell.vue';
 import Dropdown from '@/components/components/Dropdown/Dropdown.vue';
 import DropdownMenuUser from '@/components/components/Dropdown/DropdownMenuUser.vue';
 import DropdownMenuNotification from '@/components/components/Dropdown/DropdownMenuNotification.vue';
-import {useStore} from 'vuex';
-import {Notification} from '@/interfaces/notification.interface';
-import {ref} from 'vue';
+import {useFetchNotifications} from '@/composable/fetchNotifications';
 
 export default {
     name: 'TheHeader',
@@ -67,23 +64,15 @@ export default {
         TheMobileSidebar,
         TheLocaleSwitcher
     },
-    setup() {
+    setup: function () {
         const {t} = useI18n();
-        const store = useStore();
-        let notifications = ref<Notification[]>([]);
-
         let {isScreenSmall} = useBreakpoint();
-
-        const openNotifications = async () => {
-            const resp = await store.dispatch('notification/fetchNotifications');
-            notifications.value = resp;
-        };
+        const {notifications} = useFetchNotifications();
 
         return {
             links,
             t,
             isScreenSmall,
-            openNotifications,
             notifications,
         };
     }
