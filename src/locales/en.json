@@ -3,5 +3,6 @@
     "homePage": "Home",
     "exercisePage": "Exercise",
     "account": "Account",
-    "exit": "Exit"
+    "exit": "Exit",
+    "day": "0 day | {n} day | {n} days"
 }

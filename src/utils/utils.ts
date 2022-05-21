@@ -1,4 +1,5 @@
-import {Breakpoints} from "@/constants/breakpoint.constant";
+import {Breakpoints} from '@/constants/breakpoint.constant';
+import {useI18n} from 'vue-i18n';
 
 export function getBreakpoint(windowWidth: Number): Breakpoints | undefined {
     switch (true) {
@@ -17,4 +18,61 @@ export function getBreakpoint(windowWidth: Number): Breakpoints | undefined {
         default:
             return Breakpoints.XL;
     }
+}
+
+export enum FormatTimeTypes {
+    date, time, daysBack
+}
+
+interface IntlDateOptions {
+    day?: string,
+    month?: string,
+    year?: string,
+    hour?: string,
+    minute?: string,
+    second?: string
+}
+
+export interface FormatOptions {
+    format: FormatTimeTypes,
+    maxFullDay: number,
+}
+
+export function formatTime(value: Date, params: FormatOptions) {
+    let options: IntlDateOptions = {};
+    const dateOptions = (): IntlDateOptions => ({
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
+    });
+    if (params.format === FormatTimeTypes.date) {
+        options = dateOptions();
+    }
+    if (params.format === FormatTimeTypes.time) {
+        options.hour = '2-digit';
+        options.minute = '2-digit';
+        options.second = '2-digit';
+    }
+    if (params.format === FormatTimeTypes.daysBack) {
+        const currentDate = new Date();
+        const diffTime = Math.abs(currentDate.getTime() - value.getTime());
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        if (diffDays > params.maxFullDay) {
+            options = dateOptions();
+        } else {
+            const getFullDays = (dayCount: number) => {
+                const {t} = useI18n();
+                return t('day', dayCount) + ' назад';
+            };
+            return getFullDays(diffDays);
+        }
+
+    }
+
+    // TODO(get locale)
+    // const locale = store.getters.info.locale || 'ru-Ru';
+    const locale = 'ru-Ru';
+    return new Intl.DateTimeFormat(locale, options as Intl.DateTimeFormatOptions)
+        .format(new Date(value));
 }

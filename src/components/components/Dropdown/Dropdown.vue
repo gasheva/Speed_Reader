@@ -24,14 +24,16 @@ export default defineComponent({
             default: '',
         },
     },
+    emits: ['openMenu'],
 
-    setup() {
+    setup(_, ctx) {
         const isMenuVisible = ref(false);
         const onClickAway = () => {
             isMenuVisible.value = false;
         };
         const toggleMenu = () => {
             isMenuVisible.value = true;
+            ctx.emit('openMenu');
         };
 
         return {

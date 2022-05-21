@@ -5,7 +5,7 @@
         </div>
         <div class="notification-dropdown__info">
             <p>{{ notification.title }}</p>
-            <span class="label">{{ notification.date }}</span>
+            <span class="label">{{ date }}</span>
         </div>
     </div>
 </template>
@@ -13,9 +13,11 @@
 <script lang="ts">
 import {icons} from '@/constants/icons.constants';
 import {Notification} from '@/interfaces/notification.interface';
-import {PropType} from 'vue';
+import {computed, defineComponent, onMounted, PropType} from 'vue';
+import {FormatOptions, formatTime, FormatTimeTypes} from '@/utils/utils';
+import {constants} from '@/constants/constants';
 
-export default {
+export default defineComponent({
     name: 'DropdownMenuNotification',
     props: {
         notification: {
@@ -23,25 +25,43 @@ export default {
             required: true,
         }
     },
-    setup() {
+    setup(props) {
+        const dateParams: FormatOptions = {
+            format: FormatTimeTypes.daysBack,
+            maxFullDay: constants.MAX_DAYS_FOR_FULL_DAY,
+        };
+        const date = computed(() => formatTime(props.notification.date, dateParams));
+
+        onMounted(() => {
+            console.log('mount');
+        });
+
         return {
             envelop: icons.envelop,
+            date,
         };
     }
-};
+});
 </script>
 
 <style lang="scss" scoped>
 .notification-dropdown {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: .5rem;
     width: 15rem;
     color: black;
     text-decoration: none;
 
-    &:first-child:after {
+    & > div {
+        position: relative;
+    }
+
+    & > div:first-child:after {
         content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
         display: block;
         width: 1px;
         height: 100%;
