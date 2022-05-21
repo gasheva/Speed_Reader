@@ -25,7 +25,11 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'registration',
                 component: () => import(/* webpackChunkName: "register" */ '@/components/components/Sign/Registration.vue'),
                 meta: {layout: 'empty'},
-            }
+            },
+            {
+                path: '/sign:afterSign(.*)',
+                redirect: {name: 'registration'}
+            },
         ]
     },
     {
