@@ -6,13 +6,14 @@
     </div>
 </template>
 
-<script>
-import InputText from '@/components/app/InputText';
+<script lang="ts">
 
 export default {
-    name:       'Registration',
-    components: {InputText},
+    name: 'TheRegistration',
 };
+</script>
+<script setup lang="ts">
+import InputText from '@/components/app/InputText.vue';
 </script>
 
 <style scoped>

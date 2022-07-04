@@ -12,24 +12,20 @@
 </template>
 
 <script lang="ts">
+
+export default {
+    name: 'TheLogin',
+}
+</script>
+<script setup  lang="ts">
 import BaseButton from '@/components/app/BaseButton.vue';
 import InputText from '@/components/app/InputText.vue';
-import {defineComponent} from 'vue';
 import {useStore} from 'vuex';
 
-export default defineComponent({
-    name: 'Login',
-    components: {BaseButton, InputText},
-    setup() {
-        const store = useStore();
-        const login = () => {
-            store.dispatch('auth/login');
-        };
-        return {
-            login
-        };
-    }
-});
+const store = useStore();
+const login = () => {
+    store.dispatch('auth/login');
+};
 </script>
 
 <style scoped>
