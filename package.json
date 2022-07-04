@@ -10,12 +10,12 @@
         "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\""
     },
     "dependencies": {
+        "@vueuse/core": "^8.7.5",
         "axios": "^0.26.1",
         "core-js": "^3.8.3",
         "vue": "^3.2.13",
         "vue-i18n": "^9.1.0",
         "vue-router": "^4.0.3",
-        "vue3-click-away": "^1.2.4",
         "vuex": "^4.0.0"
     },
     "devDependencies": {
