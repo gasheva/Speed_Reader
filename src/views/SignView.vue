@@ -1,9 +1,10 @@
 <template>
-    <div>
+    <div class="sign">
         <sign-tabs
+                :current-tab="currentTab"
                 @changeTab="changeTab"/>
         <keep-alive>
-            <component :is="tabs[currentTab]"/>
+            <component :is="tabs[currentTab]" class="sign__content"/>
         </keep-alive>
     </div>
 </template>
@@ -30,6 +31,17 @@ const changeTab = (tabName: string) => {
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.sign{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
+  background-color: white;
+
+  &__content{
+    width: 100%;
+    padding: 0 1.5rem;
+  }
+}
 </style>

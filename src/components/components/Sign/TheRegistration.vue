@@ -1,6 +1,5 @@
 <template>
-    <div>
-        registration
+    <div class="registration">
         <input-text :hint="'E-mail'"/>
         <input-text :hint="'Password'"/>
     </div>
@@ -16,6 +15,10 @@ export default {
 import InputText from '@/components/app/InputText.vue';
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.registration{
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
 </style>

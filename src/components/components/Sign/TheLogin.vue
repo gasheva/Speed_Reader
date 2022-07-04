@@ -1,10 +1,9 @@
 <template>
-    <div>
-        login
+    <div class="login">
         <input-text :hint="'E-mail'"/>
         <input-text :hint="'Password'"/>
 
-        <div class="wrapper">
+        <div>
             <base-button style-btn="black" @click="login"/>
         </div>
         <a class="link" href="#">Забыли пароль?</a>
@@ -28,6 +27,10 @@ const login = () => {
 };
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.login{
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
 </style>

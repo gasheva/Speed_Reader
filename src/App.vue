@@ -96,6 +96,7 @@ input::-ms-clear {
 // убрать крестик в инпуте
 button {
     cursor: pointer;
+    background-color: inherit;
 }
 
 button::-moz-focus-inner {
