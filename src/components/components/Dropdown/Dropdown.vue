@@ -4,46 +4,39 @@
             <slot name="trigger"/>
             <span v-html="chevronDown"></span>
         </a>
-        <div v-if="isMenuVisible" v-click-away="onClickAway" class="dropdown__menu">
+        <div v-if="isMenuVisible" ref="dropdownMenuRef" class="dropdown__menu">
             <slot name="menu"/>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import {icons} from '@/constants/icons.constants';
-import {defineComponent, ref} from 'vue';
-import {mixin as VueClickAway} from 'vue3-click-away';
-
-export default defineComponent({
+export default {
     name: 'Dropdown',
-    mixins: [VueClickAway],
-    props: {
-        image: {
-            type: String,
-            default: '',
-        },
+};
+</script>
+<script setup lang="ts">
+import { onClickOutside } from '@vueuse/core';
+import {ref} from "vue";
+import {icons} from "@/constants/icons.constants";
+
+const props = defineProps({
+    image: {
+        type: String,
+        default: '',
     },
-    emits: ['openMenu'],
-
-    setup(_, ctx) {
-        const isMenuVisible = ref(false);
-        const onClickAway = () => {
-            isMenuVisible.value = false;
-        };
-        const toggleMenu = () => {
-            isMenuVisible.value = true;
-            ctx.emit('openMenu');
-        };
-
-        return {
-            chevronDown: icons.chevronDown,
-            isMenuVisible,
-            onClickAway,
-            toggleMenu,
-        };
-    }
 });
+const emit = defineEmits(['openMenu']);
+const chevronDown = icons.chevronDown;
+
+const dropdownMenuRef = ref(null);
+const isMenuVisible = ref(false);
+const toggleMenu = () => {
+    isMenuVisible.value = true;
+    emit('openMenu');
+};
+onClickOutside(dropdownMenuRef, (event) => isMenuVisible.value = false)
+
 </script>
 
 <style lang="scss" scoped>
