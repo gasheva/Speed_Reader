@@ -1,5 +1,5 @@
-import axios from "axios";
-import store from '@/store'
+import axios from 'axios';
+import store from '@/store';
 
 const auth = axios.create({
     baseURL: process.env.VUE_APP_AUTH_SERVER
