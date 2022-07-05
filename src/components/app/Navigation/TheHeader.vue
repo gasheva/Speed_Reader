@@ -14,26 +14,32 @@
             <burger-button v-if="isScreenSmall" data-test="burgerButton"/>
             <template v-else>
                 <!-- USER SUBMENU -->
-                <dropdown>
-                    <template #trigger>
-                        <bell/>
-                    </template>
-                    <template #menu>
-                        <dropdown-menu-notification v-for="notification in notifications"
-                                                    :key="notification.uid"
-                                                    :notification="notification"/>
-                    </template>
-                </dropdown>
-                <dropdown>
-                    <template #trigger>
-                        <div class="user-box__image">
-                            <img alt="user logo" src="@/assets/mock/mockUserLogo.png">
-                        </div>
-                    </template>
-                    <template #menu>
-                        <dropdown-menu-user/>
-                    </template>
-                </dropdown>
+                <template v-if="isAuth">
+                    <dropdown>
+                        <template #trigger>
+                            <bell/>
+                        </template>
+                        <template #menu>
+                            <dropdown-menu-notification v-for="notification in notifications"
+                                                        :key="notification.uid"
+                                                        :notification="notification"/>
+                        </template>
+                    </dropdown>
+                    <dropdown>
+                        <template #trigger>
+                            <div class="user-box__image">
+                                <img alt="user logo" src="@/assets/mock/mockUserLogo.png">
+                            </div>
+                        </template>
+                        <template #menu>
+                            <dropdown-menu-user/>
+                        </template>
+                    </dropdown>
+                </template>
+                <a v-else>
+                    <span class="navigation-item__icon icon"></span>
+                    <span>{{ t('join') }}</span>
+                </a>
                 <the-locale-switcher/>
             </template>
         </div>
@@ -41,91 +47,82 @@
 </template>
 
 <script lang="ts">
+export default {
+    name: 'TheHeader',
+};
+</script>
+<script setup lang="ts">
+import {useStore} from 'vuex';
+import {computed} from 'vue';
+import {useI18n} from 'vue-i18n';
+import {useBreakpoint} from '@/composable/breakpoint';
+import {useFetchNotifications} from '@/composable/fetchNotifications';
 import links from '@/components/app/Navigation/data/index';
 import TheLocaleSwitcher from '@/components/app/Navigation/TheLocaleSwitcher.vue';
-import {useI18n} from 'vue-i18n';
-import TheMobileSidebar from '@/components/app/Navigation/TheMobileSidebar.vue';
 import BurgerButton from '@/components/app/Navigation/BurgerButton.vue';
-import {useBreakpoint} from '@/composable/breakpoint';
 import Bell from '@/components/app/Bell.vue';
 import Dropdown from '@/components/components/Dropdown/Dropdown.vue';
 import DropdownMenuUser from '@/components/components/Dropdown/DropdownMenuUser.vue';
 import DropdownMenuNotification from '@/components/components/Dropdown/DropdownMenuNotification.vue';
-import {useFetchNotifications} from '@/composable/fetchNotifications';
 
-export default {
-    name: 'TheHeader',
-    components: {
-        DropdownMenuNotification,
-        DropdownMenuUser,
-        Dropdown,
-        Bell,
-        BurgerButton,
-        TheMobileSidebar,
-        TheLocaleSwitcher
-    },
-    setup: function () {
-        const {t} = useI18n();
-        let {isScreenSmall} = useBreakpoint();
-        const {notifications} = useFetchNotifications();
 
-        return {
-            links,
-            t,
-            isScreenSmall,
-            notifications,
-        };
-    }
-};
+const store = useStore();
+const {t} = useI18n();
+let {isScreenSmall} = useBreakpoint();
+const {notifications} = useFetchNotifications();
+
+const isAuth = computed(() => store.getters['auth/isAuth']);
+
+
 </script>
 
 <style lang="scss" scoped>
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  padding: 1rem;
+  height: 4rem;
+
+  &__start,
+  &__end {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
     align-items: center;
-    text-align: left;
-    padding: 1rem;
-    height: 4rem;
+  }
 
-    &__start,
-    &__end {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
-
-    &__logo {
-        padding: 2rem;
-    }
+  &__logo {
+    padding: 2rem;
+  }
 }
 
 .navigation {
-    display: flex;
-    justify-self: flex-end;
+  display: flex;
+  justify-self: flex-end;
 
-    &__item {
-        color: black
-    }
+  &__item {
+    color: black
+  }
 }
 
 .logo {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .user-box {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 
-    &__image {
-        height: 3rem;
-    }
+  &__image {
+    height: 3rem;
+  }
 
-    &__image img {
-        height: 100%;
-        margin-right: 0.875rem;
-    }
+  &__image img {
+    height: 100%;
+    margin-right: 0.875rem;
+  }
 }
 
 </style>
