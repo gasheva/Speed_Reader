@@ -36,7 +36,9 @@
                         </template>
                     </dropdown>
                 </template>
-                <a v-else  class="navigation__item">
+                <a v-else class="navigation__item link"
+                   @click="join"
+                >
                     <span class="navigation-item__icon icon"></span>
                     <span>{{ t('join') }}</span>
                 </a>
@@ -64,16 +66,20 @@ import Bell from '@/components/app/Bell.vue';
 import Dropdown from '@/components/components/Dropdown/Dropdown.vue';
 import DropdownMenuUser from '@/components/components/Dropdown/DropdownMenuUser.vue';
 import DropdownMenuNotification from '@/components/components/Dropdown/DropdownMenuNotification.vue';
+import {useRouter} from 'vue-router';
 
 
 const store = useStore();
+const router = useRouter();
 const {t} = useI18n();
 let {isScreenSmall} = useBreakpoint();
 const {notifications} = useFetchNotifications();
 
 const isAuth = computed(() => store.getters['auth/isAuth']);
 
-
+const join = ()=>{
+    router.push({name: 'sign'});
+}
 </script>
 
 <style lang="scss" scoped>

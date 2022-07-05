@@ -57,9 +57,9 @@ a {
 .link {
   display: inline-block;
   width: fit-content;
+  cursor: pointer;
   color: black;
   font-family: $roboto;
-  transition: color 250ms;
 
   &:visited {
     color: black;
@@ -67,6 +67,8 @@ a {
 }
 
 .link--hover-underline {
+  transition: color 250ms;
+
   &:after {
     display: block;
     content: '';
