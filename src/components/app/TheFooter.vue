@@ -3,7 +3,7 @@
         <div class="footer__copyright">
             © SpeedReader 2022
         </div>
-        <a class="link footer__share" href="#">Поделиться в вк </a>
+        <a class="link link--hover-underline footer__share" href="#">Поделиться в вк </a>
         <input-checkbox label="fjldk"/>
     </footer>
 </template>

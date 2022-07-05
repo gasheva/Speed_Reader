@@ -36,7 +36,7 @@
                         </template>
                     </dropdown>
                 </template>
-                <a v-else>
+                <a v-else  class="navigation__item">
                     <span class="navigation-item__icon icon"></span>
                     <span>{{ t('join') }}</span>
                 </a>

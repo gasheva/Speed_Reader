@@ -6,7 +6,7 @@
         <div>
             <base-button style-btn="black" @click="login"/>
         </div>
-        <a class="link" href="#">Забыли пароль?</a>
+        <a class="link link--hover-underline" href="#">Забыли пароль?</a>
     </div>
 </template>
 
