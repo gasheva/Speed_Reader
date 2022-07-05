@@ -1,3 +1,5 @@
+import {unref} from 'vue';
+
 const LS_TOKEN_FIELD_NAME = 'sp_token';
 
 type User = {
@@ -36,19 +38,24 @@ const mutations = {
 };
 
 const actions = {
-    async login({commit}: { commit: Function }) {
-        const mockUser = {uid: '1', email: 'beowulf@m.ru', nickname: 'Beowulf'};
+    async login({commit}: { commit: Function }, credits: User & {password: string}) {
+        // const mockUser = {uid: '1', email: 'beowulf@m.ru', nickname: 'Beowulf'};
         const mockToken = '123';
-        commit('setUser', mockUser);
+        const unrefUser = unref(credits);
+        commit('setUser', unrefUser);
         commit('setToken', mockToken);
+        return true;
     },
+
     async register({commit}: { commit: Function }, credits: User & {password: string}) {
-        const mockUser = {uid: '1', email: 'beowulf@m.ru', nickname: 'Beowulf'};
+        // const mockUser = {uid: '1', email: 'beowulf@m.ru', nickname: 'Beowulf'};
         const mockToken = '123';
-        console.log(credits);
-        commit('setUser', mockUser);
+        const unrefUser = unref(credits);
+        commit('setUser', unrefUser);
         commit('setToken', mockToken);
+        return true;
     },
+
     logout({commit}: { commit: Function }) {
         commit('clearToken');
     }

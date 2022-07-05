@@ -1,7 +1,7 @@
 <template>
     <div class="registration">
-        <input-text :hint="'E-mail'" v-model:value="temp"/>
-        <input-text :hint="'Password'" v-model="credits.password"/>
+        <input-text :hint="'E-mail'" v-model:value="credits.email"/>
+        <input-text :hint="'Password'" v-model:value="credits.password"/>
 
         <input-checkbox :label="t('broadcastAgreement')"
                         label-side="left"
@@ -29,19 +29,23 @@ import {useI18n} from 'vue-i18n';
 import BaseButton from '@/components/app/BaseButton.vue';
 import {useStore} from 'vuex';
 import {ref} from 'vue';
+import {useRouter} from 'vue-router';
 
 const {t} = useI18n();
 const store = useStore();
+const router = useRouter();
 
-const temp = ref('');
 const credits = ref({
     email: '',
     password: '',
     toBroadcast: true,
 });
 
-const register = () => {
-    store.dispatch('auth/register', credits);
+const register = async() => {
+    const isSuccess = await store.dispatch('auth/register', credits);
+    if(isSuccess) {
+        await router.push({name: 'home'});
+    }
 };
 
 </script>

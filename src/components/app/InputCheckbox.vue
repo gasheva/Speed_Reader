@@ -22,6 +22,8 @@ const props = defineProps({
     labelSide: {
         type: String,
         default: 'right',
+        // need to provide this: void or use arrow function
+        // validator(this: void, val: string) {
         validator: (val: string) => {
             const types = new Set(['right', 'left']);
             return types.has(val);
@@ -54,6 +56,7 @@ input {
 .input-checkbox {
   display: flex;
   position: relative;
+  width: fit-content;
   margin-bottom: 12px;
   gap: .5rem;
   cursor: pointer;
