@@ -81,9 +81,9 @@ const activeTab = computed<String>(() =>
     }
 
     &--active:after {
-      border-bottom: 1px solid blue;
+      border-bottom: 1px solid $blue-1;
       transform: scaleX(1);
-      transition: all 1s;
+      transition: all 250ms ease-in-out;
     }
   }
 }
