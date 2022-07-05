@@ -1,4 +1,5 @@
 import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router';
+import store from '@/store';
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -44,5 +45,10 @@ const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes
 });
+
+router.beforeEach((to, from)=>{
+    if (!to.name) return;
+    if(to.name==='sign' && store.getters['auth/isAuth']) return {name: 'home'};
+})
 
 export default router;

@@ -1,4 +1,4 @@
-const LS_TOKEN_FIELD_NAME = 'token';
+const LS_TOKEN_FIELD_NAME = 'sp_token';
 
 type User = {
     uid: String,
@@ -16,6 +16,7 @@ const state: State = {
 
 const getters = {
     getToken: () => localStorage.getItem(LS_TOKEN_FIELD_NAME),
+    isAuth: (_:State, getters: any) => Boolean(getters.getToken?.length),
 };
 
 const mutations = {
