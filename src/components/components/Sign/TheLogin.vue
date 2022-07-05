@@ -4,7 +4,7 @@
         <input-text :hint="'Password'"/>
 
         <div>
-            <base-button style-btn="black" @click="login"/>
+            <base-button style-btn="black" :text="t('login')" @click="login"/>
         </div>
         <a class="link link--hover-underline" href="#">Забыли пароль?</a>
     </div>
@@ -20,7 +20,9 @@ export default {
 import BaseButton from '@/components/app/BaseButton.vue';
 import InputText from '@/components/app/InputText.vue';
 import {useStore} from 'vuex';
+import {useI18n} from 'vue-i18n';
 
+const {t} = useI18n();
 const store = useStore();
 const login = () => {
     store.dispatch('auth/login');

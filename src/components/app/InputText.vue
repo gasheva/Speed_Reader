@@ -2,66 +2,92 @@
     <div class="input-text">
         <label v-show="hint" class="input-text__label label">{{ hint }}</label>
         <input v-model="text"
+               :key="trigger"
                :class="{'border-danger':!isValid}"
                class="input-text__input input"
-               type="text"/>
+               type="text"
+               @change="onChange"
+        />
     </div>
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, ref} from 'vue';
-
-// defineComponent allow to skip props typing
-export default defineComponent({
+export default {
     name: 'InputText',
-    props: {
-        initText: {
-            type: String,
-            default: '',
-        },
-        hint: {
-            type: String,
-            default: '',
-        },
-        type: {
-            type: String,
-            default: 'text',
-            // need to provide this: void or use arrow function
-            // validator(this: void, val: string) {
-            validator: (val: string) => {
-                const types = new Set(['text']);
-                return types.has(val);
-            },
-        },
-    },
-    setup(props) {
-        const text = ref(props.initText);
+};
+</script>
+<script setup lang="ts">
+import {computed, ref} from 'vue';
+import {implyModifiers, ModifierOptions} from '@/utils/modifiers';
 
-        const isValid = computed(() => {
-            if (props.type === 'text') return true;
-        });
-        return {
-            text,
-            isValid
-        };
+const props = defineProps({
+    initText: {
+        type: String,
+        default: '',
     },
+    hint: {
+        type: String,
+        default: '',
+    },
+    type: {
+        type: String,
+        default: 'text',
+        // need to provide this: void or use arrow function
+        // validator(this: void, val: string) {
+        validator: (val: string) => {
+            const types = new Set(['text']);
+            return types.has(val);
+        },
+    },
+    value: {type: String, default: ''},
+    modelModifiers: {
+        type: Object as () => ModifierOptions,
+        default: () => ({
+            trim: true,
+        } as ModifierOptions)
+    }
 });
+
+const emit = defineEmits(['update:value']);
+
+const isValid = computed(() => {
+    if (props.type === 'text') return true;
+});
+
+const text = computed({
+    get() {
+        return props.value;
+    },
+    set(val: string) {
+        if (!isValid) return;
+
+        const result: string = implyModifiers(val, props.modelModifiers);
+        emit('update:value', result);
+    }
+});
+
+// update field on change event
+const trigger = ref(0);
+const onChange = () => {
+    trigger.value = Date.now();
+};
+
 </script>
 
 <style lang="scss" scoped>
 .input-text {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    &__input {
-        &:focus {
-            box-shadow: inset 0 0 3px 1px $blue-1;
-        }
+  &__input {
+    &:focus {
+      box-shadow: inset 0 0 3px 1px $blue-1;
     }
+  }
 }
 
 .input {
-    height: 3rem;
-    border: 1px solid black;
+  height: 3rem;
+  border: 1px solid black;
 }
 </style>

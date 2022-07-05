@@ -5,5 +5,8 @@
     "account": "Account",
     "exit": "Exit",
     "day": "0 day | {n} day | {n} days",
-    "join": "Join"
+    "join": "Join",
+    "broadcastAgreement": "Send me news",
+    "register": "Register",
+    "login": "Login"
 }

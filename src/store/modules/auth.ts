@@ -4,6 +4,7 @@ type User = {
     uid: String,
     email: String,
     nickname: String,
+    broadcast: Boolean,
 }
 
 interface State {
@@ -38,6 +39,13 @@ const actions = {
     async login({commit}: { commit: Function }) {
         const mockUser = {uid: '1', email: 'beowulf@m.ru', nickname: 'Beowulf'};
         const mockToken = '123';
+        commit('setUser', mockUser);
+        commit('setToken', mockToken);
+    },
+    async register({commit}: { commit: Function }, credits: User & {password: string}) {
+        const mockUser = {uid: '1', email: 'beowulf@m.ru', nickname: 'Beowulf'};
+        const mockToken = '123';
+        console.log(credits);
         commit('setUser', mockUser);
         commit('setToken', mockToken);
     },
