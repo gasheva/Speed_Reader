@@ -22,6 +22,7 @@ a {
 
 .content {
   flex: 1 1 auto;
+  background-color: $grey-1;
 }
 
 .container {
@@ -91,9 +92,33 @@ a {
   }
 }
 
+.section{
+  display: flex;
+  justify-content: space-around;
+  max-width: 1320px;
+  height: 100%;
+  margin: 40px auto 0;
+  gap: 1.5rem;
+}
 
-.section-wrapper {
+.section-main{
+
+}
+
+.section-tile{
+  width: 20%;
+  //height: fit-content;
+  /*TODO*/
+  height: 40px;
+  background-color: white;
+}
+
+.main-section {
   max-width: 971px;
+  margin-bottom: auto;
+  padding: 39px;
+
+  background-color: white;
 
   &__title {
 
