@@ -32,6 +32,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/* TODO (rewrite style) */
 .user-box {
   display: flex;
 

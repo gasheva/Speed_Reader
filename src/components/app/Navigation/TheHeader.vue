@@ -116,6 +116,7 @@ const join = ()=>{
   font-weight: bold;
 }
 
+/* TODO (rewrite style) */
 .user-box {
   display: flex;
   align-items: center;
