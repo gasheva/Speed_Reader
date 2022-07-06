@@ -8,5 +8,9 @@
     "join": "Join",
     "broadcastAgreement": "Send me news",
     "register": "Register",
-    "login": "Login"
+    "login": "Login",
+    "startExercise": "Go!",
+    "startTutorial": "Tutorial",
+    "restart": "Again",
+    "toExerciseList": "To exercises"
 }

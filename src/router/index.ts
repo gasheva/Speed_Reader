@@ -3,10 +3,19 @@ import store from '@/store';
 
 const routes: Array<RouteRecordRaw> = [
     {
-        path: '/',
+        path: '/exercises',
         name: 'home',
         component: () => import(/* webpackChunkName: "home" */ '@/views/HomeView.vue'),
         meta: {layout: 'main'},
+        //TODO
+        children: [
+            {
+                path: '/exercises/shulte-table',
+                name: 'shulteTable',
+                component: () => import(/* webpackChunkName: "shulteTable" */ '@/components/components/Exercises/ShulteTable/ShulteTable.vue'),
+                // meta: {layout: 'main'},
+            }
+        ]
     },
     {
         path: '/sign',
@@ -46,9 +55,9 @@ const router = createRouter({
     routes
 });
 
-router.beforeEach((to, from)=>{
+router.beforeEach((to, from) => {
     if (!to.name) return;
-    if(to.name==='sign' && store.getters['auth/isAuth']) return {name: 'home'};
-})
+    if (to.name === 'sign' && store.getters['auth/isAuth']) return {name: 'home'};
+});
 
 export default router;

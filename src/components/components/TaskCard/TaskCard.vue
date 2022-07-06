@@ -32,7 +32,7 @@ const emit = defineEmits(['click']);
 
 const clickHandler = () => {
     if (!props.disabled) {
-        emit('click', props.info.uid);
+        emit('click', props.info.taskName);
     }
 };
 </script>

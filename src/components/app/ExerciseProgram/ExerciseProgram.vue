@@ -27,6 +27,8 @@ import TaskCard from '@/components/components/TaskCard/TaskCard.vue';
 import {onBeforeMount, onBeforeUnmount, ref} from 'vue';
 import {FormatOptions, formatTime, FormatTimeTypes} from '@/utils/utils';
 
+const emit = defineEmits(['select']);
+
 const dateParams: FormatOptions = {
     format: FormatTimeTypes.dateShort,
 };
@@ -34,6 +36,7 @@ const dateParams: FormatOptions = {
 const tasks = ref([
     {
         uid: Math.random().toString(),
+        taskName: 'shulteTable',
         image: '',
         title: 'Task',
         description: 'jfksld',
@@ -42,6 +45,7 @@ const tasks = ref([
     },
     {
         uid: Math.random().toString(),
+        taskName: 'shulteTable',
         image: '',
         title: 'Task',
         description: 'jfksld',
@@ -50,6 +54,7 @@ const tasks = ref([
     },
     {
         uid: Math.random().toString(),
+        taskName: 'shulteTable',
         image: '',
         title: 'Task',
         description: 'jfksld',
@@ -58,6 +63,7 @@ const tasks = ref([
     },
     {
         uid: Math.random().toString(),
+        taskName: 'shulteTable',
         image: '',
         title: 'Task',
         description: 'jfksld',
@@ -81,8 +87,8 @@ const getDate = () => {
     interval = setInterval(() => currentDate.value = new Date(), 3000);
 };
 
-const taskCardClickHandler = () => {
-    console.log('[x] taskCardClickHandler');
+const taskCardClickHandler = (taskName: string) => {
+    emit('select', taskName)
 };
 </script>
 <style scoped>

@@ -8,5 +8,9 @@
     "join": "Присоединиться",
     "broadcastAgreement": "Подписаться на рассылку",
     "register": "Зарегистрироваться",
-    "login": "Войти"
+    "login": "Войти",
+    "startExercise": "Приступить к упражнению",
+    "startTutorial": "Пройти обучение",
+    "restart": "Повторить",
+    "toExerciseList": "К списку упражнений"
 }
