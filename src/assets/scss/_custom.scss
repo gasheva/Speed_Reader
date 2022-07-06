@@ -97,7 +97,7 @@ a {
   justify-content: space-around;
   max-width: 1320px;
   height: 100%;
-  margin: 40px auto 0;
+  margin: 4rem auto 0;
   gap: 1.5rem;
 }
 
@@ -107,9 +107,7 @@ a {
 
 .section-tile{
   width: 20%;
-  //height: fit-content;
-  /*TODO*/
-  height: 40px;
+  height: fit-content;
   background-color: white;
 }
 
