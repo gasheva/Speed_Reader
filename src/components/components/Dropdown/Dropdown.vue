@@ -55,6 +55,8 @@ onClickOutside(dropdownMenuRef, (event) => isMenuVisible.value = false)
         margin-top: .5rem;
         box-shadow: 0 0 18px 0 rgb(0 0 0 / 25%);
         border-radius: 3px;
+        z-index: $dropdown-z-index;
+        background: white;
     }
 }
 
