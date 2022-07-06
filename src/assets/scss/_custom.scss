@@ -31,6 +31,7 @@ a {
 
 .label {
   font-family: $roboto;
+  color: $grey-4;
 }
 
 .border-danger {
@@ -39,7 +40,7 @@ a {
 
 /* FONT */
 .text-small {
-
+  font-size: 12px;
 }
 
 .text-middle {
@@ -88,4 +89,23 @@ a {
 
   &:active {
   }
+}
+
+
+.section-wrapper {
+  max-width: 971px;
+
+  &__title {
+
+  }
+
+  &__text {
+
+  }
+}
+
+.tasks-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
 }

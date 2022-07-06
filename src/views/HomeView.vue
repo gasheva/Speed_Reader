@@ -1,14 +1,18 @@
 <template>
   <div class="home">
-    HOME
+      <main-section-wrapper>
+          <exercise-program/>
+      </main-section-wrapper>
   </div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
-
-export default defineComponent({
+export default {
   name: 'HomeView',
-  components: {},
-});
+};
+</script>
+<script setup lang="ts">
+import MainSectionWrapper from '@/components/app/MainSectionWrapper.vue';
+import ExerciseProgram from '@/components/app/ExerciseProgram/ExerciseProgram.vue';
+
 </script>
