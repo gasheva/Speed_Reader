@@ -21,7 +21,7 @@ export function getBreakpoint(windowWidth: Number): Breakpoints | undefined {
 }
 
 export enum FormatTimeTypes {
-    date, time, daysBack
+    dateFull, dateShort, time, daysBack
 }
 
 interface IntlDateOptions {
@@ -35,7 +35,7 @@ interface IntlDateOptions {
 
 export interface FormatOptions {
     format: FormatTimeTypes,
-    maxFullDay: number,
+    maxFullDay?: number,
 }
 
 export function formatTime(value: Date, params: FormatOptions) {
@@ -45,8 +45,13 @@ export function formatTime(value: Date, params: FormatOptions) {
         month: 'long',
         year: 'numeric',
     });
-    if (params.format === FormatTimeTypes.date) {
+    if (params.format === FormatTimeTypes.dateFull) {
         options = dateOptions();
+    }
+    if (params.format === FormatTimeTypes.dateShort) {
+        options.day = '2-digit';
+        options.month = '2-digit';
+        options.year = '2-digit';
     }
     if (params.format === FormatTimeTypes.time) {
         options.hour = '2-digit';
@@ -54,6 +59,7 @@ export function formatTime(value: Date, params: FormatOptions) {
         options.second = '2-digit';
     }
     if (params.format === FormatTimeTypes.daysBack) {
+        if(!params.maxFullDay) throw "Expected argument - 'daysBack'"
         const currentDate = new Date();
         const diffTime = Math.abs(currentDate.getTime() - value.getTime());
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
