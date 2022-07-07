@@ -1,5 +1,5 @@
 <template>
-    <div class="section">
+    <div class="section container">
         <div v-if="isVisible('left')"
              class="section-tile">
             <slot name="left-tile"/>

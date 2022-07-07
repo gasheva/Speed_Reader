@@ -1,12 +1,12 @@
 <template>
     <div class="main-content wrapper">
         <div v-if="!isScreenSmall" class="black-line"></div>
-        <the-header/>
+        <the-header class="container"/>
         <template v-if="isScreenSmall">
             <the-mobile-sidebar v-show="isSidebarVisible" data-test="mobileSidebar"/>
         </template>
         <router-view class="content"/>
-        <the-footer/>
+        <the-footer class="container"/>
     </div>
 </template>
 

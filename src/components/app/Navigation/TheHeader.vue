@@ -99,7 +99,7 @@ const join = ()=>{
   }
 
   &__logo {
-    padding: 2rem;
+    padding-right: 1rem;
   }
 }
 

@@ -31,8 +31,9 @@ export default defineComponent({
 <style lang="scss" scoped>
 .base-button {
     display: inline-block;
-    border: 2px solid black;
+    width: 100%;
     padding: 1rem 1.75rem;
+    border: 2px solid black;
     font-family: $roboto;
     font-weight: 700;
     font-size: $text-middle;

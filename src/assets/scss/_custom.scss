@@ -26,7 +26,8 @@ a {
 }
 
 .container {
-  min-width: 1180px;
+  max-width: 1440px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -95,28 +96,28 @@ a {
 .section{
   display: flex;
   justify-content: space-around;
-  max-width: 1320px;
   height: 100%;
   margin: 4rem auto 0;
+  padding: 0 1rem;
   gap: 1.5rem;
 }
 
 .section-main{
-
+  width: 100%;
+  background-color: white;
+  margin-bottom: auto;
 }
 
 .section-tile{
-  width: 20%;
+  width: 30%;
   height: fit-content;
   background-color: white;
 }
 
 .main-section {
   max-width: 971px;
-  margin-bottom: auto;
+  margin: 0 auto auto;
   padding: 39px;
-
-  background-color: white;
 
   &__title {
 
