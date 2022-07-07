@@ -14,7 +14,7 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'shulteTable',
                 component: () => import(/* webpackChunkName: "shulteTable" */ '@/components/components/Exercises/ShulteTable/ShulteTable.vue'),
                 // meta: {layout: 'main'},
-            }
+            },
         ]
     },
     {

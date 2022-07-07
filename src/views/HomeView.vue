@@ -3,6 +3,7 @@
         <main-section-wrapper>
             <exercise-program
                     v-show="!isExerciseSelected"
+                    :tasks="tasks"
                     @select="selectCardHandler"
             />
             <router-view/>
@@ -19,21 +20,63 @@ export default {
 import MainSectionWrapper from '@/components/app/MainSectionWrapper.vue';
 import ExerciseProgram from '@/components/app/ExerciseProgram/ExerciseProgram.vue';
 
-const ShulteTable = () => import('@/components/components/Exercises/ShulteTable/ShulteTable.vue');
 
-import {ref} from 'vue';
+import {computed, onBeforeMount, ref} from 'vue';
 import {implyModifiers} from '@/utils/modifiers';
 import {useRouter} from 'vue-router';
 
 const router = useRouter();
 
-const exerciseComponents = {ShulteTable};
-const currentComponent = ref<string | null>(null);
+let tasks = ref<Object[]>([]);
+onBeforeMount(async()=>{
+    tasks.value = [
+        {
+            uid: Math.random().toString(),
+            taskName: 'shulteTable',
+            image: '',
+            title: 'Task',
+            description: 'jfksld',
+            level: '1',
+            complete: true,
+        },
+        {
+            uid: Math.random().toString(),
+            taskName: 'shulteTable',
+            image: '',
+            title: 'Task',
+            description: 'jfksld',
+            level: '1',
+            complete: false,
+        },
+        {
+            uid: Math.random().toString(),
+            taskName: 'shulteTable',
+            image: '',
+            title: 'Task',
+            description: 'jfksld',
+            level: '1',
+            complete: false,
+        },
+        {
+            uid: Math.random().toString(),
+            taskName: 'shulteTable',
+            image: '',
+            title: 'Task',
+            description: 'jfksld',
+            level: '1',
+            complete: false,
+        },
+    ];
+});
+
+const isExerciseSelected = computed(()=>
+    router.currentRoute.value.name !=='home'
+);
 
 const selectCardHandler = (taskName: string) => {
     router.push({name:taskName});
-    // currentComponent.value = getComponentName(taskName);
 };
+
 const getComponentName = (taskName: string) => {
     return implyModifiers(taskName, {capitalize: true});
 };

@@ -28,52 +28,16 @@ import {onBeforeMount, onBeforeUnmount, ref} from 'vue';
 import {FormatOptions, formatTime, FormatTimeTypes} from '@/utils/utils';
 
 const emit = defineEmits(['select']);
+const props = defineProps({
+    tasks: {type: Object, default: []},
+})
 
 const dateParams: FormatOptions = {
     format: FormatTimeTypes.dateShort,
 };
 
-const tasks = ref([
-    {
-        uid: Math.random().toString(),
-        taskName: 'shulteTable',
-        image: '',
-        title: 'Task',
-        description: 'jfksld',
-        level: '1',
-        complete: true,
-    },
-    {
-        uid: Math.random().toString(),
-        taskName: 'shulteTable',
-        image: '',
-        title: 'Task',
-        description: 'jfksld',
-        level: '1',
-        complete: false,
-    },
-    {
-        uid: Math.random().toString(),
-        taskName: 'shulteTable',
-        image: '',
-        title: 'Task',
-        description: 'jfksld',
-        level: '1',
-        complete: false,
-    },
-    {
-        uid: Math.random().toString(),
-        taskName: 'shulteTable',
-        image: '',
-        title: 'Task',
-        description: 'jfksld',
-        level: '1',
-        complete: false,
-    },
-]);
 /* Get Date */
 onBeforeMount(async () => {
-    // TODO(fetch from server)
     getDate();
 });
 onBeforeUnmount(() => {
