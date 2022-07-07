@@ -1,10 +1,19 @@
 <template>
-<div>shulte</div>
+<div>
+    shulte
+</div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
-    name: "ShulteTable"
+    name: "ShulteTable",
+}
+</script>
+<script setup lang="ts">
+
+const emit = defineEmits(['finish']);
+const timeoutHandler = ()=>{
+    emit('finish');
 }
 </script>
 

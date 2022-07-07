@@ -21,16 +21,34 @@ export default {
 import BaseButton from '@/components/app/BaseButton.vue';
 import {useI18n} from 'vue-i18n';
 
+const emit = defineEmits(['startTutorial', 'startExercise']);
 const {t} = useI18n();
 
 const startTutorialHandler = () => {
-    console.log('[x] startTutorialHandler');
+    emit('startTutorial');
+
 };
 const startExerciseHandler = () => {
-    console.log('[x] startExerciseHandler');
+    emit('startExercise');
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.exercise-start {
+  display: flex;
+  align-items: center;
+  height: 500px;
+  padding: 2rem 0;
+  background-color: $grey-3;
 
+  &__buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 70%;
+    width: 100%;
+    margin: 0 auto;
+    gap: 2rem;
+  }
+}
 </style>

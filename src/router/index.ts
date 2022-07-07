@@ -11,8 +11,8 @@ const routes: Array<RouteRecordRaw> = [
         children: [
             {
                 path: '/exercises/shulte-table',
-                name: 'shulteTable',
-                component: () => import(/* webpackChunkName: "shulteTable" */ '@/components/components/Exercises/ShulteTable/ShulteTable.vue'),
+                name: 'ShulteTable',
+                component: () => import(/* webpackChunkName: "home" */ '@/views/HomeView.vue'),
                 // meta: {layout: 'main'},
             },
         ]

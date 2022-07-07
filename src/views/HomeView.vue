@@ -1,13 +1,13 @@
 <template>
     <div class="home">
-        <main-section-wrapper>
+        <main-section-wrapper v-show="!isExerciseSelected">
             <exercise-program
-                    v-show="!isExerciseSelected"
                     :tasks="tasks"
                     @select="selectCardHandler"
             />
-            <router-view/>
         </main-section-wrapper>
+
+        <exercise-container v-if="isExerciseSelected" />
     </div>
 </template>
 
@@ -22,8 +22,8 @@ import ExerciseProgram from '@/components/app/ExerciseProgram/ExerciseProgram.vu
 
 
 import {computed, onBeforeMount, ref} from 'vue';
-import {implyModifiers} from '@/utils/modifiers';
 import {useRouter} from 'vue-router';
+import ExerciseContainer from '@/components/components/Exercises/ExerciseContainer.vue';
 
 const router = useRouter();
 
@@ -32,7 +32,7 @@ onBeforeMount(async()=>{
     tasks.value = [
         {
             uid: Math.random().toString(),
-            taskName: 'shulteTable',
+            taskName: 'ShulteTable',
             image: '',
             title: 'Task',
             description: 'jfksld',
@@ -41,7 +41,7 @@ onBeforeMount(async()=>{
         },
         {
             uid: Math.random().toString(),
-            taskName: 'shulteTable',
+            taskName: 'ShulteTable',
             image: '',
             title: 'Task',
             description: 'jfksld',
@@ -50,7 +50,7 @@ onBeforeMount(async()=>{
         },
         {
             uid: Math.random().toString(),
-            taskName: 'shulteTable',
+            taskName: 'ShulteTable',
             image: '',
             title: 'Task',
             description: 'jfksld',
@@ -59,7 +59,7 @@ onBeforeMount(async()=>{
         },
         {
             uid: Math.random().toString(),
-            taskName: 'shulteTable',
+            taskName: 'ShulteTable',
             image: '',
             title: 'Task',
             description: 'jfksld',
@@ -69,16 +69,16 @@ onBeforeMount(async()=>{
     ];
 });
 
+const currentPageName = computed(()=>
+    router.currentRoute.value.name
+);
+
 const isExerciseSelected = computed(()=>
-    router.currentRoute.value.name !=='home'
+    currentPageName.value !=='home'
 );
 
 const selectCardHandler = (taskName: string) => {
     router.push({name:taskName});
-};
-
-const getComponentName = (taskName: string) => {
-    return implyModifiers(taskName, {capitalize: true});
 };
 
 </script>
