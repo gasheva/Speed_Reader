@@ -15,7 +15,10 @@
                 @goToExercises="goToExercisesHandler"
         />
 
-        <template #right-tile>fds</template>
+        <template #right-tile>
+            <p>Title</p>
+            <p>Description</p>
+        </template>
     </main-section-wrapper>
 </template>
 

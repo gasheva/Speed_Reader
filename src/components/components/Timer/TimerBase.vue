@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="timer">
         Time: {{ currentTime }}
     </div>
 </template>
@@ -44,6 +44,10 @@ watch(currentTime, () => {
 
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.timer {
+  font-family: $electrolize;
+  color: $grey-4;
+  font-size: 1rem;
+}
 </style>
