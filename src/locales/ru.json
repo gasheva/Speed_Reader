@@ -1,5 +1,4 @@
 {
-    "message": "Привет i18n !!",
     "homePage": "Домашняя страница",
     "exercisePage": "Упражнения",
     "account": "Личный кабинет",
@@ -12,5 +11,9 @@
     "startExercise": "Приступить к упражнению",
     "startTutorial": "Пройти обучение",
     "restart": "Повторить",
-    "toExerciseList": "К списку упражнений"
+    "toExerciseList": "К списку упражнений",
+    "accountMainInformation": "Основная информация",
+    "accountMessages": "Сообщения",
+    "loadPhoto": "Загрузить фото",
+    "saveChanges": "Сохранить изменения"
 }
