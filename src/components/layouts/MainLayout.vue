@@ -11,30 +11,24 @@
 </template>
 
 <script lang="ts">
-import {computed, defineAsyncComponent} from 'vue';
-import {useStore} from 'vuex';
-import TheHeader from '@/components/app/Navigation/TheHeader.vue';
-import TheFooter from '@/components/app/TheFooter.vue';
-import {useBreakpoint} from '@/composable/breakpoint';
-
 export default {
     name: 'MainLayout',
-    components: {
-        TheFooter,
-        TheMobileSidebar: defineAsyncComponent(() =>
-            import('@/components/app/Navigation/TheMobileSidebar.vue')),
-        TheHeader
-    },
-    setup() {
-        const store = useStore();
-        let isSidebarVisible = computed(() => store.state.isSidebarVisible);
-        let {isScreenSmall} = useBreakpoint();
-        return {
-            isSidebarVisible,
-            isScreenSmall,
-        };
-    }
 };
+</script>
+<script setup lang="ts">
+import {useStore} from 'vuex';
+import {computed, defineAsyncComponent} from 'vue';
+import {useBreakpoint} from '@/composable/breakpoint';
+import TheHeader from '@/components/app/Navigation/TheHeader.vue';
+import TheFooter from '@/components/app/TheFooter.vue';
+const TheMobileSidebar = defineAsyncComponent(() =>
+    import('@/components/app/Navigation/TheMobileSidebar.vue'));
+
+const store = useStore();
+let isSidebarVisible = computed(() => store.state.isSidebarVisible);
+let {isScreenSmall} = useBreakpoint();
+
+
 </script>
 
 <style scoped>

@@ -1,7 +1,7 @@
 <template>
     <div class="notification-dropdown">
         <div class="notification-dropdown__img">
-            <span v-html="envelop"/>
+            <span v-html="icons.envelop"/>
         </div>
         <div class="notification-dropdown__info">
             <p>{{ notification.title }}</p>
@@ -11,36 +11,32 @@
 </template>
 
 <script lang="ts">
-import {icons} from '@/constants/icons.constants';
-import {Notification} from '@/interfaces/notification.interface';
-import {computed, defineComponent, onMounted, PropType} from 'vue';
+export default {
+    name: 'DropdownMenuNotification',
+}
+</script>
+<script setup lang="ts">
 import {FormatOptions, formatTime, FormatTimeTypes} from '@/utils/utils';
 import {constants} from '@/constants/constants';
+import {computed, onMounted, PropType} from 'vue';
+import {Notification} from '@/interfaces/notification.interface';
+import {icons} from '@/constants/icons.constants';
 
-export default defineComponent({
-    name: 'DropdownMenuNotification',
-    props: {
-        notification: {
-            type: Object as PropType<Notification>,
-            required: true,
-        }
-    },
-    setup(props) {
-        const dateParams: FormatOptions = {
-            format: FormatTimeTypes.daysBack,
-            maxFullDay: constants.MAX_DAYS_FOR_FULL_DAY_FORMAT,
-        };
-        const date = computed(() => formatTime(props.notification.date, dateParams));
-
-        onMounted(() => {
-            console.log('mount');
-        });
-
-        return {
-            envelop: icons.envelop,
-            date,
-        };
+const props = defineProps({
+    notification: {
+        type: Object as PropType<Notification>,
+        required: true,
     }
+})
+
+const $_dateParams: FormatOptions = {
+    format: FormatTimeTypes.daysBack,
+    maxFullDay: constants.MAX_DAYS_FOR_FULL_DAY_FORMAT,
+};
+const date = computed(() => formatTime(props.notification.date, $_dateParams));
+
+onMounted(() => {
+    console.log('mount');
 });
 </script>
 

@@ -13,23 +13,16 @@
 </template>
 
 <script lang="ts">
-import UserBox from '@/components/components/UserBox.vue';
-import {defineComponent} from 'vue';
-import {useI18n} from 'vue-i18n';
-import links from '@/components/components/Dropdown/data/dropdownMenuUser';
-
-export default defineComponent({
+export default {
     name: 'DropdownMenuUser',
-    components: {UserBox},
-    setup() {
-        const {t} = useI18n();
+}
+</script>
+<script setup lang="ts">
+import links from '@/components/components/Dropdown/data/dropdownMenuUser';
+import UserBox from '@/components/components/UserBox.vue';
+import {useI18n} from 'vue-i18n';
 
-        return {
-            links,
-            t
-        };
-    },
-});
+const {t} = useI18n();
 </script>
 
 <style lang="scss" scoped>

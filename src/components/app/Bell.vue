@@ -1,24 +1,20 @@
 <template>
   <a class="new-msg" href="" @click.prevent>
-    <span v-html="bell"/>
+    <span v-html="icons.bell"/>
     <div v-if="msgCount" class="new-msg__count danger">{{ msgCount }}</div>
   </a>
 </template>
 
-<script>
-import {computed} from "vue";
-import {icons} from "@/constants/icons.constants"
-
+<script  lang="ts">
 export default {
   name: "Bell",
-  setup() {
-    const msgCount = computed(() => 4);
-    return {
-      msgCount,
-      bell: icons.bell
-    }
-  }
 }
+</script>
+<script setup lang="ts">
+import {computed} from 'vue';
+import {icons} from "@/constants/icons.constants"
+
+const msgCount = computed(() => 4);
 </script>
 
 <style lang="scss">

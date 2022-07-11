@@ -10,20 +10,17 @@
 </template>
 
 <script lang="ts">
-import links from '@/components/app/Navigation/data/index';
-import {useI18n} from 'vue-i18n';
 
 export default {
     name: 'TheMobileSidebar',
-    setup() {
-        const {t} = useI18n();
-
-        return {
-            links,
-            t,
-        };
-    }
 };
+</script>
+<script setup lang="ts">
+import {useI18n} from 'vue-i18n';
+import links from '@/components/app/Navigation/data/index';
+
+const {t} = useI18n();
+
 </script>
 
 <style lang="scss" scoped>

@@ -4,46 +4,47 @@
 </template>
 
 <script lang="ts">
-import {computed, onMounted, onUnmounted, ref, watch} from 'vue';
-import {getBreakpoint} from '@/utils/utils';
-import {useStore} from 'vuex';
+/* TODO (can't move imports) */
 import MainLayout from '@/components/layouts/MainLayout.vue';
 import EmptyLayout from '@/components/layouts/EmptyLayout.vue';
-import {useRoute} from 'vue-router';
 
 export default {
     components: {
         MainLayout, EmptyLayout
     },
-    setup() {
-        const store = useStore();
-        const windowWidth = ref(window.innerWidth);
-        let breakpoint = computed(() => store.state.breakpoint);
-        const handleResize = (() => {
-            windowWidth.value = window.innerWidth;
-        });
-
-        watch(windowWidth, (width) => {
-            let br = getBreakpoint(width);
-            if (breakpoint.value !== br) {
-                store.commit('setBreakpoint', br);
-            }
-        }, {immediate: true});
-
-        onMounted(() => {
-            window.addEventListener('resize', handleResize);
-        });
-
-        onUnmounted(() => {
-            window.removeEventListener('resize', handleResize);
-        });
-
-        const route = useRoute();
-        const layout = computed(() => (route.meta.layout || 'empty') + '-layout');
-
-        return {layout};
-    },
 };
+</script>
+<script setup lang="ts">
+import {useStore} from 'vuex';
+import {computed, onMounted, onUnmounted, ref, watch} from 'vue';
+import {getBreakpoint} from '@/utils/utils';
+import {useRoute} from 'vue-router';
+
+const store = useStore();
+const windowWidth = ref(window.innerWidth);
+let breakpoint = computed(() => store.state.breakpoint);
+const handleResize = (() => {
+    windowWidth.value = window.innerWidth;
+});
+
+watch(windowWidth, (width) => {
+    let br = getBreakpoint(width);
+    if (breakpoint.value !== br) {
+        store.commit('setBreakpoint', br);
+    }
+}, {immediate: true});
+
+onMounted(() => {
+    window.addEventListener('resize', handleResize);
+});
+
+onUnmounted(() => {
+    window.removeEventListener('resize', handleResize);
+});
+
+const route = useRoute();
+const layout = computed(() => (route.meta.layout || 'empty') + '-layout');
+
 </script>
 
 <style lang="scss">
