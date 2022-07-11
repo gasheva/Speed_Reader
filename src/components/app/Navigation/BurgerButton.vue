@@ -21,7 +21,6 @@ export default {
         watch(isActive, () => {
             store.commit('setSidebarVisible', isActive);
         });
-        let {isScreenSmall} = useBreakpoint();
         return {
             toggleSidebar, isActive
         };

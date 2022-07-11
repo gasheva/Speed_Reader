@@ -1,18 +1,8 @@
 <template>
     <div class="section container">
-        <div v-if="isVisible('left')"
-             class="section-tile">
-            <slot name="left-tile"/>
-        </div>
-        <div v-if="isVisible('main')"
-             class="section-main">
-            <div class="main-section">
-                <slot/>
-            </div>
-        </div>
-        <div v-if="isVisible('right')"
-             class="section-tile">
-            <slot name="right-tile"/>
+        <div v-for="part in parts"
+             :class="['section-'+part]">
+            <slot :name="part+'-tile'"></slot>
         </div>
     </div>
 </template>
@@ -34,10 +24,4 @@ const props = defineProps({
         }
     }
 });
-
-
-const isVisible = (val: string) => {
-    return props.parts?.includes(val);
-};
-
 </script>

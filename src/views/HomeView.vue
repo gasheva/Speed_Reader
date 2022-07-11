@@ -1,13 +1,15 @@
 <template>
     <div class="home">
         <main-section-wrapper v-show="!isExerciseSelected">
-            <exercise-program
-                    :tasks="tasks"
-                    @select="selectCardHandler"
-            />
+            <template #main-tile>
+                <exercise-program
+                        :tasks="tasks"
+                        @select="selectCardHandler"
+                />
+            </template>
         </main-section-wrapper>
 
-        <exercise-container v-if="isExerciseSelected" />
+        <exercise-container v-if="isExerciseSelected"/>
     </div>
 </template>
 
@@ -28,7 +30,7 @@ import ExerciseContainer from '@/components/components/Exercises/ExerciseContain
 const router = useRouter();
 
 let tasks = ref<Object[]>([]);
-onBeforeMount(async()=>{
+onBeforeMount(async () => {
     tasks.value = [
         {
             uid: Math.random().toString(),
@@ -69,16 +71,16 @@ onBeforeMount(async()=>{
     ];
 });
 
-const currentPageName = computed(()=>
+const currentPageName = computed(() =>
     router.currentRoute.value.name
 );
 
-const isExerciseSelected = computed(()=>
-    currentPageName.value !=='home'
+const isExerciseSelected = computed(() =>
+    currentPageName.value !== 'home'
 );
 
 const selectCardHandler = (taskName: string) => {
-    router.push({name:taskName});
+    router.push({name: taskName});
 };
 
 </script>

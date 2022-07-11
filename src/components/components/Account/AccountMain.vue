@@ -1,12 +1,13 @@
 <template>
     <div class="account">
         <main-section-wrapper :parts="['left', 'main']">
-            <keep-alive>
-                <component
-                    v-if="currentComponentName"
-                    :is="accountComponents[currentComponentName]"/>
-            </keep-alive>
-
+            <template #main-tile>
+                <keep-alive>
+                    <component
+                            v-if="currentComponentName"
+                            :is="accountComponents[currentComponentName]"/>
+                </keep-alive>
+            </template>
             <template #left-tile>
                 <nav class="account-navigation">
                     <ul>
@@ -29,14 +30,14 @@ export default {
 };
 </script>
 <script setup lang="ts">
-import MainSectionWrapper from "@/components/app/MainSectionWrapper.vue";
-import {links} from "@/components/components/Account/data";
-import {icons} from "@/constants/icons.constants";
+import MainSectionWrapper from '@/components/app/MainSectionWrapper.vue';
+import {links} from '@/components/components/Account/data';
+import {icons} from '@/constants/icons.constants';
 import {ref} from 'vue';
-import {useI18n} from "vue-i18n";
+import {useI18n} from 'vue-i18n';
 
-const AccountMainInformation = () => import("@/components/components/Account/AccountMainInformation.vue");
-const AccountMainMessages = () => import("@/components/components/Account/AccountMainMessages.vue");
+const AccountMainInformation = () => import('@/components/components/Account/AccountMainInformation.vue');
+const AccountMainMessages = () => import('@/components/components/Account/AccountMainMessages.vue');
 
 const {t} = useI18n();
 
@@ -45,14 +46,14 @@ const currentComponentName = ref<string>('');
 
 const changeNavigationHandler = (componentName: string) => {
     currentComponentName.value = componentName;
-}
+};
 </script>
 
 <style lang="scss" scoped>
 .account-navigation {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 1rem;
 }
 </style>

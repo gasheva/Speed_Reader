@@ -4,7 +4,6 @@
             © SpeedReader 2022
         </div>
         <a class="link link--hover-underline footer__share" href="#">Поделиться в вк </a>
-        <input-checkbox label="fjldk"/>
     </footer>
 </template>
 
