@@ -32,6 +32,7 @@ export default {
     width: 70%;
     height: 100vh;
     background-color: gray;
+    z-index: 1;
 
     &__navigation {
         flex-direction: column;

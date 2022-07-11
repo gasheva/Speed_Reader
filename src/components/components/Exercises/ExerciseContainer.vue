@@ -77,7 +77,7 @@ const isEndPageVisible = computed(() => currentStatus.value === statuses.end);
 let {isScreenSmall} = useBreakpoint();
 
 const parts = computed(() => {
-    if (isScreenSmall.value) return ['main'];
+    // if (isScreenSmall.value) return ['main'];
     return ['main', 'right'];
 });
 </script>
