@@ -6,15 +6,18 @@
                     {{ implyModifiers(header, {capitalize: true}) }}
                 </th>
             </tr>
-            <tr v-for="row in visibleRows">
-                <td v-for="cellValue in Object.values(row)">
+            <tr v-for="row in visibleRows"
+                :key="row.id"
+                class="table__row"
+            >
+                <td v-for="(cellValue, colIndex) in Object.values(row)" :key="colIndex">
                     {{ cellValue }}
                 </td>
             </tr>
             <tr>
                 <td class="table__hide-button"
                     @click="hideHandler" :colspan="headers.length">
-                    {{isHidden?'Показать все':'Скрыть'}}
+                    {{ isHidden ? 'Показать все' : 'Скрыть' }}
                 </td>
             </tr>
         </table>
@@ -51,8 +54,8 @@ const showPlaceholder = computed(() =>
     !props.headers || props.headers?.length === 0
 );
 
-const visibleRows = computed(()=>{
-    if(isHidden.value){
+const visibleRows = computed(() => {
+    if (isHidden.value) {
         return props.rowsData?.slice(0, props.maxVisibleRowsCount);
     }
     return props.rowsData;
@@ -60,24 +63,42 @@ const visibleRows = computed(()=>{
 
 const isHidden = ref(true);
 
-onBeforeUnmount(()=>{
+onBeforeUnmount(() => {
     isHidden.value = props.rowsData?.length > props.maxVisibleRowsCount;
-})
+});
 
-const hideHandler = ()=>{
+const hideHandler = () => {
     isHidden.value = !isHidden.value;
-}
+};
+
+const onEnter = () => {
+    console.log('onEnter');
+};
 </script>
 
 <style lang="scss" scoped>
 .table-wrapper {
 }
 
-.table__hide-button{
-  padding: .5rem;
-  text-align: center;
-  color: $grey-3;
-  cursor: pointer;
+.table {
+  &__hide-button {
+    padding: .5rem;
+    text-align: center;
+    color: $grey-3;
+    cursor: pointer;
+  }
+
+  &__row {
+    animation-name: row-show;
+    animation-duration: 1s;
+  }
+}
+
+@keyframes row-show {
+  from {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
 }
 
 table {
@@ -123,7 +144,7 @@ th:last-child {
   border-right: none;
 }
 
-.no-data{
+.no-data {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -131,5 +152,4 @@ th:last-child {
   border: 3px solid $grey-3;
   border-radius: $card-border-radius;
 }
-
 </style>
