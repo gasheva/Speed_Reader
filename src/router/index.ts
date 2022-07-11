@@ -43,6 +43,12 @@ const routes: Array<RouteRecordRaw> = [
         // ]
     },
     {
+        path: '/account',
+        name: 'account',
+        component: () => import('@/components/components/Account/AccountMain.vue'),
+        meta: {layout: 'main'},
+    },
+    {
         path: '/:pathMatch(.*)*',
         name: '404',
         meta: {layout: 'empty'},

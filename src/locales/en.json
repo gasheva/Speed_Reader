@@ -1,5 +1,4 @@
 {
-    "message": "hello i18n !!",
     "homePage": "Home",
     "exercisePage": "Exercise",
     "account": "Account",
@@ -12,5 +11,9 @@
     "startExercise": "Go!",
     "startTutorial": "Tutorial",
     "restart": "Again",
-    "toExerciseList": "To exercises"
+    "toExerciseList": "To exercises",
+    "accountMainInformation": "Information",
+    "accountMessages": "Messages",
+    "loadPhoto": "Load photo",
+    "saveChanges": "Save changes"
 }
