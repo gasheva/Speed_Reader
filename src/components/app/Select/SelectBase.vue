@@ -1,63 +1,106 @@
 <template>
-<div class="dropdown">
-    <button class="dropdown__trigger" @click="toggleSidebar">
-        click me
-    </button>
+    <div class="dropdown">
+        <button class="dropdown__trigger"
+                ref="dropdownMenuRef"
+                @keydown.down="keypressHandler(DIRECTIONS.down)"
+                @keydown.up="keypressHandler(DIRECTIONS.up)"
+                @keydown.enter="enterHandler"
+                @click="toggleMenu">
+            <span>{{ currentItem.label }}</span>
+            <span class="dropdown__icon" v-html="icons.chevronDown"/>
+        </button>
 
-    <div v-show="isActive"
-         ref="dropdownMenuRef"
-         class="dropdown__menu">
-        <div class="dropdown__item"
-             v-for="item in menu"
-             :key="item.id"
-             @click="itemClickHandler(item.id)"
+        <div v-show="isActive"
+             class="dropdown__menu"
         >
-            {{item.label}}
+            <select-base-item
+                    v-for="(item, index) in menu"
+                    :item="item"
+                    :is-active="activeItemIndex===index"
+                    @mouseenter="mouseenterHandler(index)"
+                    @click="itemClickHandler(item)"
+            />
         </div>
     </div>
-</div>
 </template>
 
 <script lang="ts">
 export default {
-    name: "SelectBase"
-}
+    name: 'SelectBase'
+};
 </script>
 <script setup lang="ts">
 import {useToggle} from '@/composable/toggler';
 import {useStore} from 'vuex';
 import {PropType, ref, watch} from 'vue';
 import {onClickOutside} from '@vueuse/core';
+import {icons} from '@/constants/icons.constants';
+import SelectBaseItem from '@/components/app/Select/SelectBaseItem.vue';
+
+enum DIRECTIONS {up, down}
 
 const props = defineProps({
-    menu: {type: Object as PropType<Object[]>, default: [] },
-})
+    menu: {type: Object as PropType<Object[]>, required: true},
+});
+const emit = defineEmits(['select']);
 
-const {isVisible: isActive, toggle: toggleSidebar} = useToggle();
+const {isVisible: isActive, toggle: toggleMenu} = useToggle();
 const store = useStore();
 
-const itemClickHandler = (id: string)=>{
-    console.log('itemClickHandler');
-}
+const currentItem = ref<Object>(props.menu[0]);
+
+const itemClickHandler = (item: Object) => {
+    currentItem.value = item;
+    isActive.value = false;
+    emitSelect(item);
+};
+
+const enterHandler = () => {
+    currentItem.value = props.menu[activeItemIndex.value];
+    emitSelect(currentItem.value);
+};
 
 const dropdownMenuRef = ref(null);
-onClickOutside(dropdownMenuRef, (event) => isActive.value = false)
+onClickOutside(dropdownMenuRef, (event) => isActive.value = false);
+
+
+const activeItemIndex = ref(0);
+
+const mouseenterHandler = (index: number) => {
+    activeItemIndex.value = index;
+};
+
+const keypressHandler = (direction: DIRECTIONS) => {
+    if (direction === DIRECTIONS.up) {
+        activeItemIndex.value = activeItemIndex.value === 0 ?
+            props.menu.length - 1 : activeItemIndex.value - 1;
+    } else {
+        activeItemIndex.value = activeItemIndex.value === props.menu.length - 1 ?
+            0 : activeItemIndex.value + 1;
+    }
+    currentItem.value = props.menu[activeItemIndex.value];
+};
+
+const emitSelect = (item: Object) => {
+    emit('select', item);
+};
 </script>
 
 <style lang="scss" scoped>
 select::-ms-expand {
-    display: none;
-}
-select {
-    background: white;
-    padding: 0.25rem 0.5rem;
-    border: 2px solid black;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    text-overflow: '';
+  display: none;
 }
 
-.dropdown{
+select {
+  background: white;
+  padding: 0.25rem 0.5rem;
+  border: 2px solid black;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-overflow: '';
+}
+
+.dropdown {
   position: relative;
   min-width: 234px;
   width: fit-content;
@@ -69,6 +112,12 @@ select {
     flex-direction: row;
     align-items: center;
     width: 100%;
+    min-height: 1rem;
+  }
+
+  &__icon {
+    margin-left: auto;
+    margin-right: .25rem;
   }
 
   &__menu {
@@ -82,9 +131,13 @@ select {
     outline: 2px solid black;
   }
 
-  &__item{
-    &:hover{
+  &__item {
+    &--active {
       background-color: $grey-5;
+    }
+
+    &:hover {
+      //background-color: $grey-5;
     }
   }
 }
