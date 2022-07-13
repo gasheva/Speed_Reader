@@ -3,6 +3,7 @@ import {Breakpoints} from '@/constants/breakpoint.constant';
 import {toaster} from '@/store/modules/toaster';
 import {notification} from '@/store/modules/notification';
 import {auth} from '@/store/modules/auth';
+import {exercise} from '@/store/modules/exercise';
 
 const debug = process.env.NODE_ENV !== 'production';
 
@@ -25,5 +26,6 @@ export default createStore({
         toaster,
         auth,
         notification,
+        exercise
     }
 });

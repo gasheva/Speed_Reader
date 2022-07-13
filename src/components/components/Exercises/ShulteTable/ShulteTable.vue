@@ -1,14 +1,14 @@
 <template>
     <div class="exercise">
-        <timer-base :start-time="55" @timeout="timeoutHandler" @timeUpdated="timeUpdatedHandler"/>
+        <timer-base :start-time="startTimeSec" @timeout="timeoutHandler" @timeUpdated="timeUpdatedHandler"/>
 
         <div class="shulte-table">
             {{currentVal}}
             <div class="shulte-table__row" v-for="rowIdx in tableSize">
                 <shulte-table-cell
                         v-for="colIdx in tableSize"
-                        :value="getVal(rowIdx, colIdx)"
-                        :is-next="getVal(rowIdx, colIdx)===currentVal"
+                        :value="getVal(rowIdx, colIdx).value"
+                        :is-next="getVal(rowIdx, colIdx).index===currentVal"
                         @rightSelect="rightSelectHandler"
                 />
             </div>
@@ -26,8 +26,15 @@ export default {
 import TimerBase from '@/components/components/Timer/TimerBase.vue';
 import {computed, onBeforeMount, ref} from 'vue';
 import ShulteTableCell from '@/components/components/Exercises/ShulteTable/ShulteTableCell.vue';
+import {ShulteData} from '@/components/components/Exercises/ShulteTable/data/shulteData.interface';
+import {useStore} from 'vuex';
 
+const props = defineProps({
+    taskName: {type: String, required: true},
+})
 const emit = defineEmits(['finish']);
+const store = useStore();
+
 const timeoutHandler = () => {
     onResult();
 };
@@ -38,21 +45,28 @@ const onResult = ()=>{
 }
 
 /* GAME LOGIC */
-let tableSize: number = 5;
+const tableSize = ref<number>(0);
 let cellCount: number = 0;
-let shulteTable = ref<number[]>([]);
+let shulteTable = ref<ShulteData[]>([]);
 let currentVal = ref(1);
 onBeforeMount(async () => {
-    // TODO (fetch size)
-    cellCount = tableSize * tableSize;
-    shulteTable.value = generateTable(cellCount);
+    tableSize.value = (await store.dispatch('exercise/fetchExerciseData', {id:props.taskName})).size;
+    cellCount = tableSize.value * tableSize.value;
+    shulteTable.value = generateTable(cellCount, props.taskName);
     shuffle(shulteTable.value);
 });
 
-const generateTable = (arrayCapacity: number): number[] => {
+const generateTable = (arrayCapacity: number, type: string): ShulteData[] => {
+    const getValue = (i: number):string=>{
+        if(type==='numbers'){
+            return i.toString();
+        }
+        return String.fromCharCode(1039+i);
+    }
+
     const randomArray = [];
     for (let i = 1; i < arrayCapacity + 1; i++) {
-        randomArray.push(i);
+        randomArray.push({index: i, value: getValue(i)});
     }
     return randomArray;
 };
@@ -64,8 +78,8 @@ const shuffle = (arr: Object[]): void => {
     }
 };
 
-const getVal = (rowIdx: number, colIdx: number): number => {
-    return shulteTable.value[(rowIdx - 1) * tableSize + (colIdx - 1)];
+const getVal = (rowIdx: number, colIdx: number): ShulteData => {
+    return shulteTable.value[(rowIdx - 1) * tableSize.value + (colIdx - 1)];
 };
 
 const isGameFinished = computed(() => {
@@ -82,7 +96,7 @@ const rightSelectHandler = () => {
 
 
 /* TIMER LOGIC */
-const startTimeSec = 55;
+const startTimeSec = 5;
 let currentTimeSec = startTimeSec;
 const timeUpdatedHandler = (time: number): void => {
     currentTimeSec = time;

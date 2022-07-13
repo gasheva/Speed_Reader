@@ -17,7 +17,7 @@ export default {
 import {onBeforeUnmount, ref} from 'vue';
 
 const props = defineProps({
-    value: {type: Number, required: true},
+    value: {type: String, required: true},
     isNext: {type: Boolean, required: true},
 });
 
