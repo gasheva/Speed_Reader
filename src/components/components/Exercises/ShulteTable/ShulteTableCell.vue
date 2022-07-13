@@ -1,5 +1,5 @@
 <template>
-    <div class="shulte-table-cell"
+    <div class="shulte-table-cell noselect"
          @click="clickHandler"
          ref="cellRef"
          :class="[`shulte-table-cell--${currentStyle}`]"
