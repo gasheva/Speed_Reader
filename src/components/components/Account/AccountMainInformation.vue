@@ -3,7 +3,9 @@
         Main info
         <div class="main-info__photo-container">
             <div class="main-info__photo"></div>
-            <base-button :text="t('loadPhoto')"/>
+            <div class="main-info__load-button">
+                <base-button :text="t('loadPhoto')"/>
+            </div>
         </div>
         <div class="main-info__credits">
             <input-text :hint="'E-mail'" v-model:value="credits.email"/>
@@ -14,7 +16,10 @@
                             v-model="credits.toBroadcast"
             />
         </div>
-        <base-button :text="t('saveChanges')"/>
+        <base-button
+                :text="t('saveChanges')"
+                :disabled="isDisabled"
+        />
     </div>
 </template>
 
@@ -24,11 +29,12 @@ export default {
 };
 </script>
 <script setup lang="ts">
-import BaseButton from "@/components/app/BaseButton.vue";
-import {useI18n} from "vue-i18n";
-import InputText from "@/components/app/InputText.vue";
-import InputCheckbox from "@/components/app/InputCheckbox.vue";
-import {ref} from "vue";
+import BaseButton from '@/components/app/BaseButton.vue';
+import {useI18n} from 'vue-i18n';
+import InputText from '@/components/app/InputText.vue';
+import InputCheckbox from '@/components/app/InputCheckbox.vue';
+import {computed, ref} from 'vue';
+import {validateCredits} from '@/utils/utils';
 
 const {t} = useI18n();
 const credits = ref({
@@ -37,10 +43,15 @@ const credits = ref({
     toBroadcast: true,
 });
 
+const isDisabled = computed(() => {
+    return !validateCredits(credits.value);
+});
 
 </script>
 <style lang="scss" scoped>
 .main-info {
-
+  &__load-button {
+    max-width: 242px;
+  }
 }
 </style>
