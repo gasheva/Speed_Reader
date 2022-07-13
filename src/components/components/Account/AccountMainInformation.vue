@@ -3,7 +3,7 @@
         Main info
         <div class="main-info__photo-container">
             <div class="main-info__photo"></div>
-            <div class="main-info__load-button">
+            <div class="main-info__button">
                 <base-button :text="t('loadPhoto')"/>
             </div>
         </div>
@@ -16,10 +16,12 @@
                             v-model="credits.toBroadcast"
             />
         </div>
-        <base-button
-                :text="t('saveChanges')"
-                :disabled="isDisabled"
-        />
+        <div class="main-info__button">
+            <base-button
+                    :text="t('saveChanges')"
+                    :disabled="isDisabled"
+            />
+        </div>
     </div>
 </template>
 
@@ -50,7 +52,7 @@ const isDisabled = computed(() => {
 </script>
 <style lang="scss" scoped>
 .main-info {
-  &__load-button {
+  &__button {
     max-width: 242px;
   }
 }
