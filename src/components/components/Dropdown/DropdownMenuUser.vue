@@ -2,7 +2,7 @@
     <div class="user-dropdown">
         <user-box class="user-dropdown__group"/>
         <div class="user-dropdown__group">
-            <router-link v-for="link in links" :key="link.name" :to="link.route">
+            <router-link v-for="link in links" :key="link.name" :to="{name: link.route}">
                 {{ t(link.label) }}
             </router-link>
         </div>
