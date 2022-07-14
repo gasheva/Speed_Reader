@@ -4,18 +4,20 @@
             <template #main-tile>
             </template>
             <template #right-tile>
-                <Doughnut
-                        ref="doughnutRef"
-                        v-if="loaded"
-                        :chart-data="chartData"
-                        :chart-options="chartOptions"
-                        :plugins="[plugin]"
-                        @click="onClick"
-                />
-                <div class="pos"
-                     ref="calendarRef"
-                >jflsd
-                </div>
+                <section class="statistic-wrapper">
+                    <Doughnut
+                            ref="doughnutRef"
+                            v-if="loaded"
+                            :chart-data="chartData"
+                            :chart-options="chartOptions"
+                            @click="onClick"
+                    />
+                    <div class="calendar"
+                         @click="calendarClickHandler"
+                    >
+                        jflsd
+                    </div>
+                </section>
                 <statistic-tile/>
             </template>
         </main-section-wrapper>
@@ -31,14 +33,11 @@ export default {
 import MainSectionWrapper from '@/components/app/MainSectionWrapper.vue';
 import StatisticTile from '@/components/components/Statistic/StatisticTile.vue';
 
-import {plugin} from '@/components/components/Statistic/data/doughnutChartPlugin';
 import {Doughnut} from 'vue-chartjs';
-import {Chart as ChartJS, Title, Tooltip, Legend, ArcElement, CategoryScale, Plugin} from 'chart.js';
-import {onBeforeMount, onBeforeUnmount, onBeforeUpdate, onMounted, ref, watch} from 'vue';
-import {getBreakpoint} from '@/utils/utils';
-import {useStore} from 'vuex';
+import {Chart as ChartJS, Title, Tooltip, ArcElement, CategoryScale} from 'chart.js';
+import {ref} from 'vue';
 
-ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
+ChartJS.register(Title, Tooltip, ArcElement, CategoryScale);
 
 const loaded = true;
 const chartData = {
@@ -59,12 +58,6 @@ const chartOptions = {
             bottom: 0
         }
     },
-    elements: {
-        center: {
-            text: '90%',
-            sidePadding: 60
-        }
-    }
 };
 
 const onClick = (info: any) => {
@@ -72,28 +65,22 @@ const onClick = (info: any) => {
 };
 
 const doughnutRef = ref(null);
-const store = useStore();
-const calendarRef = ref(null);
 
-watch(() => store.state.breakpoint, () => {
-    const clientRect = doughnutRef.value.$el.getClientRects()[0];
-    const ctx = doughnutRef.value.chart.ctx;
-    console.log(ctx);
-    console.log(clientRect[0]);
-    calendarRef.value.style.left = `${clientRect.left+ctx.computedCenterX}px`;
-    calendarRef.value.style.top = `${clientRect.top+ctx.computedCenterY}px`;
-});
+const calendarClickHandler = () => {
 
-onBeforeUnmount(() => {
-    console.log('doughnutRef', doughnutRef.value.chart.ctx);
-});
-
+};
 </script>
 
 <style lang="scss" scoped>
-.pos {
+.statistic-wrapper {
+  position: relative;
+}
+
+.calendar {
   position: absolute;
-  right: 50px;
-  top: 500px;
+  top: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 </style>
