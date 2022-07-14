@@ -2,12 +2,12 @@
     <div class="user-dropdown">
         <user-box class="user-dropdown__group"/>
         <div class="user-dropdown__group">
-            <router-link v-for="link in links" :key="link.name" :to="link.route">
+            <router-link v-for="link in links" :key="link.name" :to="{name: link.route}">
                 {{ t(link.label) }}
             </router-link>
         </div>
         <div class="user-dropdown__group">
-            <a class="bold" href="">Выйти</a>
+            <a class="bold" href="" @click="logout">{{ t('exit') }}</a>
         </div>
     </div>
 </template>
@@ -15,41 +15,47 @@
 <script lang="ts">
 export default {
     name: 'DropdownMenuUser',
-}
+};
 </script>
 <script setup lang="ts">
 import links from '@/components/components/Dropdown/data/dropdownMenuUser';
 import UserBox from '@/components/components/UserBox.vue';
 import {useI18n} from 'vue-i18n';
+import {useStore} from 'vuex';
 
 const {t} = useI18n();
+const store = useStore();
+
+const logout = () => {
+    store.dispatch('auth/logout');
+};
 </script>
 
 <style lang="scss" scoped>
 .user-dropdown {
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-    width: 15rem;
-    color: black;
-    text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  width: 15rem;
+  color: black;
+  text-decoration: none;
 
-    &__group {
-        position: relative;
+  &__group {
+    position: relative;
 
-        &:after {
-            content: "";
-            position: absolute;
-            display: block;
-            height: 1px;
-            width: 100%;
-            background: black;
-            bottom: -8px;
-        }
-
-        &:last-child:after {
-            display: none;
-        }
+    &:after {
+      content: "";
+      position: absolute;
+      display: block;
+      height: 1px;
+      width: 100%;
+      background: black;
+      bottom: -8px;
     }
+
+    &:last-child:after {
+      display: none;
+    }
+  }
 }
 </style>

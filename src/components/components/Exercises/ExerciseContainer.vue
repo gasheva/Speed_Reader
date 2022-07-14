@@ -8,6 +8,7 @@
             />
             <component :is="exercisesComponents[currentComponent]"
                        v-if="isExercisePageVisible"
+                       :task-name="currentComponent"
                        @finish="finishExerciseHandler"
             />
             <exercise-end

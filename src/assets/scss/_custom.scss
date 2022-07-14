@@ -93,7 +93,7 @@ a {
   }
 }
 
-.section{
+.section {
   display: flex;
   justify-content: space-around;
   margin: 4rem auto 0;
@@ -106,13 +106,13 @@ a {
   }
 }
 
-.section-main{
+.section-main {
   width: 100%;
   background-color: white;
   margin-bottom: auto;
 }
 
-.section-right, .section-left{
+.section-right, .section-left {
   width: 30%;
   height: fit-content;
   background-color: white;
@@ -135,9 +135,20 @@ a {
   }
 }
 
-.tasks-wrapper{
+.tasks-wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                   supported by Chrome, Edge, Opera and Firefox */
 }

@@ -32,7 +32,7 @@ export default defineComponent({
 .base-button {
     display: inline-block;
     width: 100%;
-    padding: 1rem 1.75rem;
+    padding: 1rem 1.5rem;
     border: 2px solid black;
     font-family: $roboto;
     font-weight: 700;

@@ -82,3 +82,7 @@ export function formatTime(value: Date, params: FormatOptions) {
     return new Intl.DateTimeFormat(locale, options as Intl.DateTimeFormatOptions)
         .format(new Date(value));
 }
+
+export function validateCredits(_credits: { email: string, password: string }): Boolean {
+    return !(!_credits.email || !_credits.password);
+}
