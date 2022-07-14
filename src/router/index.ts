@@ -18,6 +18,12 @@ const routes: Array<RouteRecordRaw> = [
         ]
     },
     {
+      path: '/statistic',
+      name: 'statistic',
+        component: ()=> import(/* webpackChunkName: "statistic" */ '@/views/StatisticView.vue'),
+        meta: {layout: 'main'},
+    },
+    {
         path: '/sign',
         name: 'sign',
         component: () => import(/* webpackChunkName: "sign" */ '@/views/SignView.vue'),
