@@ -10,6 +10,7 @@
         "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\""
     },
     "dependencies": {
+        "@vuepic/vue-datepicker": "^3.3.1",
         "@vueuse/core": "^8.7.5",
         "axios": "^0.26.1",
         "chart.js": "^3.8.0",
