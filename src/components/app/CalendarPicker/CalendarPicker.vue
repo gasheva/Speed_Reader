@@ -37,33 +37,24 @@ const props = defineProps({
 const selectedDate = ref(new Date());
 
 const datepickerKeyTrigger = ref(0);
-watch(()=> props.datepickerType, ()=>{
+watch(() => props.datepickerType, () => {
     const currentDate = new Date();
     selectedDate.value = currentDate;
-    if(props.datepickerType?.monthPicker){
+    if (props.datepickerType?.monthPicker) {
         selectedDate.value = {
-            month: currentDate.getMonth()+1,
+            month: currentDate.getMonth() + 1,
             year: currentDate.getFullYear(),
-        }
+        };
     }
-    if(props.datepickerType?.yearPicker){
+    if (props.datepickerType?.yearPicker) {
         selectedDate.value = currentDate.getFullYear().toString();
     }
-    datepickerKeyTrigger.value+=1;
-    // selectedDate.value='02/02/2002';
-    // selectedDate.value = {
-    //     month: 1,
-    //     year: 2022,
-    // }
+    datepickerKeyTrigger.value += 1;
 });
 
 watch(selectedDate, () => {
     console.log(selectedDate.value);
 });
-// const selectDateHandler = (selectedDate: any)=>{
-//     debugger;
-//     console.log(selectedDate);
-// }
 
 </script>
 

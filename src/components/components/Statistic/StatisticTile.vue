@@ -70,9 +70,9 @@ const calendarClickHandler = () => {
 
 };
 
-const changePeriodHandler = (id: number)=>{
+const changePeriodHandler = (id: number) => {
 
-}
+};
 
 const onClick = (info: any) => {
     console.log('onClick', info);
@@ -95,25 +95,25 @@ const periods = [
         type: {yearPicker: true} as DatepickerProps,
     },
 ];
-const selectedPeriod = ref(periods[0])
+const selectedPeriod = ref(periods[0]);
 const selectPeriodHandler = (item: Object) => {
-    selectedPeriod.value = item
+    selectedPeriod.value = item;
 };
 </script>
 
 <style lang="scss" scoped>
 .statistic-wrapper {
-    position: relative;
+  position: relative;
 }
 
 .calendar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
