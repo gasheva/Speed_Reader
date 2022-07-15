@@ -9,8 +9,7 @@
                         :chart-options="chartOptions"
                         @click="onClick"
                 />
-                <div class="calendar"
-                     @click="calendarClickHandler">
+                <div class="calendar">
                     <calendar-picker
                             :datepicker-type="selectedPeriod.type"
                     />
@@ -65,14 +64,6 @@ const chartOptions = {
 };
 
 const doughnutRef = ref(null);
-
-const calendarClickHandler = () => {
-
-};
-
-const changePeriodHandler = (id: number) => {
-
-};
 
 const onClick = (info: any) => {
     console.log('onClick', info);
