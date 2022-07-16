@@ -3,15 +3,15 @@
         <table v-if="!showPlaceholder" class="table">
             <tr>
                 <th v-for="header in headers">
-                    {{ implyModifiers(header, {capitalize: true}) }}
+                    {{ implyModifiers(header.label, {capitalize: true}) }}
                 </th>
             </tr>
             <tr v-for="row in visibleRows"
                 :key="row.id"
                 class="table__row"
             >
-                <td v-for="(cellValue, colIndex) in Object.values(row)" :key="colIndex">
-                    {{ cellValue }}
+                <td v-for="colIndex in headers.length" :key="colIndex">
+                    {{row[headers[colIndex-1].uname]}}
                 </td>
             </tr>
             <tr>
@@ -36,15 +36,16 @@ export default {
 
 import {computed, onBeforeUnmount, PropType, ref} from 'vue';
 import {implyModifiers} from '@/utils/modifiers';
+import {TableBaseHeaderInterface, TableBaseRowInterface} from '@/components/app/Table/data/tableBase.interface';
 
 const props = defineProps({
     placeholder: {type: String, default: ''},
     headers: {
-        type: Object as PropType<string[]>,
-        default: []
+        type: Object as PropType<TableBaseHeaderInterface[]>,
+        required: true,
     },
     rowsData: {
-        type: Object as PropType<Object[]>,
+        type: Object as PropType<TableBaseRowInterface[]>,
         default: []
     },
     maxVisibleRowsCount: {type: Number, default: 2},

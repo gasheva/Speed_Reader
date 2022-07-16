@@ -29,17 +29,21 @@ export default {
 };
 </script>
 <script setup lang="ts">
-import SelectBase from '@/components/app/Select/SelectBase';
+import SelectBase from '@/components/app/Select/SelectBase.vue';
 
 import {Doughnut} from 'vue-chartjs';
 import {Chart as ChartJS, Title, Tooltip, ArcElement, CategoryScale} from 'chart.js';
-import {ref} from 'vue';
+import {PropType, ref} from 'vue';
 import CalendarPicker from '@/components/app/CalendarPicker/CalendarPicker.vue';
-import {DatepickerProps} from '@/components/app/CalendarPicker/data/datepickerProps.interface';
+import {Period} from '@/interfaces/periods';
+import {periods} from '@/constants/period';
 
 ChartJS.register(Title, Tooltip, ArcElement, CategoryScale);
 
-const emit = defineEmits(['select']);
+const props = defineProps({
+    selectedPeriod: {type: Object as PropType<Period>, required: true},
+});
+const emit = defineEmits(['selectPeriod']);
 
 const loaded = true;
 const chartData = {
@@ -69,26 +73,8 @@ const onClick = (info: any) => {
     console.log('onClick', info);
 };
 
-const periods = [
-    {
-        id: '1',
-        label: 'day',
-        type: {},
-    },
-    {
-        id: '2',
-        label: 'month',
-        type: {monthPicker: true} as DatepickerProps,
-    },
-    {
-        id: '3',
-        label: 'year',
-        type: {yearPicker: true} as DatepickerProps,
-    },
-];
-const selectedPeriod = ref(periods[0]);
-const selectPeriodHandler = (item: Object) => {
-    selectedPeriod.value = item;
+const selectPeriodHandler = (item: Period) => {
+    emit('selectPeriod', item);
 };
 </script>
 

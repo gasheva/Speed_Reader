@@ -16,9 +16,12 @@ export default {
 </script>
 <script setup lang="ts">
 
+import {SelectBaseItemInterface} from '@/components/app/Select/data/selectBaseItem.interface.js';
+import {PropType} from 'vue';
+
 const props = defineProps({
     isActive: {type:Boolean, default: false},
-    item: {type: Object, required: true},
+    item: {type: Object as PropType<SelectBaseItemInterface>, required: true},
 });
 const emit = defineEmits(['mouseenter', 'click'])
 

@@ -4,6 +4,7 @@ import {toaster} from '@/store/modules/toaster';
 import {notification} from '@/store/modules/notification';
 import {auth} from '@/store/modules/auth';
 import {exercise} from '@/store/modules/exercise';
+import {statistic} from '@/store/modules/statistic';
 
 const debug = process.env.NODE_ENV !== 'production';
 
@@ -26,6 +27,7 @@ export default createStore({
         toaster,
         auth,
         notification,
-        exercise
+        exercise,
+        statistic,
     }
 });

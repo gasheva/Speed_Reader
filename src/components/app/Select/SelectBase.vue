@@ -32,15 +32,16 @@ export default {
 <script setup lang="ts">
 import {useToggle} from '@/composable/toggler';
 import {useStore} from 'vuex';
-import {PropType, ref, watch} from 'vue';
+import {PropType, ref} from 'vue';
 import {onClickOutside} from '@vueuse/core';
 import {icons} from '@/constants/icons.constants';
 import SelectBaseItem from '@/components/app/Select/SelectBaseItem.vue';
+import {SelectBaseItemInterface} from '@/components/app/Select/data/selectBaseItem.interface.js';
 
 enum DIRECTIONS {up, down}
 
 const props = defineProps({
-    menu: {type: Object as PropType<Object[]>, required: true},
+    menu: {type: Object as PropType<SelectBaseItemInterface[]>, required: true},
 });
 const emit = defineEmits(['select']);
 
@@ -61,7 +62,7 @@ const enterHandler = () => {
 };
 
 const dropdownMenuRef = ref(null);
-onClickOutside(dropdownMenuRef, (event) => isActive.value = false);
+onClickOutside(dropdownMenuRef, () => isActive.value = false);
 
 
 const activeItemIndex = ref(0);
