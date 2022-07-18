@@ -14,7 +14,7 @@
                     {{ row[headers[colIndex - 1].uname] }}
                 </td>
             </tr>
-            <tr v-if="hasData">
+            <tr v-if="isHideRowVisible">
                 <td class="table__hide-button"
                     @click="hideHandler" :colspan="headers.length">
                     {{ isHidden ? 'Показать все' : 'Скрыть' }}
@@ -55,6 +55,9 @@ const hasData = computed(() => {
         return Boolean(props.rowsData?.length);
     }
 );
+const isHideRowVisible = computed(()=>{
+    return props.rowsData?.length>props.maxVisibleRowsCount;
+})
 
 const visibleRows = computed(() => {
     if (isHidden.value) {
