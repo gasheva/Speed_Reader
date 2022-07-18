@@ -11,6 +11,7 @@
                 <div class="calendar">
                     <calendar-picker
                             :datepicker-type="selectedPeriod.type"
+                            v-model:value="date"
                     />
                 </div>
             </section>
@@ -43,8 +44,19 @@ const props = defineProps({
     selectedPeriod: {type: Object as PropType<Period>, required: true},
     data: {type: Object as PropType<{ id: string, count: number }[]>, required: true},
     undone: {type: Number, required: true},
+    selectedDate: {type: [Object, String], required: true},
 });
-const emit = defineEmits(['selectPeriod']);
+const emit = defineEmits(['selectPeriod', 'update:selectedDate']);
+
+const date = computed({
+    get(){
+        return props.selectedDate;
+    },
+    set(val){
+        emit('update:selectedDate', val)
+    }
+})
+
 
 const loaded = true;
 const chartData = ref({

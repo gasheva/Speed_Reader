@@ -28,13 +28,23 @@ import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 
 import {DatepickerProps} from '@/components/app/CalendarPicker/data/datepickerProps.interface';
-import {ref, watch} from 'vue';
+import {computed, ref, watch} from 'vue';
 
 const props = defineProps({
-    datepickerType: {type: Object as () => DatepickerProps, default: ''}
+    datepickerType: {type: Object as () => DatepickerProps, default: ''},
+    value: {type: [Object, String], default: new Date()},
 });
 
-const selectedDate = ref(new Date());
+const emit = defineEmits(['update:value']);
+
+const selectedDate = computed({
+    get(){
+        return props.value;
+    },
+    set(val){
+        emit('update:value', val);
+    }
+});
 
 const datepickerKeyTrigger = ref(0);
 watch(() => props.datepickerType, () => {

@@ -8,14 +8,18 @@
                             :period="selectedPeriod"
                             :extra-data="[]"
                             :data="currentData"
-                            :date="currentDate"
+                            :date="selectedDate"
                     />
                 </keep-alive>
             </template>
             <template #right-tile>
-                <statistic-tile @selectPeriod="changePeriodHandler"
+                <statistic-tile v-model:selected-date="selectedDate"
                                 :selected-period="selectedPeriod"
-                                :data="currentData" :undone="10"/>
+                                :data="currentData"
+                                :selected-date="selectedDate"
+                                :undone="10"
+                                @selectPeriod="changePeriodHandler"
+                />
             </template>
         </main-section-wrapper>
     </div>
@@ -35,7 +39,6 @@ import {ref, watch} from 'vue';
 import {Period, PERIODS} from '@/interfaces/periods';
 import {periods} from '@/constants/period';
 import {useStore} from 'vuex';
-import {useDateInterval} from '@/composable/dateInterval';
 
 const store = useStore();
 const mainComponents = {StatisticMainDay, StatisticMainPeriod};
@@ -47,13 +50,17 @@ const changePeriodHandler = (period: Period) => {
 };
 
 const currentData = ref([]);
+const selectedDate = ref(new Date());
 watch(() => selectedPeriod.value.id, async () => {
     currentComponentName.value = selectedPeriod.value.id === PERIODS.day ? 'StatisticMainDay'
         : 'StatisticMainPeriod';
     currentData.value = await store.dispatch('statistic/fetchTableForPeriod', {period: selectedPeriod.value.id});
 }, {immediate: true});
 
-const {currentDate} = useDateInterval();
+watch(selectedDate, ()=>{
+    // TODO(convert date for StatisticMain* if year or month selected)
+})
+
 </script>
 
 <style lang="scss" scoped>
