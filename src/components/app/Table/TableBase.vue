@@ -11,7 +11,7 @@
                 class="table__row"
             >
                 <td v-for="colIndex in headers.length" :key="colIndex">
-                    {{row[headers[colIndex-1].uname]}}
+                    {{ row[headers[colIndex - 1].uname] }}
                 </td>
             </tr>
             <tr>

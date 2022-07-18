@@ -7,7 +7,6 @@
                         v-if="loaded"
                         :chart-data="chartData"
                         :chart-options="chartOptions"
-                        @click="onClick"
                 />
                 <div class="calendar">
                     <calendar-picker
@@ -33,7 +32,7 @@ import SelectBase from '@/components/app/Select/SelectBase.vue';
 
 import {Doughnut} from 'vue-chartjs';
 import {Chart as ChartJS, Title, Tooltip, ArcElement, CategoryScale} from 'chart.js';
-import {PropType, ref} from 'vue';
+import {computed, PropType, ref, watch} from 'vue';
 import CalendarPicker from '@/components/app/CalendarPicker/CalendarPicker.vue';
 import {Period} from '@/interfaces/periods';
 import {periods} from '@/constants/period';
@@ -42,20 +41,21 @@ ChartJS.register(Title, Tooltip, ArcElement, CategoryScale);
 
 const props = defineProps({
     selectedPeriod: {type: Object as PropType<Period>, required: true},
+    data: {type: Object as PropType<{ id: string, count: number }[]>, required: true},
+    undone: {type: Number, required: true},
 });
 const emit = defineEmits(['selectPeriod']);
 
 const loaded = true;
-const chartData = {
-    labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
+const chartData = ref({
+    labels: ['Выполнено по программе', 'Не выполнено по программе'],
     datasets: [
         {
-            backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-            data: [40, 20, 80, 10]
+            backgroundColor: ['#BE3BCA', '#FFF'],
+            data: [] as number[]
         }
     ]
-};
-
+});
 const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -65,13 +65,24 @@ const chartOptions = {
             bottom: 0
         }
     },
+    borderColor: '#000',
+    borderWidth: 1,
+    plugins: {
+        tooltip: {
+            yAlign: 'top',
+        }
+    }
 };
 
 const doughnutRef = ref(null);
+const propsIdsAndCounts = computed(() => {
+    return props.data.map(item => ({id: item.id, count: item.count}));
+});
 
-const onClick = (info: any) => {
-    console.log('onClick', info);
-};
+watch(propsIdsAndCounts, () => {
+    const doneExerciseCount = propsIdsAndCounts.value.reduce((sum, item) => sum += item.count, 0);
+    chartData.value.datasets[0].data = [doneExerciseCount, props.undone];
+}, {immediate: true});
 
 const selectPeriodHandler = (item: Period) => {
     emit('selectPeriod', item);
@@ -85,10 +96,9 @@ const selectPeriodHandler = (item: Period) => {
 
 .calendar {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
   align-items: center;

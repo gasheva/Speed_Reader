@@ -2,7 +2,7 @@
     <div class="statistic-main">
         <table-base
                 :headers="currentHeaders"
-                :rows-data="currentData"
+                :rows-data="data"
         />
     </div>
 </template>
@@ -13,14 +13,16 @@ export default {
 };
 </script>
 <script setup lang="ts">
-import {computed, PropType, ref, watch} from 'vue';
+import {computed, PropType} from 'vue';
 import TableBase from '@/components/app/Table/TableBase.vue';
 import {useStore} from 'vuex';
 import {Period, PERIODS} from '@/interfaces/periods';
 import {headersDay, headersYearOrMonth} from '@/constants/period';
+import {TableBaseRowInterface} from '@/components/app/Table/data/tableBase.interface';
 
 const props = defineProps({
-    period: {type: Object as PropType<Period>, required: true}
+    period: {type: Object as PropType<Period>, required: true},
+    data: {type: Object as PropType<TableBaseRowInterface[]>, required: true},
 });
 
 const store = useStore();
@@ -29,12 +31,6 @@ const store = useStore();
 const currentHeaders = computed(() => {
     return props.period.id === PERIODS.day ? headersDay : headersYearOrMonth;
 });
-
-const currentData = ref([]);
-watch(() => props.period.id, async () => {
-    currentData.value = await store.dispatch('statistic/fetchTableForPeriod', {period: props.period.id});
-}, {immediate: true});
-
 
 </script>
 
