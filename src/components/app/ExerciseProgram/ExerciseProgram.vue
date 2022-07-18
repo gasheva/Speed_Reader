@@ -24,8 +24,8 @@ export default {
 <script setup lang="ts">
 
 import TaskCard from '@/components/components/TaskCard/TaskCard.vue';
-import {onBeforeMount, onBeforeUnmount, ref} from 'vue';
 import {FormatOptions, formatTime, FormatTimeTypes} from '@/utils/utils';
+import {useDateInterval} from '@/composable/dateInterval';
 
 const emit = defineEmits(['select']);
 const props = defineProps({
@@ -36,21 +36,7 @@ const dateParams: FormatOptions = {
     format: FormatTimeTypes.dateShort,
 };
 
-/* Get Date */
-onBeforeMount(async () => {
-    getDate();
-});
-onBeforeUnmount(() => {
-    interval && clearInterval(interval);
-    interval = undefined;
-});
-
-const currentDate = ref(new Date());
-let interval: number | undefined = undefined;
-const getDate = () => {
-    interval = setInterval(() => currentDate.value = new Date(), 3000);
-};
-
+const {currentDate} = useDateInterval();
 const taskCardClickHandler = (taskName: string) => {
     emit('select', taskName)
 };
