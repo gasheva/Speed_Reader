@@ -8,6 +8,7 @@
                             :period="selectedPeriod"
                             :extra-data="[]"
                             :data="currentData"
+                            :date="currentDate"
                     />
                 </keep-alive>
             </template>
@@ -34,6 +35,7 @@ import {ref, watch} from 'vue';
 import {Period, PERIODS} from '@/interfaces/periods';
 import {periods} from '@/constants/period';
 import {useStore} from 'vuex';
+import {useDateInterval} from '@/composable/dateInterval';
 
 const store = useStore();
 const mainComponents = {StatisticMainDay, StatisticMainPeriod};
@@ -50,6 +52,8 @@ watch(() => selectedPeriod.value.id, async () => {
         : 'StatisticMainPeriod';
     currentData.value = await store.dispatch('statistic/fetchTableForPeriod', {period: selectedPeriod.value.id});
 }, {immediate: true});
+
+const {currentDate} = useDateInterval();
 </script>
 
 <style lang="scss" scoped>

@@ -1,6 +1,6 @@
 <template>
     <div class="table-wrapper">
-        <table v-if="!showPlaceholder" class="table">
+        <table v-if="hasData" class="table">
             <tr>
                 <th v-for="header in headers">
                     {{ implyModifiers(header.label, {capitalize: true}) }}
@@ -14,7 +14,7 @@
                     {{ row[headers[colIndex - 1].uname] }}
                 </td>
             </tr>
-            <tr>
+            <tr v-if="hasData">
                 <td class="table__hide-button"
                     @click="hideHandler" :colspan="headers.length">
                     {{ isHidden ? 'Показать все' : 'Скрыть' }}
@@ -51,8 +51,9 @@ const props = defineProps({
     maxVisibleRowsCount: {type: Number, default: 2},
 });
 
-const showPlaceholder = computed(() =>
-    !props.headers || props.headers?.length === 0
+const hasData = computed(() => {
+        return Boolean(props.rowsData?.length);
+    }
 );
 
 const visibleRows = computed(() => {
