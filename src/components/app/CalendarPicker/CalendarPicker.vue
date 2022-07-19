@@ -29,20 +29,42 @@ import '@vuepic/vue-datepicker/dist/main.css';
 
 import {DatepickerProps} from '@/components/app/CalendarPicker/data/datepickerProps.interface';
 import {computed, ref, watch} from 'vue';
+import {DatePickerMonthInterface} from '@/components/app/CalendarPicker/data/datePickerMonth.interface';
 
 const props = defineProps({
     datepickerType: {type: Object as () => DatepickerProps, default: ''},
-    value: {type: [Object, String], default: new Date()},
+    value: {type: Object as ()=>Date, default: new Date()},
 });
 
 const emit = defineEmits(['update:value']);
 
+const convertPickerDateToDate= (_pickerDate: DatePickerMonthInterface | string | Date, _datepickerType: DatepickerProps)=>{
+    if(_pickerDate instanceof Date) return _pickerDate
+    if(_datepickerType.yearPicker) {
+        return new Date('01/01/'+_pickerDate)
+    }
+    // TODO(check cast)
+    if(_datepickerType.monthPicker){
+        return new Date(`${(_pickerDate as DatePickerMonthInterface).month}/01/${(_pickerDate as DatePickerMonthInterface).year}`);
+    }
+    return new Date(_pickerDate as string);
+}
+const convertDateToPickerDate= (_date: Date, _datepickerType: DatepickerProps): DatePickerMonthInterface | string=>{
+    if(_datepickerType.yearPicker) {
+        return _date.getFullYear().toString();
+    }
+    if(_datepickerType.monthPicker){
+        return {month: _date.getMonth(), year: _date.getFullYear()}
+    }
+    return _date.toString();
+}
+
 const selectedDate = computed({
-    get(){
-        return props.value;
+    get(): DatePickerMonthInterface | string{
+        return convertDateToPickerDate(props.value, props.datepickerType);
     },
-    set(val){
-        emit('update:value', val);
+    set(val: DatePickerMonthInterface | string | Date){
+        emit('update:value', convertPickerDateToDate(val, props.datepickerType));
     }
 });
 
