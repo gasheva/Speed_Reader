@@ -6,7 +6,7 @@
                 @keydown.up="keypressHandler(DIRECTIONS.up)"
                 @keydown.enter="enterHandler"
                 @click="toggleMenu">
-            <span>{{ currentItem.label }}</span>
+            <span>{{ currentItem?.label || '' }}</span>
             <span class="dropdown__icon" v-html="icons.chevronDown"/>
         </button>
 
@@ -32,7 +32,7 @@ export default {
 <script setup lang="ts">
 import {useToggle} from '@/composable/toggler';
 import {useStore} from 'vuex';
-import {PropType, ref} from 'vue';
+import {onMounted, PropType, ref, watch} from 'vue';
 import {onClickOutside} from '@vueuse/core';
 import {icons} from '@/constants/icons.constants';
 import SelectBaseItem from '@/components/app/Select/SelectBaseItem.vue';
@@ -48,7 +48,17 @@ const emit = defineEmits(['select']);
 const {isVisible: isActive, toggle: toggleMenu} = useToggle();
 const store = useStore();
 
-const currentItem = ref<Object>(props.menu[0]);
+const currentItem = ref<Object|undefined>(undefined);
+
+onMounted(()=>{
+    currentItem.value = props.menu[0];
+    emitSelect(currentItem);
+});
+watch(()=>props.menu, ()=>{
+   if(currentItem.value) return;
+   currentItem.value = props.menu[0];
+   emitSelect(currentItem);
+});
 
 const itemClickHandler = (item: Object) => {
     currentItem.value = item;
