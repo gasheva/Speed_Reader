@@ -45,7 +45,7 @@ const convertPickerDateToDate= (_pickerDate: DatePickerMonthInterface | string |
     }
     // TODO(check cast)
     if(_datepickerType.monthPicker){
-        return new Date(`${(_pickerDate as DatePickerMonthInterface).month}/01/${(_pickerDate as DatePickerMonthInterface).year}`);
+        return new Date(`${(_pickerDate as DatePickerMonthInterface).month+1}/01/${(_pickerDate as DatePickerMonthInterface).year}`);
     }
     return new Date(_pickerDate as string);
 }
