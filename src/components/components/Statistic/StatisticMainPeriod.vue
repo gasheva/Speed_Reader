@@ -5,6 +5,19 @@
                 :headers="headersYearOrMonth"
                 :rows-data="data"
         />
+
+        <section>
+            Статистика по упражнениям
+            <div>
+                <select-base :menu="exercisesList" @select="changeExerciseHandler"/>
+            </div>
+
+            <Line
+                    ref="lineChartRef"
+                    :chart-data="chartData"
+                    :chart-options="chartOptions"
+            />
+        </section>
     </div>
 </template>
 
@@ -14,12 +27,29 @@ export default {
 };
 </script>
 <script setup lang="ts">
-import {computed, PropType} from 'vue';
+import {computed, onBeforeMount, PropType, ref} from 'vue';
 import TableBase from '@/components/app/Table/TableBase.vue';
 import {Period, PERIODS} from '@/interfaces/periods';
 import {headersYearOrMonth} from '@/constants/period';
 import {TableBaseRowInterface} from '@/components/app/Table/data/tableBase.interface';
 import {formatTime, FormatTimeTypes} from '@/utils/utils';
+import SelectBase from '@/components/app/Select/SelectBase.vue';
+import {useStore} from 'vuex';
+import {Line} from 'vue-chartjs';
+import {
+    Chart as ChartJS,
+    Title,
+    Tooltip,
+    Legend,
+    LineElement,
+    LinearScale,
+    PointElement,
+    CategoryScale,
+} from 'chart.js';
+
+// TODO (it's global registration)
+ChartJS.register(Title, Tooltip, LineElement, LinearScale, PointElement, CategoryScale);
+
 
 const props = defineProps({
     period: {type: Object as PropType<Period>, required: true},
@@ -27,6 +57,8 @@ const props = defineProps({
     extraData: {type: Object as PropType<TableBaseRowInterface[]>, required: true},
     date: {type: Object as PropType<Date>, required: true},
 });
+
+const store = useStore();
 
 const selectedDate = computed(() => {
     if (props.period.id === PERIODS.year) {
@@ -42,6 +74,32 @@ const getMonthFormat = (_date: Date): string => {
     return formatTime(_date, {format: FormatTimeTypes.monthAndYear});
 };
 
+/* CHART */
+const exercisesList = ref([]);
+onBeforeMount(async () => {
+    // TODO(maybe only names)
+    exercisesList.value = (await store.dispatch('statistic/fetchAllExercisesForPeriod')).map((item: Object)=>({...item, label: item.name}));
+});
+const changeExerciseHandler = (item: Object) => {
+    console.log('changeExerciseHandler');
+    console.log(item);
+};
+
+// TODO (finish date)
+const chartData = {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    datasets: [
+        {
+            label: 'Data One',
+            backgroundColor: '#f87979',
+            data: [40, 39, 10, 40, 39, 80, 40]
+        }
+    ]
+};
+const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false
+};
 </script>
 
 <style scoped>
