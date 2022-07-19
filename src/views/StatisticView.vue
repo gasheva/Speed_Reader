@@ -57,10 +57,6 @@ watch(() => selectedPeriod.value.id, async () => {
     currentData.value = await store.dispatch('statistic/fetchTableForPeriod', {period: selectedPeriod.value.id});
 }, {immediate: true});
 
-watch(selectedDate, ()=>{
-    // TODO(convert date for StatisticMain* if year or month selected)
-})
-
 </script>
 
 <style lang="scss" scoped>

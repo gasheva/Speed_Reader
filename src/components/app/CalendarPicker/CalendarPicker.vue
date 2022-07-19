@@ -33,37 +33,37 @@ import {DatePickerMonthInterface} from '@/components/app/CalendarPicker/data/dat
 
 const props = defineProps({
     datepickerType: {type: Object as () => DatepickerProps, default: ''},
-    value: {type: Object as ()=>Date, default: new Date()},
+    value: {type: Object as () => Date, default: new Date()},
 });
 
 const emit = defineEmits(['update:value']);
 
-const convertPickerDateToDate= (_pickerDate: DatePickerMonthInterface | string | Date, _datepickerType: DatepickerProps)=>{
-    if(_pickerDate instanceof Date) return _pickerDate
-    if(_datepickerType.yearPicker) {
-        return new Date('01/01/'+_pickerDate)
+const convertPickerDateToDate = (_pickerDate: DatePickerMonthInterface | string | Date, _datepickerType: DatepickerProps) => {
+    if (_pickerDate instanceof Date) return _pickerDate;
+    if (_datepickerType.yearPicker) {
+        return new Date('01/01/' + _pickerDate);
     }
     // TODO(check cast)
-    if(_datepickerType.monthPicker){
-        return new Date(`${(_pickerDate as DatePickerMonthInterface).month+1}/01/${(_pickerDate as DatePickerMonthInterface).year}`);
+    if (_datepickerType.monthPicker) {
+        return new Date(`${(_pickerDate as DatePickerMonthInterface).month + 1}/01/${(_pickerDate as DatePickerMonthInterface).year}`);
     }
     return new Date(_pickerDate as string);
-}
-const convertDateToPickerDate= (_date: Date, _datepickerType: DatepickerProps): DatePickerMonthInterface | string=>{
-    if(_datepickerType.yearPicker) {
+};
+const convertDateToPickerDate = (_date: Date, _datepickerType: DatepickerProps): DatePickerMonthInterface | string => {
+    if (_datepickerType.yearPicker) {
         return _date.getFullYear().toString();
     }
-    if(_datepickerType.monthPicker){
-        return {month: _date.getMonth(), year: _date.getFullYear()}
+    if (_datepickerType.monthPicker) {
+        return {month: _date.getMonth(), year: _date.getFullYear()};
     }
     return _date.toString();
-}
+};
 
 const selectedDate = computed({
-    get(): DatePickerMonthInterface | string{
+    get(): DatePickerMonthInterface | string {
         return convertDateToPickerDate(props.value, props.datepickerType);
     },
-    set(val: DatePickerMonthInterface | string | Date){
+    set(val: DatePickerMonthInterface | string | Date) {
         emit('update:value', convertPickerDateToDate(val, props.datepickerType));
     }
 });
@@ -82,10 +82,6 @@ watch(() => props.datepickerType, () => {
         selectedDate.value = currentDate.getFullYear().toString();
     }
     datepickerKeyTrigger.value += 1;
-});
-
-watch(selectedDate, () => {
-    console.log(selectedDate.value);
 });
 
 </script>

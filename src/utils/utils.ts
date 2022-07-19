@@ -21,7 +21,7 @@ export function getBreakpoint(windowWidth: Number): Breakpoints | undefined {
 }
 
 export enum FormatTimeTypes {
-    dateFull, dateShort, time, daysBack
+    dateFull, dateShort, time, daysBack, monthAndYear
 }
 
 interface IntlDateOptions {
@@ -45,6 +45,12 @@ export function formatTime(value: Date, params: FormatOptions) {
         month: 'long',
         year: 'numeric',
     });
+    if(params.format === FormatTimeTypes.monthAndYear){
+        options = {
+            month: 'long',
+            year: 'numeric'
+        }
+    }
     if (params.format === FormatTimeTypes.dateFull) {
         options = dateOptions();
     }
