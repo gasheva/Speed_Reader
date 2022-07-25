@@ -7,6 +7,11 @@
 /* TODO (can't move imports) */
 import MainLayout from '@/components/layouts/MainLayout.vue';
 import EmptyLayout from '@/components/layouts/EmptyLayout.vue';
+import {
+    Chart, registerables
+} from 'chart.js';
+
+Chart.register(...registerables);
 
 export default {
     components: {

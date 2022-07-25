@@ -2,11 +2,9 @@
     <div class="statistic-info">
         <div class="statistic-info__chart-wrapper">
             <section class="statistic-wrapper">
-                <Doughnut
-                        ref="doughnutRef"
-                        v-if="loaded"
-                        :chart-data="chartData"
-                        :chart-options="chartOptions"
+                <DoughnutChart
+                    :data="chartData"
+                    :options="{responsive: true}"
                 />
                 <div class="calendar">
                     <calendar-picker
@@ -31,14 +29,12 @@ export default {
 <script setup lang="ts">
 import SelectBase from '@/components/app/Select/SelectBase.vue';
 
-import {Doughnut} from 'vue-chartjs';
-import {Chart as ChartJS, Title, Tooltip, ArcElement, CategoryScale} from 'chart.js';
+
 import {computed, PropType, ref, watch} from 'vue';
 import CalendarPicker from '@/components/app/CalendarPicker/CalendarPicker.vue';
 import {Period} from '@/interfaces/periods';
 import {periods} from '@/constants/period';
-
-ChartJS.register(Title, Tooltip, ArcElement, CategoryScale);
+import DoughnutChart from '@/components/app/Charts/DoughnutChart.vue';
 
 const props = defineProps({
     selectedPeriod: {type: Object as PropType<Period>, required: true},
@@ -49,16 +45,19 @@ const props = defineProps({
 const emit = defineEmits(['selectPeriod', 'update:selectedDate']);
 
 const date = computed({
-    get(){
+    get() {
         return props.selectedDate;
     },
-    set(val){
-        emit('update:selectedDate', val)
+    set(val) {
+        emit('update:selectedDate', val);
     }
-})
+});
+
+const propsIdsAndCounts = computed(() => {
+    return props.data.map(item => ({id: item.id, count: item.count}));
+});
 
 
-const loaded = true;
 const chartData = ref({
     labels: ['Выполнено по программе', 'Не выполнено по программе'],
     datasets: [
@@ -67,28 +66,6 @@ const chartData = ref({
             data: [] as number[]
         }
     ]
-});
-const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    events: ['mousemove', 'mouseout', 'click', 'touchstart', 'touchmove'],
-    layout: {
-        padding: {
-            bottom: 0
-        }
-    },
-    borderColor: '#000',
-    borderWidth: 1,
-    plugins: {
-        tooltip: {
-            yAlign: 'top',
-        }
-    }
-};
-
-const doughnutRef = ref(null);
-const propsIdsAndCounts = computed(() => {
-    return props.data.map(item => ({id: item.id, count: item.count}));
 });
 
 watch(propsIdsAndCounts, () => {
