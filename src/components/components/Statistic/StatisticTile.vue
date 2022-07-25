@@ -4,7 +4,6 @@
             <section class="statistic-wrapper">
                 <DoughnutChart
                     :data="chartData"
-                    :options="{responsive: true}"
                 />
                 <div class="calendar">
                     <calendar-picker

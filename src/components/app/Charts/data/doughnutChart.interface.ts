@@ -1,6 +1,6 @@
 export interface DoughnutChartDatasetInterface {
     backgroundColor: string[],
-    data: (number|string)[],
+    data: number[],
 }
 
 export interface DoughnutChartDataInterface {

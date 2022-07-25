@@ -10,13 +10,11 @@
             Статистика по упражнениям
             <div>
                 <select-base :menu="exercisesList" @select="changeExerciseHandler"/>
+                <LineChart
+                        :data="chartData"
+                />
             </div>
 
-            <Line
-                    ref="lineChartRef"
-                    :chart-data="chartData"
-                    :chart-options="chartOptions"
-            />
         </section>
     </div>
 </template>
@@ -27,7 +25,7 @@ export default {
 };
 </script>
 <script setup lang="ts">
-import {computed, onBeforeMount, PropType, ref} from 'vue';
+import {computed, defineAsyncComponent, defineComponent, onBeforeMount, PropType, ref} from 'vue';
 import TableBase from '@/components/app/Table/TableBase.vue';
 import {Period, PERIODS} from '@/interfaces/periods';
 import {headersYearOrMonth} from '@/constants/period';
@@ -35,20 +33,8 @@ import {TableBaseRowInterface} from '@/components/app/Table/data/tableBase.inter
 import {formatTime, FormatTimeTypes} from '@/utils/utils';
 import SelectBase from '@/components/app/Select/SelectBase.vue';
 import {useStore} from 'vuex';
-import {Line} from 'vue-chartjs';
-import {
-    Chart as ChartJS,
-    Title,
-    Tooltip,
-    Legend,
-    LineElement,
-    LinearScale,
-    PointElement,
-    CategoryScale,
-} from 'chart.js';
 
-// TODO (it's global registration)
-ChartJS.register(Title, Tooltip, LineElement, LinearScale, PointElement, CategoryScale);
+import LineChart from '@/components/app/Charts/LineChart.vue';
 
 
 const props = defineProps({
@@ -78,7 +64,10 @@ const getMonthFormat = (_date: Date): string => {
 const exercisesList = ref([]);
 onBeforeMount(async () => {
     // TODO(maybe only names)
-    exercisesList.value = (await store.dispatch('statistic/fetchAllExercisesForPeriod')).map((item: Object)=>({...item, label: item.name}));
+    exercisesList.value = (await store.dispatch('statistic/fetchAllExercisesForPeriod')).map((item: Object) => ({
+        ...item,
+        label: item.name    // TODO(interface)
+    }));
 });
 const changeExerciseHandler = (item: Object) => {
     console.log('changeExerciseHandler');
@@ -86,7 +75,7 @@ const changeExerciseHandler = (item: Object) => {
 };
 
 // TODO (finish date)
-const chartData = {
+const chartData = ref({
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
         {
@@ -94,12 +83,8 @@ const chartData = {
             backgroundColor: '#f87979',
             data: [40, 39, 10, 40, 39, 80, 40]
         }
-    ]
-};
-const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: false
-};
+    ],
+});
 </script>
 
 <style scoped>
