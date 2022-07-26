@@ -89,6 +89,6 @@ export function formatTime(value: Date, params: FormatOptions) {
         .format(new Date(value));
 }
 
-export function validateCredits(_credits: { email: string, password: string }): Boolean {
+export function validateAuthCredits(_credits: { email: string, password: string }): Boolean {
     return !(!_credits.email || !_credits.password);
 }

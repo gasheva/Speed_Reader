@@ -2,11 +2,12 @@ import {unref} from 'vue';
 
 const LS_TOKEN_FIELD_NAME = 'sp_token';
 
-type User = {
-    uid: String,
-    email: String,
-    nickname: String,
-    broadcast: Boolean,
+export type User = {
+    uid: string,
+    email: string,
+    nickname: string,
+    broadcast: boolean,
+    avatar: string,
 }
 
 interface State {
