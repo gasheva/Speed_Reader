@@ -29,7 +29,7 @@ export default {
 import SelectBase from '@/components/app/Select/SelectBase.vue';
 
 
-import {computed, PropType, ref, watch} from 'vue';
+import {computed, PropType, ref, unref, watch} from 'vue';
 import CalendarPicker from '@/components/app/CalendarPicker/CalendarPicker.vue';
 import {Period} from '@/interfaces/periods';
 import {periods} from '@/constants/period';
@@ -73,7 +73,7 @@ watch(propsIdsAndCounts, () => {
 }, {immediate: true});
 
 const selectPeriodHandler = (item: Period) => {
-    emit('selectPeriod', item);
+    emit('selectPeriod', unref(item));
 };
 </script>
 

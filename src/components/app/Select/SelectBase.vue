@@ -32,7 +32,7 @@ export default {
 <script setup lang="ts">
 import {useToggle} from '@/composable/toggler';
 import {useStore} from 'vuex';
-import {onMounted, PropType, ref, watch} from 'vue';
+import {onMounted, PropType, ref, unref, watch} from 'vue';
 import {onClickOutside} from '@vueuse/core';
 import {icons} from '@/constants/icons.constants';
 import SelectBaseItem from '@/components/app/Select/SelectBaseItem.vue';
@@ -93,7 +93,7 @@ const keypressHandler = (direction: DIRECTIONS) => {
 };
 
 const emitSelect = (item: Object) => {
-    emit('select', item);
+    emit('select', unref(item));
 };
 </script>
 

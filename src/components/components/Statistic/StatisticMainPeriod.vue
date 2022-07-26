@@ -25,7 +25,7 @@ export default {
 };
 </script>
 <script setup lang="ts">
-import {computed, defineAsyncComponent, defineComponent, onBeforeMount, PropType, ref} from 'vue';
+import {computed, onBeforeMount, PropType, ref, watch} from 'vue';
 import TableBase from '@/components/app/Table/TableBase.vue';
 import {Period, PERIODS} from '@/interfaces/periods';
 import {headersYearOrMonth} from '@/constants/period';
@@ -35,6 +35,7 @@ import SelectBase from '@/components/app/Select/SelectBase.vue';
 import {useStore} from 'vuex';
 
 import LineChart from '@/components/app/Charts/LineChart.vue';
+import {LineChartDataInterface} from '@/components/app/Charts/data/lineChart.interface';
 
 
 const props = defineProps({
@@ -62,6 +63,7 @@ const getMonthFormat = (_date: Date): string => {
 
 /* CHART */
 const exercisesList = ref([]);
+let selectedExercise = null;
 onBeforeMount(async () => {
     // TODO(maybe only names)
     exercisesList.value = (await store.dispatch('statistic/fetchAllExercisesForPeriod')).map((item: Object) => ({
@@ -69,22 +71,42 @@ onBeforeMount(async () => {
         label: item.name    // TODO(interface)
     }));
 });
-const changeExerciseHandler = (item: Object) => {
+
+watch([()=>props.period, ()=>props.date], async()=>{
+    await fetchExercise(selectedExercise, props.period.id);
+})
+
+const changeExerciseHandler = async (item: Object) => {
     console.log('changeExerciseHandler');
-    console.log(item);
+    selectedExercise = item;
+    await fetchExercise(item, props.period.id);
 };
 
-// TODO (finish date)
-const chartData = ref({
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+const chartData = ref<LineChartDataInterface>({
+    labels: [],
     datasets: [
         {
-            label: 'Data One',
+            label: '',
             backgroundColor: '#f87979',
-            data: [40, 39, 10, 40, 39, 80, 40]
+            data: []
         }
     ],
 });
+const fetchExercise = async (item: Object, period: PERIODS) => {
+    if(!item?.id) return;
+    const exerciseData = await store.dispatch('statistic/fetchExerciseForPeriodById', {id: item.id});
+    chartData.value.datasets[0].data = [];
+    chartData.value.labels = [];
+    exerciseData.statistic.forEach(stat => {
+        chartData.value.datasets[0].data.push(stat.count);
+        chartData.value.labels.push($_formatDateOnPeriod(period, stat.date));
+    });
+};
+
+const $_formatDateOnPeriod = (period: PERIODS, date: Date) => {
+    return period === PERIODS.month ? formatTime(date, {format: FormatTimeTypes.dateShort})
+        : formatTime(date, {format: FormatTimeTypes.monthAndYear});
+};
 </script>
 
 <style scoped>
