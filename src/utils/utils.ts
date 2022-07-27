@@ -92,3 +92,7 @@ export function formatTime(value: Date, params: FormatOptions) {
 export function validateAuthCredits(_credits: { email: string, password: string }): Boolean {
     return !(!_credits.email || !_credits.password);
 }
+
+export function deepClone(dataToClone: Object | any[]){
+    return JSON.parse(JSON.stringify(dataToClone));
+}

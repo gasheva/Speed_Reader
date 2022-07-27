@@ -17,5 +17,7 @@
     "accountMessages": "Messages",
     "loadPhoto": "Load photo",
     "saveChanges": "Save changes",
-    "mainInfo": "Credits"
+    "mainInfo": "Credits",
+    "cancel": "Cancel",
+    "ok": "Ok"
 }

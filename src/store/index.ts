@@ -5,6 +5,7 @@ import {notification} from '@/store/modules/notification';
 import {auth} from '@/store/modules/auth';
 import {exercise} from '@/store/modules/exercise';
 import {statistic} from '@/store/modules/statistic';
+import {settings} from '@/store/modules/settings';
 
 const debug = process.env.NODE_ENV !== 'production';
 
@@ -29,5 +30,6 @@ export default createStore({
         notification,
         exercise,
         statistic,
+        settings
     }
 });

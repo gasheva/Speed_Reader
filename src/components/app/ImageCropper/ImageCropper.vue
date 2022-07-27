@@ -1,121 +1,91 @@
 <template>
     <div class="">
-        <div v-show="imageSrc" class="my-2 w-64 h-64 object-fill mx-auto">
-            <img class="block max-w-full" ref="img" :src="imageSrc" alt="ava"/>
+        <div class="">
+            <slot name="uploader">
+                <base-button
+                        style-btn="black"
+                        :text="t('loadPhoto')"
+                        @click="readress"/>
+
+                <input
+                        type="file"
+                        ref="imageInput"
+                        accept=".jpg,.jpeg,.png"
+                        @change="fileChanged"
+                        :style="{ display: 'none' }"
+                />
+            </slot>
         </div>
-        <div class="flex justify-center content-end mt-2">
-            <button
-                    v-if="!imageSrc"
-                    class="btn btn-blue w-32 mx-2"
-                    @click="readress"
-            >
-                New Image
-            </button>
-            <button v-else class="btn btn-blue w-32 mx-2" @click="handleImageCropped">
-                Update
-            </button>
-            <button
-                    v-if="imageSrc"
-                    class="btn btn-gray w-32 mx-2"
-                    @click="fileCleared"
-            >
-                Cancel
-            </button>
-            <input
-                    type="file"
-                    ref="imageInput"
-                    accept=".jpg,.jpeg,.png"
-                    @change="fileChanged"
-                    :style="{ display: 'none' }"
-            />
-        </div>
-        <div v-if="selectedFile" class="my-2 align-baseline text-center">
+        <div v-if="selectedFile" class="">
             <span>Selected File: </span>
             <span>{{ selectedFile.name }}</span>
         </div>
+
+        <Teleport to="#app">
+            <popup-base ref="cropperPopupRef">
+                <template #body="{reset, cancel, confirm}">
+                    <image-cropper-tools :reset="reset"
+                                         :popup-cancel-handler="cancel"
+                                         :popup-confirm-handler="confirm"
+                                         :selected-file="selectedFile"
+                                         @fileClear="fileCleared"
+                                         @error="errorHandler"/>
+                </template>
+                <template #footer>
+                    <div/>
+                </template>
+            </popup-base>
+        </Teleport>
     </div>
 </template>
 
 <script lang="ts">
 export default {
-    name: "ImageCropper"
-}
+    name: 'ImageCropper'
+};
 </script>
 <script setup lang="ts">
 import 'cropperjs/dist/cropper.css';
-import Cropper from 'cropperjs';
-import {onMounted, onUnmounted, ref, watch, watchEffect} from 'vue';
+import {ref} from 'vue';
+import BaseButton from '@/components/app/BaseButton.vue';
+import {useI18n} from 'vue-i18n';
+import PopupBase from '@/components/app/Popup/PopupBase.vue';
+import ImageCropperTools from '@/components/app/ImageCropper/ImageCropperTools.vue';
 
 const emit = defineEmits(['imageCropped']);
 
+const {t} = useI18n();
+
 const imageInput = ref(null); // template ref for file input
 const selectedFile = ref(null);
-const imageSrc = ref(null);
-const img = ref(null);
-const fileReader = new FileReader();
-let cropper = null;
-fileReader.onload = (event) => {
-    imageSrc.value = event.target.result;
-};
-const handleImageCropped = () => {
-    cropper
-        .getCroppedCanvas({
-            width: 256,
-            height: 256,
-        })
-        .toBlob((blob) => {
-            console.log(blob);
-            emit('imageCropped', blob);
-        }, 'image/jpeg');
-    selectedFile.value = null;
-};
-const fileChanged = (e) => {
+const cropperPopupRef = ref<Object>({});
+
+const fileChanged = async (e) => {
     const files = e.target!.files || e.dataTransfer.files;
     if (files.length) {
         selectedFile.value = files[0];
+    }
+    const result = await cropperPopupRef.value.open();
+    if (result) {
+        selectedFile.value = null;
+        emit('imageCropped', result);
+    } else {
+        fileCleared();
     }
 };
 const fileCleared = () => {
     selectedFile.value = null;
 };
-onMounted(() => {
-    cropper = new Cropper(img.value, {
-        aspectRatio: 1,
-        minCropBoxWidth: 256,
-        minCropBoxHeight: 256,
-        viewMode: 3,
-        dragMode: 'move',
-        background: false,
-        cropBoxMovable: true,
-        cropBoxResizable: false,
-    });
-});
-onUnmounted(() => {
-    cropper.destroy();
-});
-watchEffect(() => {
-    if (selectedFile.value) {
-        fileReader.readAsDataURL(selectedFile.value);
-    } else {
-        imageSrc.value = null;
-    }
-});
-watch(
-    imageSrc,
-    () => {
-        if (imageSrc.value) {
-            cropper.replace(imageSrc.value);
-        }
-    },
-    {
-        flush: 'post', // watch runs after component updates
-    }
-);
 
-const readress = ()=>{
+const readress = () => {
     imageInput.value.value = null;
     imageInput.value.click();
-}
+};
+
+const errorHandler = () => {
+    console.log('[x] Cropper error');
+};
+
 </script>
 
 <style scoped>
@@ -123,7 +93,7 @@ const readress = ()=>{
 </style>
 
 <style lang="scss">
-.cropper-view-box, .cropper-face{
+.cropper-view-box, .cropper-face {
   border-radius: 50%;
 }
 </style>
