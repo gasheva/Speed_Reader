@@ -1,15 +1,18 @@
 <template>
-    <div v-show="isOpen" class="popup-base">
-        <div class="popup-base__body">
-            <slot name="body" :reset="resetContent" :cancel="cancelHandler" :confirm="confirmHandler"/>
+    <Teleport to="#app">
+        <div v-show="isOpen" class="popup-base-background" @click="cancelHandler"/>
+        <div v-show="isOpen" class="popup-base">
+            <div class="popup-base__body">
+                <slot name="body" :reset="resetContent" :cancel="cancelHandler" :confirm="confirmHandler"/>
+            </div>
+            <div class="popup__footer">
+                <slot name="footer" :cancel="cancelHandler" :confirm="confirmHandler">
+                    <base-button style-btn="black" :text="t('ok')" @click="confirmHandler"/>
+                    <base-button style-btn="white" :text="t('cancel')" @click="cancelHandler"/>
+                </slot>
+            </div>
         </div>
-        <div class="popup__footer">
-            <slot name="footer" :cancel="cancelHandler" :confirm="confirmHandler">
-                <base-button style-btn="black" :text="t('ok')" @click="confirmHandler"/>
-                <base-button style-btn="white" :text="t('cancel')" @click="cancelHandler"/>
-            </slot>
-        </div>
-    </div>
+    </Teleport>
 </template>
 
 <script lang="ts">
@@ -61,6 +64,17 @@ defineExpose({open});
 </script>
 
 <style lang="scss" scoped>
+.popup-base-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 20%;
+
+}
+
 .popup-base {
   position: absolute;
   display: flex;

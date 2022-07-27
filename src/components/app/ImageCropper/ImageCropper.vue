@@ -21,7 +21,6 @@
             <span>{{ selectedFile.name }}</span>
         </div>
 
-        <Teleport to="#app">
             <popup-base ref="cropperPopupRef">
                 <template #body="{reset, cancel, confirm}">
                     <image-cropper-tools :reset="reset"
@@ -35,7 +34,6 @@
                     <div/>
                 </template>
             </popup-base>
-        </Teleport>
     </div>
 </template>
 
