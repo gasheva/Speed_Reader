@@ -118,6 +118,13 @@ const resetForm = () => {
 
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.cropper-tools {
+  &__buttons{
+    display: flex;
+    flex-direction: row;
+    padding: 1rem 0;
+    gap: 1rem;
+  }
+}
 </style>

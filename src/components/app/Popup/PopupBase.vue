@@ -87,6 +87,8 @@ defineExpose({open});
   height: fit-content;
   background: white;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-top: 4rem solid black;
+  border-radius: 32px;
 
   &__header {
     padding: 2rem;
