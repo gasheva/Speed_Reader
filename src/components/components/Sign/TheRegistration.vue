@@ -5,7 +5,7 @@
 
         <input-checkbox :label="t('broadcastAgreement')"
                         label-side="left"
-                        v-model="credits.toBroadcast"
+                        v-model:value-init="credits.toBroadcast"
         />
 
         <div>
