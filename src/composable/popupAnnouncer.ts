@@ -17,7 +17,6 @@ export const usePopupAnnouncer = () => {
             // @ts-ignore
             instance.parent.setupState.error.msg = '';
         }
-        debugger
         // @ts-ignore
         if (instance.parent.setupState.popupResult) {
             // @ts-ignore

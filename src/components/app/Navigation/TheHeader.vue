@@ -8,7 +8,7 @@
                              :key="link.name"
                              :to="{name: link.route}"
                              class="custom-router-link navigation__item">
-                    <span class="navigation-item__icon icon"></span>
+                    <span class="navigation-item__icon icon"/>
                     <span>{{ t(link.label) }}</span>
                 </router-link>
             </ul>
@@ -40,7 +40,7 @@
                     </dropdown>
                 </template>
                 <a v-else class="navigation__item link"
-                   @click="join"
+                   @click.prevent="join"
                 >
                     <span class="navigation-item__icon icon"></span>
                     <span>{{ t('join') }}</span>
@@ -58,7 +58,7 @@ export default {
 </script>
 <script setup lang="ts">
 import {useStore} from 'vuex';
-import {computed} from 'vue';
+import {computed, ref} from 'vue';
 import {useI18n} from 'vue-i18n';
 import {useBreakpoint} from '@/composable/breakpoint';
 import {useFetchNotifications} from '@/composable/fetchNotifications';
@@ -80,9 +80,10 @@ const {notifications} = useFetchNotifications();
 
 const isAuth = computed(() => store.getters['auth/isAuth']);
 
-const join = ()=>{
-    router.push({name: 'sign'});
+const join = async ()=>{
+    await router.push({name: 'sign'});
 }
+
 </script>
 
 <style lang="scss" scoped>
