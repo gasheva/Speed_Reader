@@ -21,19 +21,19 @@
             <span>{{ selectedFile.name }}</span>
         </div>
 
-            <popup-base ref="cropperPopupRef">
-                <template #body="{reset, cancel, confirm}">
-                    <image-cropper-tools :reset="reset"
-                                         :popup-cancel-handler="cancel"
-                                         :popup-confirm-handler="confirm"
-                                         :selected-file="selectedFile"
-                                         @fileClear="fileCleared"
-                                         @error="errorHandler"/>
-                </template>
-                <template #footer>
-                    <div/>
-                </template>
-            </popup-base>
+        <popup-base ref="cropperPopupRef">
+            <template #body="{reset, cancel, confirm}">
+                <image-cropper-tools :reset="reset"
+                                     :popup-cancel-handler="cancel"
+                                     :popup-confirm-handler="confirm"
+                                     :selected-file="selectedFile"
+                                     @fileClear="fileCleared"
+                                     @error="errorHandler"/>
+            </template>
+            <template #footer>
+                <div/>
+            </template>
+        </popup-base>
     </div>
 </template>
 

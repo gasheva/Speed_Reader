@@ -1,7 +1,7 @@
 <template>
     <label class="input-checkbox">
         <span :class="labelSide" class="input-checkbox__label">{{ label }}</span>
-        <input checked="checked" type="checkbox">
+        <input checked="checked" type="checkbox" v-model="value">
         <span class="input-checkbox__checkmark"></span>
     </label>
 </template>
@@ -13,7 +13,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {ref} from 'vue';
+import {computed} from 'vue';
 
 const props = defineProps({
     label: {type: String, required: true},
@@ -28,14 +28,19 @@ const props = defineProps({
             const types = new Set(['right', 'left']);
             return types.has(val);
         }
+    },
+    valueInit: {type: Boolean, required: true,}
+});
+const emit = defineEmits(['update:valueInit']);
+
+const value = computed({
+    get() {
+        return props.valueInit;
+    },
+    set(val: boolean) {
+        emit('update:valueInit', val);
     }
 });
-const emit = defineEmits(['update']);
-
-const value = ref(false);
-const update = () => {
-    emit('update', value.value);
-};
 </script>
 
 <style lang="scss" scoped>

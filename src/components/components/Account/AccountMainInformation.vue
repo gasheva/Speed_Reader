@@ -7,9 +7,7 @@
                 <span v-else id="avatarWrapper" class="main-info__avatar" v-html="icons.defaultAvatar"/>
             </div>
             <div class="main-info__load-button main-info__button">
-                <image-cropper @imageCropped="$emit('imageSubmitted', $event)" />
-<!--                <input id="uploadAvatar" type="file" hidden @input="uploadImageHandler">-->
-<!--                <base-button id="uploadAvatarBtn" :text="t('loadPhoto')"/>-->
+                <image-cropper @imageCropped="updatePictureHandler"/>
             </div>
         </div>
         <div class="main-info__credits">
@@ -18,13 +16,14 @@
 
             <input-checkbox :label="t('broadcastAgreement')"
                             label-side="left"
-                            v-model="credits.toBroadcast"
+                            v-model:value-init="credits.toBroadcast"
             />
         </div>
         <div class="main-info__button">
             <base-button
                     :text="t('saveChanges')"
                     :disabled="isDisabled"
+                    @click="saveChangesHandler"
             />
         </div>
     </div>
@@ -40,7 +39,7 @@ import BaseButton from '@/components/app/BaseButton.vue';
 import {useI18n} from 'vue-i18n';
 import InputText from '@/components/app/InputText.vue';
 import InputCheckbox from '@/components/app/InputCheckbox.vue';
-import {computed, onBeforeMount, onMounted, onUnmounted, ref} from 'vue';
+import {computed, onBeforeMount, onMounted, ref} from 'vue';
 import {useStore} from 'vuex';
 import {User} from '@/store/modules/auth';
 import {icons} from '@/constants/icons.constants';
@@ -57,7 +56,7 @@ const credits = ref({
 });
 
 const validateCredits = (_credits: { email: string, nickname: string }) => {
-    return !(!_credits.email || !_credits.nickname);
+    return Boolean(_credits.email && _credits.nickname);
 };
 const isDisabled = computed(() => {
     return !validateCredits(credits.value);
@@ -65,31 +64,24 @@ const isDisabled = computed(() => {
 
 onBeforeMount(() => {
     const user = store.state.auth.user;
-    if (!user?.uid) return;
+    if (user?.uid) {
+        setupCredits(user);
+    }
 });
 
 onMounted(() => {
+    setupAvatarSize();
+});
+
+const setupAvatarSize = () => {
     let avatarWrapper = document.getElementById('avatarWrapper');
-    if (avatarWrapper) {
-        avatarWrapper.children[0].setAttribute('viewBox', '0 0 42 42');
-    }
-    // listenerForUploadAvatar();
-});
-onUnmounted(() => {
-    // removeListenerForUploadAvatar();
-});
+    if (!avatarWrapper) return;
+    avatarWrapper.children[0].setAttribute('viewBox', '0 0 42 42');
+};
 
 /* Upload avatar */
 const openDialog = () => {
     document!.getElementById('uploadAvatar')!.click();
-};
-
-const listenerForUploadAvatar = () => {
-    document!.getElementById('uploadAvatarBtn')!.addEventListener('click', openDialog);
-};
-
-const removeListenerForUploadAvatar = () => {
-    document!.getElementById('uploadAvatarBtn')!.removeEventListener('click', openDialog);
 };
 
 const setupCredits = (user: User) => {
@@ -99,10 +91,14 @@ const setupCredits = (user: User) => {
     credits.value.avatar = user.avatar;
 };
 
-const uploadImageHandler = (file:Event)=>{
-    console.log('uploadImageHandler');
-    console.log(file.target!.files);
-}
+const saveChangesHandler = async () => {
+    await store.dispatch('settings/postUser', credits);
+    await store.dispatch('settings/postPicture');
+};
+
+const updatePictureHandler = async () => {
+    await store.dispatch('settings/postPicture');
+};
 </script>
 <style lang="scss" scoped>
 .main-info {

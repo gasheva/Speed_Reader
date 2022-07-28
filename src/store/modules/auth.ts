@@ -15,12 +15,18 @@ interface State {
 }
 
 const state: State = {
-    user: undefined,
+    user: {
+        uid: '1',
+        email: 'valhalla@mail.c',
+        nickname: 'Thor',
+        broadcast: false,
+        avatar: '',
+    },
 };
 
 const getters = {
     getToken: () => localStorage.getItem(LS_TOKEN_FIELD_NAME),
-    isAuth: (_:State, getters: any) => Boolean(getters.getToken?.length),
+    isAuth: (_: State, getters: any) => Boolean(getters.getToken?.length),
 };
 
 const mutations = {
@@ -39,7 +45,7 @@ const mutations = {
 };
 
 const actions = {
-    async login({commit}: { commit: Function }, credits: User & {password: string}) {
+    async login({commit}: { commit: Function }, credits: User & { password: string }) {
         // const mockUser = {uid: '1', email: 'beowulf@m.ru', nickname: 'Beowulf'};
         const mockToken = '123';
         const unrefUser = unref(credits);
@@ -48,7 +54,7 @@ const actions = {
         return true;
     },
 
-    async register({commit}: { commit: Function }, credits: User & {password: string}) {
+    async register({commit}: { commit: Function }, credits: User & { password: string }) {
         // const mockUser = {uid: '1', email: 'beowulf@m.ru', nickname: 'Beowulf'};
         const mockToken = '123';
         const unrefUser = unref(credits);
