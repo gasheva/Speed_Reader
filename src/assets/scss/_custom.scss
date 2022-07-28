@@ -4,8 +4,14 @@
 }
 
 // override router-link
-.router-link-exact-active {
-  color: #42b983;
+.custom-router-link.router-link-exact-active {
+  color: $yellow-1 !important;
+}
+//.router-link-active {
+//  color: #42b983 !important;
+//}
+.active-link{
+  color: $yellow-1 !important;
 }
 
 a {

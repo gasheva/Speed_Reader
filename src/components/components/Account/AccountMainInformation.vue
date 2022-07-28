@@ -15,6 +15,7 @@
             <input-text :hint="'Nickname'" v-model:value="credits.nickname"/>
 
             <input-checkbox :label="t('broadcastAgreement')"
+                            label-bold
                             label-side="left"
                             v-model:value-init="credits.toBroadcast"
             />

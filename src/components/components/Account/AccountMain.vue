@@ -12,8 +12,9 @@
                 <nav class="account-navigation">
                     <ul>
                         <li v-for="link in links">
-                            <span v-html="icons[link.icon]"></span>
+                            <span v-html="icons[link.icon]"/>
                             <a href="" class="link"
+                               :class="{'active-link': link.componentName===currentComponentName}"
                                @click.prevent="changeNavigationHandler(link.componentName)"
                             >{{ t(link.label) }}</a>
                         </li>

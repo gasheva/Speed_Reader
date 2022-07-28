@@ -1,8 +1,8 @@
 <template>
     <label class="input-checkbox">
-        <span :class="labelSide" class="input-checkbox__label">{{ label }}</span>
+        <span :class="[labelSide, labelBold?'bold':'']" class="input-checkbox__label">{{ label }}</span>
         <input checked="checked" type="checkbox" v-model="value">
-        <span class="input-checkbox__checkmark"></span>
+        <span class="input-checkbox__checkmark"/>
     </label>
 </template>
 
@@ -19,6 +19,7 @@ const props = defineProps({
     label: {type: String, required: true},
     name: {type: String, default: ''},
     disabled: {type: Boolean, default: false},
+    labelBold: {type: Boolean, default: false},
     labelSide: {
         type: String,
         default: 'right',

@@ -4,7 +4,10 @@
             <label class="header__logo logo">SpeedReader</label>
             <!--NAVIGATION-->
             <ul v-if="!isScreenSmall" class="header__navigation navigation">
-                <router-link v-for="link in links" :key="link.name" :to="{name: link.route}" class="navigation__item">
+                <router-link v-for="link in links"
+                             :key="link.name"
+                             :to="{name: link.route}"
+                             class="custom-router-link navigation__item">
                     <span class="navigation-item__icon icon"></span>
                     <span>{{ t(link.label) }}</span>
                 </router-link>
