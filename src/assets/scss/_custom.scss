@@ -1,4 +1,8 @@
 @import "variables";
+#app{
+  overflow: hidden;
+}
+
 // override router-link
 .router-link-exact-active {
   color: #42b983;
@@ -13,22 +17,29 @@ a {
   }
 }
 
-.wrapper {
-  overflow: auto;
+/* a wrapper for all page content */
+.the-wrapper {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  min-height: 100vh;
+  @media screen and (min-width: $sm) {
+    border-top: 4rem solid black;
+  }
 }
 
+/* page body */
 .content {
   flex: 1 1 auto;
   background-color: $grey-1;
 }
 
+/* a container for content */
 .container {
   max-width: 1440px;
   width: 100%;
-  margin: 0 auto;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .label {
@@ -42,19 +53,26 @@ a {
 
 /* FONT */
 .text-small {
-  font-size: 12px;
+  font-size: $text-small;
 }
 
 .text-middle {
-
+  font-size: $text-middle;
 }
 
 .text-big {
-
+  font-size: $text-big;
 }
 
 .bold {
   font-weight: bold;
+}
+
+.headers {
+  font-size: $text-big;
+  font-weight: bold;
+  font-family: $montserrat;
+  line-height: $text-big;
 }
 
 .link {
@@ -96,7 +114,8 @@ a {
 .section {
   display: flex;
   justify-content: space-around;
-  margin: 4rem auto 0;
+  margin-top: 4rem;
+  margin-bottom: 0;
   padding: 0 1rem;
   gap: 1.5rem;
 

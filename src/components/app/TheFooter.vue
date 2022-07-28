@@ -11,27 +11,28 @@
 import InputCheckbox from '@/components/app/InputCheckbox';
 
 export default {
-    name:       'TheFooter',
+    name: 'TheFooter',
     components: {InputCheckbox},
 };
 </script>
 
 <style lang="scss" scoped>
 .footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: auto;
 
-    @media screen and (max-width: $md) {
-        justify-content: space-between;
-    }
+  @media screen and (max-width: $md) {
+    justify-content: space-between;
+  }
 
-    &__copyright {
+  &__copyright {
 
-    }
+  }
 
-    &__share {
+  &__share {
 
-    }
+  }
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
-    <div class="main-content wrapper">
-        <div v-if="!isScreenSmall" class="black-line"></div>
+    <div class="the-wrapper">
         <the-header class="container"/>
         <template v-if="isScreenSmall">
             <the-mobile-sidebar v-show="isSidebarVisible" data-test="mobileSidebar"/>
@@ -31,13 +30,5 @@ let {isScreenSmall} = useBreakpoint();
 
 </script>
 
-<style scoped>
-.main-content {
-    height: 100vh;
-}
-
-.black-line {
-    height: 4rem;
-    background-color: black;
-}
+<style lang="scss" scoped>
 </style>

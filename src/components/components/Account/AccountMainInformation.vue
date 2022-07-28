@@ -1,6 +1,6 @@
 <template>
     <div class="main-info">
-        <span>{{ t('mainInfo') }}</span>
+        <h2 class="headers">{{ t('mainInfo') }}</h2>
         <div class="main-info__photo-container">
             <div class="main-info__photo">
                 <img v-if="credits.avatar" src="" alt="">
@@ -104,14 +104,25 @@ const updatePictureHandler = async () => {
 .main-info {
   display: flex;
   flex-direction: column;
-  padding: 0 2.75rem;
+  padding: 2.5rem 2.75rem 1.5rem;
   gap: 4rem;
 
   &__photo-container {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 3rem;
+    gap: 4rem;
+    padding: 0 1rem;
+
+    @media screen and (max-width: $sm) {
+      justify-content: center;
+    }
+  }
+
+  &__credits {
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
   }
 
   &__load-button {
