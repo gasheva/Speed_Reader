@@ -1,6 +1,6 @@
 <template>
     <div class="dropdown">
-        <a class="dropdown__trigger" href="#" @click="toggleMenu">
+        <a class="dropdown__trigger" href="#" @click="openMenu">
             <slot name="trigger"/>
             <span v-html="chevronDown"></span>
         </a>
@@ -31,7 +31,7 @@ const chevronDown = icons.chevronDown;
 
 const dropdownMenuRef = ref(null);
 const isMenuVisible = ref(false);
-const toggleMenu = () => {
+const openMenu = () => {
     isMenuVisible.value = true;
     emit('openMenu');
 };

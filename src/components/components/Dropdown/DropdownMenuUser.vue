@@ -2,7 +2,9 @@
     <div class="user-dropdown">
         <user-box class="user-dropdown__group"/>
         <div class="user-dropdown__group">
-            <router-link v-for="link in links" :key="link.name" :to="{name: link.route}">
+            <router-link v-for="link in links"
+                         :key="link.name" :to="{name: link.route}"
+            @click.prevent="clickHandler">
                 {{ t(link.label) }}
             </router-link>
         </div>
@@ -22,6 +24,7 @@ import links from '@/components/components/Dropdown/data/dropdownMenuUser';
 import UserBox from '@/components/components/UserBox.vue';
 import {useI18n} from 'vue-i18n';
 import {useStore} from 'vuex';
+import {getCurrentInstance, onMounted} from 'vue';
 
 const {t} = useI18n();
 const store = useStore();
@@ -29,6 +32,15 @@ const store = useStore();
 const logout = () => {
     store.dispatch('auth/logout');
 };
+
+let instance ;
+onMounted(()=>{
+    instance = getCurrentInstance();
+})
+
+const clickHandler=()=>{
+    instance.parent.setupState.isMenuVisible=false;
+}
 </script>
 
 <style lang="scss" scoped>
