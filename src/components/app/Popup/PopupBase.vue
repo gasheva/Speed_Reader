@@ -1,5 +1,5 @@
 <template>
-    <Teleport to="#app">
+    <Teleport to="body">
         <div v-show="isOpen" class="popup-base-background" @click="cancelHandler"/>
         <div v-show="isOpen" class="popup-base">
             <div class="popup-base__body">
