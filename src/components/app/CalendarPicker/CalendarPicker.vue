@@ -89,7 +89,7 @@ watch(() => props.datepickerType, () => {
 <style lang="scss">
 .dp-custom-input {
   text-align: center;
-  font-size: 1rem;
+  font-size: $text-middle;
   font-family: $montserrat;
   line-height: 1.5rem;
   padding: 3px 3px;

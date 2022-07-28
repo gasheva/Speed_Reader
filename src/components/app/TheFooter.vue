@@ -1,5 +1,5 @@
 <template>
-    <footer class="footer">
+    <footer class="footer container">
         <div class="footer__copyright">
             © SpeedReader 2022
         </div>

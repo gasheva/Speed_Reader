@@ -57,7 +57,6 @@ input {
   order: 2;
 }
 
-/* The input-checkbox */
 .input-checkbox {
   display: flex;
   position: relative;
@@ -65,7 +64,7 @@ input {
   margin-bottom: 12px;
   gap: .5rem;
   cursor: pointer;
-  font-size: 18px;
+  font-size: $text-middle;
   user-select: none;
 
   &__label {

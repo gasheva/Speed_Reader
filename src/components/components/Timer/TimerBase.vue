@@ -48,6 +48,6 @@ watch(currentTime, () => {
 .timer {
   font-family: $electrolize;
   color: $grey-4;
-  font-size: 1rem;
+  font-size: $text-middle;
 }
 </style>

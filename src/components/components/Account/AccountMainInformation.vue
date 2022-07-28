@@ -104,7 +104,7 @@ const updatePictureHandler = async () => {
 .main-info {
   display: flex;
   flex-direction: column;
-  padding: 2.5rem 2.75rem 1.5rem;
+  padding: 1.5rem 2.75rem 1.5rem;
   gap: 4rem;
 
   &__photo-container {

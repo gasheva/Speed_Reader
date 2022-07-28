@@ -5,7 +5,9 @@
             <the-mobile-sidebar v-show="isSidebarVisible" data-test="mobileSidebar"/>
         </template>
         <router-view class="content"/>
-        <the-footer class="container"/>
+        <div class="footer-container">
+            <the-footer/>
+        </div>
     </div>
 </template>
 
@@ -31,4 +33,13 @@ let {isScreenSmall} = useBreakpoint();
 </script>
 
 <style lang="scss" scoped>
+.footer-container{
+  position: relative;
+  &:before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    border-top: 1px solid $grey-3;
+  }
+}
 </style>

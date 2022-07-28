@@ -80,6 +80,8 @@ const onChange = () => {
   flex-direction: column;
 
   &__input {
+    padding: 0 0.5rem;
+    font-size: $text-middle;
     &:focus {
       box-shadow: inset 0 0 3px 1px $blue-1;
     }
