@@ -21,7 +21,7 @@
             <span>{{ selectedFile.name }}</span>
         </div>
 
-        <popup-base ref="cropperPopupRef">
+        <popup-base ref="cropperPopupRef" with-black-header with-round-corner>
             <template #body="{reset, cancel, confirm}">
                 <image-cropper-tools :reset="reset"
                                      :popup-cancel-handler="cancel"

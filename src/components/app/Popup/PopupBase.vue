@@ -1,7 +1,13 @@
 <template>
     <Teleport to="body">
         <div v-show="isOpen" class="popup-base-background" @click="cancelHandler"/>
-        <div v-show="isOpen" class="popup-base">
+        <div v-show="isOpen" class="popup-base" :class="{
+            'black-header':withBlackHeader,
+            'round-corners': withRoundCorner
+        }">
+            <div v-if="withCross" class="popup-base__header">
+                <div class="popup-base__cross cross-icon" @click="cancelHandler"/>
+            </div>
             <div class="popup-base__body">
                 <slot name="body" :reset="resetContent" :cancel="cancelHandler" :confirm="confirmHandler"/>
             </div>
@@ -26,6 +32,11 @@ import {useI18n} from 'vue-i18n';
 import {ref} from 'vue';
 import {deepClone} from '@/utils/utils';
 
+const props = defineProps({
+    withCross: {type: Boolean, default: false},
+    withBlackHeader: {type: Boolean, default: false},
+    withRoundCorner: {type: Boolean, default: false},
+});
 const {t} = useI18n();
 let popupController: { resolve: any, reject: any } = {resolve: null, reject: null};
 let popupResult = {};
@@ -72,7 +83,6 @@ defineExpose({open});
   height: 100%;
   background-color: black;
   opacity: 20%;
-
 }
 
 .popup-base {
@@ -87,13 +97,14 @@ defineExpose({open});
   height: fit-content;
   background: white;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  border-top: 4rem solid black;
-  border-radius: 32px;
 
   &__header {
-    padding: 2rem;
-    background-color: cornflowerblue;
-    color: white;
+    position: relative;
+    padding: 1rem;
+  }
+
+  &__cross {
+    margin: 0.5rem;
   }
 
   &__body {
@@ -107,5 +118,13 @@ defineExpose({open});
     padding: 1rem;
     justify-content: space-around;
   }
+}
+
+.black-header {
+  border-top: 4rem solid black
+}
+
+.round-corners {
+  border-radius: 32px
 }
 </style>
