@@ -75,13 +75,6 @@ a {
   font-weight: bold;
 }
 
-.headers {
-  font-size: $text-big;
-  font-weight: bold;
-  font-family: $montserrat;
-  line-height: $text-big;
-}
-
 .link {
   display: inline-block;
   width: fit-content;
@@ -199,4 +192,23 @@ a {
   &:after {
     transform: rotate(-45deg);
   }
+}
+
+.text-truncate-w100 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.account-container{
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 2.75rem 1.5rem;
+}
+
+.account-container-header {
+  font-size: $text-big;
+  font-weight: bold;
+  font-family: $montserrat;
+  line-height: $text-big;
 }

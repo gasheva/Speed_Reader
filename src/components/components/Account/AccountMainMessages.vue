@@ -1,6 +1,10 @@
 <template>
-    <div>
-        <message-base v-for="i in 5" @click="showMessageHandler"/>
+    <div class="account-container messages">
+        <h2 class="account-container-header messages__title">{{ t('messages') }}</h2>
+        <message-base v-for="message in messages"
+                      :message="message"
+                      @remove="removeMessageHandler(message.id)"
+                      @click.stop="showMessageHandler(message.id)"/>
 
         <popup-base ref="messagePopupRef" with-cross>
             <template #body>
@@ -25,26 +29,33 @@ import MessageContent from '@/components/app/Message/MessageContent.vue';
 import MessageFooter from '@/components/app/Message/MessageFooter.vue';
 import {onBeforeMount, ref} from 'vue';
 import {MessageInterface} from '@/components/app/Message/data/message.interface';
+import {useStore} from 'vuex';
+import {useI18n} from 'vue-i18n';
 
+
+const store = useStore();
+const {t} = useI18n();
 const messages = ref<MessageInterface[]>([]);
 const selectedMessage = ref<MessageInterface>();
 const messagePopupRef = ref({});
 
-onBeforeMount(() => {
-    // TODO(fetch messages)
+onBeforeMount(async () => {
+    messages.value = await store.dispatch('message/fetchMessages');
 });
 
 const showMessageHandler = async (id: string) => {
-    // selectedMessage.value = messages.value.find(message=>message.id===id);
-    selectedMessage.value = {
-        id: '1',
-        title: 'Title',
-        text: '        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec urna hendrerit, commodo nisl quis, cursus sem. In congue velit lorem, non pellentesque nunc convallis eget. Sed non neque malesuada, efficitur neque sed, scelerisque nibh. Donec placerat lacus nec pretium posuere. Nulla ultricies orci et vestibulum facilisis. Donec vitae magna risus. Fusce a lorem nec tortor porta pellentesque ut vitae orci. Nulla eget tincidunt dolor, at dictum mi. Vivamus laoreet, tellus id porta mollis, augue mi suscipit lorem, a semper velit quam et neque.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec urna hendrerit, commodo nisl quis, cursus sem. In congue velit lorem, non pellentesque nunc convallis eget. Sed non neque malesuada, efficitur neque sed, scelerisque nibh. Donec placerat lacus nec pretium posuere. Nulla ultricies orci et vestibulum facilisis. Donec vitae magna risus. Fusce a lorem nec tortor porta pellentesque ut vitae orci. Nulla eget tincidunt dolor, at dictum mi. Vivamus laoreet, tellus id porta mollis, augue mi suscipit lorem, a semper velit quam et neque.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec urna hendrerit, commodo nisl quis, cursus sem. In congue velit lorem, non pellentesque nunc convallis eget. Sed non neque malesuada, efficitur neque sed, scelerisque nibh. Donec placerat lacus nec pretium posuere. Nulla ultricies orci et vestibulum facilisis. Donec vitae magna risus. Fusce a lorem nec tortor porta pellentesque ut vitae orci. Nulla eget tincidunt dolor, at dictum mi. Vivamus laoreet, tellus id porta mollis, augue mi suscipit lorem, a semper velit quam et neque.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec urna hendrerit, commodo nisl quis, cursus sem. In congue velit lorem, non pellentesque nunc convallis eget. Sed non neque malesuada, efficitur neque sed, scelerisque nibh. Donec placerat lacus nec pretium posuere. Nulla ultricies orci et vestibulum facilisis. Donec vitae magna risus. Fusce a lorem nec tortor porta pellentesque ut vitae orci. Nulla eget tincidunt dolor, at dictum mi. Vivamus laoreet, tellus id porta mollis, augue mi suscipit lorem, a semper velit quam et neque.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec urna hendrerit, commodo nisl quis, cursus sem. In congue velit lorem, non pellentesque nunc convallis eget. Sed non neque malesuada, efficitur neque sed, scelerisque nibh. Donec placerat lacus nec pretium posuere. Nulla ultricies orci et vestibulum facilisis. Donec vitae magna risus. Fusce a lorem nec tortor porta pellentesque ut vitae orci. Nulla eget tincidunt dolor, at dictum mi. Vivamus laoreet, tellus id porta mollis, augue mi suscipit lorem, a semper velit quam et neque.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec urna hendrerit, commodo nisl quis, cursus sem. In congue velit lorem, non pellentesque nunc convallis eget. Sed non neque malesuada, efficitur neque sed, scelerisque nibh. Donec placerat lacus nec pretium posuere. Nulla ultricies orci et vestibulum facilisis. Donec vitae magna risus. Fusce a lorem nec tortor porta pellentesque ut vitae orci. Nulla eget tincidunt dolor, at dictum mi. Vivamus laoreet, tellus id porta mollis, augue mi suscipit lorem, a semper velit quam et neque.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec urna hendrerit, commodo nisl quis, cursus sem. In congue velit lorem, non pellentesque nunc convallis eget. Sed non neque malesuada, efficitur neque sed, scelerisque nibh. Donec placerat lacus nec pretium posuere. Nulla ultricies orci et vestibulum facilisis. Donec vitae magna risus. Fusce a lorem nec tortor porta pellentesque ut vitae orci. Nulla eget tincidunt dolor, at dictum mi. Vivamus laoreet, tellus id porta mollis, augue mi suscipit lorem, a semper velit quam et neque.\n',
-        senderEmail: 'valhalla@m.com'
-    };
+    selectedMessage.value = messages.value.find(message => message.id === id);
     await messagePopupRef.value.open();
 };
-</script>
-<style scoped>
+const removeMessageHandler = async (id: string) => {
+    await store.dispatch('message/deleteMessage', {id});
+};
 
+</script>
+<style lang="scss" scoped>
+.messages {
+  &__title {
+    margin-bottom: 2rem;
+  }
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
-    <div class="main-info">
-        <h2 class="headers">{{ t('mainInfo') }}</h2>
+    <div class="account-container main-info">
+        <h2 class="account-container-header">{{ t('mainInfo') }}</h2>
         <div class="main-info__photo-container">
             <div class="main-info__photo">
                 <img v-if="credits.avatar" src="" alt="">
@@ -103,9 +103,6 @@ const updatePictureHandler = async () => {
 </script>
 <style lang="scss" scoped>
 .main-info {
-  display: flex;
-  flex-direction: column;
-  padding: 1.5rem 2.75rem 1.5rem;
   gap: 4rem;
 
   &__photo-container {
