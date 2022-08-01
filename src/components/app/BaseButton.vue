@@ -8,12 +8,15 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
-
-export default defineComponent({
+export default {
     name: 'BaseButton',
-    emits: ['click'],
-    props: {
+}
+
+</script>
+<script setup lang="ts">
+
+const props = defineProps(
+    {
         text: {type: String, default: 'Undefined'},
         disabled: {type: Boolean, default: false},
         styleBtn: {
@@ -24,8 +27,10 @@ export default defineComponent({
                 return types.has(val);
             }
         },
-    },
-});
+    }
+);
+const emit = defineEmits(['click']);
+
 </script>
 
 <style lang="scss" scoped>
