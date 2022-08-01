@@ -1,6 +1,6 @@
 import {computed, ref} from 'vue';
 
-const DEFAULT_AMOUNT_ON_PAGE = 2;
+const DEFAULT_AMOUNT_ON_PAGE = 10;
 
 export function usePagination() {
     const pageCount = ref(1);

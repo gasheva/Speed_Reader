@@ -11,6 +11,7 @@
                 :last-page="pageCount"
                 @prev="prevHandler"
                 @next="nextHandler"
+                @update:currentPageValue="turnPageHandler"
         />
 
         <popup-base ref="messagePopupRef" with-cross>
@@ -60,7 +61,7 @@ const removeMessageHandler = async (id: string) => {
 };
 
 // PAGINATOR
-const {currentPage, next, prev, displayingItems, setup, pageCount} = usePagination();
+const {currentPage, next, prev, displayingItems, setup, pageCount, onPage} = usePagination();
 watch(messages, () => {
     setup(messages.value);
 });
@@ -69,6 +70,9 @@ const prevHandler = (): void => {
 };
 const nextHandler = (): void => {
     next();
+};
+const turnPageHandler = (_page: number) => {
+    onPage(_page);
 };
 
 </script>
