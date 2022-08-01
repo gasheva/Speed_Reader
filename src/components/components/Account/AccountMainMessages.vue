@@ -1,10 +1,17 @@
 <template>
     <div class="account-container messages">
         <h2 class="account-container-header messages__title">{{ t('messages') }}</h2>
-        <message-base v-for="message in messages"
+        <message-base v-for="message in displayingItems"
                       :message="message"
                       @remove="removeMessageHandler(message.id)"
                       @click.stop="showMessageHandler(message.id)"/>
+
+        <paginator-base
+                :currentPageValue="currentPage"
+                :last-page="pageCount"
+                @prev="prevHandler"
+                @next="nextHandler"
+        />
 
         <popup-base ref="messagePopupRef" with-cross>
             <template #body>
@@ -27,11 +34,12 @@ import MessageBase from '@/components/components/Messages/MessageBase.vue';
 import PopupBase from '@/components/app/Popup/PopupBase.vue';
 import MessageContent from '@/components/app/Message/MessageContent.vue';
 import MessageFooter from '@/components/app/Message/MessageFooter.vue';
-import {onBeforeMount, ref} from 'vue';
+import {onBeforeMount, ref, watch} from 'vue';
 import {MessageInterface} from '@/components/app/Message/data/message.interface';
 import {useStore} from 'vuex';
 import {useI18n} from 'vue-i18n';
-
+import PaginatorBase from '@/components/app/Paginator/PaginatorBase.vue';
+import {usePagination} from '@/composable/pagination';
 
 const store = useStore();
 const {t} = useI18n();
@@ -49,6 +57,18 @@ const showMessageHandler = async (id: string) => {
 };
 const removeMessageHandler = async (id: string) => {
     await store.dispatch('message/deleteMessage', {id});
+};
+
+// PAGINATOR
+const {currentPage, next, prev, displayingItems, setup, pageCount} = usePagination();
+watch(messages, () => {
+    setup(messages.value);
+});
+const prevHandler = (): void => {
+    prev();
+};
+const nextHandler = (): void => {
+    next();
 };
 
 </script>
