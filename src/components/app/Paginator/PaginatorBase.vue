@@ -2,7 +2,7 @@
     <div class="paginator">
         <button :class="{'button--disabled':isFirst}"
                 :disabled="isFirst"
-                @click.prevent="prevHandler">{{ '<<' }}
+                @click.prevent="openFirstHandler">{{ '<<' }}
         </button>
         <button :class="{'button--disabled':isFirst}"
                 :disabled="isFirst"
@@ -23,7 +23,7 @@
         </button>
         <button :class="{'button--disabled':isLast}"
                 :disabled="isLast"
-                @click.prevent="nextHandler">{{ '>>' }}
+                @click.prevent="openLastHandler">{{ '>>' }}
         </button>
     </div>
 </template>
@@ -42,13 +42,20 @@ const props = defineProps({
     currentPageValue: {type: Number, default: 1},
     lastPage: {type: Number, default: 1},
 });
-const emit = defineEmits(['prev', 'next', 'update:currentPageValue']);
+const emit = defineEmits(['prev', 'next', 'update:currentPageValue', 'openFirst', 'openLast']);
 
 const prevHandler = (): void => {
     emit('prev');
 };
 const nextHandler = (): void => {
     emit('next');
+};
+
+const openFirstHandler = (): void => {
+    emit('openFirst');
+};
+const openLastHandler = (): void => {
+    emit('openLast');
 };
 
 const $_setInputValue = (val: string | number) => {

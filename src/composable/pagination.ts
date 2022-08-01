@@ -43,6 +43,14 @@ export function usePagination() {
         if (page >= pageCount.value) currentPage.value = pageCount.value;
         displayingItems.value = sliceDisplayingItems(items, currentPage.value, amountOnPage);
     };
+    const onFirst = () => {
+        currentPage.value = 1;
+        displayingItems.value = sliceDisplayingItems(items, currentPage.value, amountOnPage);
+    };
+    const onLast = () => {
+        currentPage.value = pageCount.value;
+        displayingItems.value = sliceDisplayingItems(items, currentPage.value, amountOnPage);
+    };
 
     const setup = (_items: any[] = [], _amountOnPage: number = DEFAULT_AMOUNT_ON_PAGE) => {
         amountOnPage = _amountOnPage;
@@ -62,6 +70,8 @@ export function usePagination() {
         next,
         prev,
         onPage,
+        onFirst,
+        onLast,
         isLast,
         isFirst,
     };

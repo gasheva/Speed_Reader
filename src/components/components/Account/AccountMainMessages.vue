@@ -11,6 +11,8 @@
                 :last-page="pageCount"
                 @prev="prevHandler"
                 @next="nextHandler"
+                @openFirst="openFirstHandler"
+                @openLast="openLastHandler"
                 @update:currentPageValue="turnPageHandler"
         />
 
@@ -61,7 +63,7 @@ const removeMessageHandler = async (id: string) => {
 };
 
 // PAGINATOR
-const {currentPage, next, prev, displayingItems, setup, pageCount, onPage} = usePagination();
+const {currentPage, next, prev, displayingItems, setup, pageCount, onPage, onFirst, onLast} = usePagination();
 watch(messages, () => {
     setup(messages.value);
 });
@@ -74,7 +76,12 @@ const nextHandler = (): void => {
 const turnPageHandler = (_page: number) => {
     onPage(_page);
 };
-
+const openFirstHandler = (): void => {
+    onFirst();
+};
+const openLastHandler = (): void => {
+    onLast();
+};
 </script>
 <style lang="scss" scoped>
 .messages {
