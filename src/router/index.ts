@@ -6,7 +6,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/exercises',
         name: 'home',
         component: () => import(/* webpackChunkName: "home" */ '@/views/HomeView.vue'),
-        meta: {layout: 'main'},
+        meta: {layout: 'main', isPublic: true},
         //TODO
         children: [
             {
@@ -21,13 +21,13 @@ const routes: Array<RouteRecordRaw> = [
       path: '/statistic',
       name: 'statistic',
         component: ()=> import(/* webpackChunkName: "statistic" */ '@/views/StatisticView.vue'),
-        meta: {layout: 'main'},
+        meta: {layout: 'main', isPublic: false},
     },
     {
         path: '/sign',
         name: 'sign',
         component: () => import(/* webpackChunkName: "sign" */ '@/views/SignView.vue'),
-        meta: {layout: 'empty'},
+        meta: {layout: 'empty', isPublic: true},
         // redirect: {name: 'registration'},
         // children: [
         //     {
@@ -52,7 +52,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/account',
         name: 'account',
         component: () => import('@/components/components/Account/AccountMain.vue'),
-        meta: {layout: 'main'},
+        meta: {layout: 'main', isPublic: false},
     },
     {
         path: '/:pathMatch(.*)*',
@@ -70,6 +70,7 @@ const router = createRouter({
 router.beforeEach((to, from) => {
     if (!to.name) return;
     if (to.name === 'sign' && store.getters['auth/isAuth']) return {name: 'home'};
+    if (!to.meta.isPublic && !store.getters['auth/isAuth']) return {name: 'home'};
 });
 
 export default router;

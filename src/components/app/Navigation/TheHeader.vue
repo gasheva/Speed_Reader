@@ -4,13 +4,16 @@
             <label class="header__logo logo">SpeedReader</label>
             <!--NAVIGATION-->
             <ul v-if="!isScreenSmall" class="header__navigation navigation">
-                <router-link v-for="link in links"
-                             :key="link.name"
-                             :to="{name: link.route}"
-                             class="custom-router-link navigation__item">
-                    <span class="navigation-item__icon icon"/>
-                    <span>{{ t(link.label) }}</span>
-                </router-link>
+                <li v-for="link in links"
+                     :key="link.name">
+                    <router-link
+                            v-if="link.isPublic || (!link.isPublic && isAuth)"
+                            :to="{name: link.route}"
+                            class="custom-router-link navigation__item">
+                        <span class="navigation-item__icon icon"/>
+                        <span>{{ t(link.label) }}</span>
+                    </router-link>
+                </li>
             </ul>
         </div>
         <div class="header__end">
@@ -58,7 +61,7 @@ export default {
 </script>
 <script setup lang="ts">
 import {useStore} from 'vuex';
-import {computed, ref} from 'vue';
+import {computed} from 'vue';
 import {useI18n} from 'vue-i18n';
 import {useBreakpoint} from '@/composable/breakpoint';
 import {useFetchNotifications} from '@/composable/fetchNotifications';
@@ -80,9 +83,9 @@ const {notifications} = useFetchNotifications();
 
 const isAuth = computed(() => store.getters['auth/isAuth']);
 
-const join = async ()=>{
+const join = async () => {
     await router.push({name: 'sign'});
-}
+};
 
 </script>
 
@@ -96,7 +99,7 @@ const join = async ()=>{
   height: 4rem;
   background: white;
 
-  @media screen and (max-width: $sm){
+  @media screen and (max-width: $sm) {
     position: sticky;
     top: 0;
     left: 0;
