@@ -22,6 +22,9 @@ export default {
   flex-direction: row;
   justify-content: flex-start;
   margin-top: auto;
+  gap: 4rem;
+  padding: 1rem;
+  font-size: 12px;
 
   @media screen and (max-width: $md) {
     justify-content: space-between;

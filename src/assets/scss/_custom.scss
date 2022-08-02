@@ -1,5 +1,6 @@
 @import "variables";
-#app{
+
+#app {
   overflow: hidden;
 }
 
@@ -7,10 +8,11 @@
 .custom-router-link.router-link-exact-active {
   color: $yellow-1 !important;
 }
+
 //.router-link-active {
 //  color: #42b983 !important;
 //}
-.active-link{
+.active-link {
   color: $yellow-1 !important;
 }
 
@@ -115,7 +117,7 @@ a {
   display: flex;
   justify-content: space-around;
   margin-top: 4rem;
-  margin-bottom: 0;
+  margin-bottom: 3rem;
   padding: 0 1rem;
   gap: 1.5rem;
 
@@ -129,6 +131,7 @@ a {
   width: 100%;
   background-color: white;
   margin-bottom: auto;
+
 }
 
 .section-right, .section-left {
@@ -172,12 +175,15 @@ a {
   width: 20px;
   height: 20px;
   opacity: 0.3;
+
   &:hover {
     opacity: 1;
   }
+
   &:hover {
     opacity: 1;
   }
+
   &:before, &:after {
     position: absolute;
     left: 9px;
@@ -186,9 +192,11 @@ a {
     width: 2px;
     background-color: $grey-6;
   }
+
   &:before {
     transform: rotate(45deg);
   }
+
   &:after {
     transform: rotate(-45deg);
   }
@@ -200,7 +208,7 @@ a {
   text-overflow: ellipsis;
 }
 
-.account-container{
+.account-container {
   display: flex;
   flex-direction: column;
   padding: 1.5rem 2.75rem 1.5rem;

@@ -134,6 +134,10 @@ const updatePictureHandler = async () => {
 
   &__button {
     max-width: 242px;
+
+    @media screen and (max-width: $sm) {
+      align-self: center;
+    }
   }
 }
 </style>
