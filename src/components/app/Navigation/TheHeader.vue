@@ -5,7 +5,7 @@
             <!--NAVIGATION-->
             <ul v-if="!isScreenSmall" class="header__navigation navigation">
                 <li v-for="link in links"
-                     :key="link.name">
+                    :key="link.name">
                     <router-link
                             v-if="link.isPublic || (!link.isPublic && isAuth)"
                             :to="{name: link.route}"
@@ -34,7 +34,8 @@
                     <dropdown>
                         <template #trigger>
                             <div class="user-box__image">
-                                <img alt="user logo" src="@/assets/mock/mockUserLogo.png">
+                                <img v-if="userAvatar" alt="user logo" :src="userAvatar"/>
+                                <span v-else v-html="icons.defaultAvatar"/>
                             </div>
                         </template>
                         <template #menu>
@@ -73,6 +74,7 @@ import Dropdown from '@/components/components/Dropdown/Dropdown.vue';
 import DropdownMenuUser from '@/components/components/Dropdown/DropdownMenuUser.vue';
 import DropdownMenuNotification from '@/components/components/Dropdown/DropdownMenuNotification.vue';
 import {useRouter} from 'vue-router';
+import {icons} from '@/constants/icons.constants';
 
 
 const store = useStore();
@@ -86,6 +88,8 @@ const isAuth = computed(() => store.getters['auth/isAuth']);
 const join = async () => {
     await router.push({name: 'sign'});
 };
+
+const userAvatar = computed(() => store.state.auth.user?.avatar);
 
 </script>
 

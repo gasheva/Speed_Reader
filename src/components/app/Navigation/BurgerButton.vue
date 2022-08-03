@@ -1,8 +1,11 @@
 <template>
-    <div>
-        <button :class="{'burger--active':isActive}" class="burger" data-test="burgerButton" @click="toggleSidebar">
-            Burger
-        </button>
+    <div class="burger"
+         :class="{'burger--active':isActive}"
+         @click="toggleSidebar"
+         data-test="burgerButton">
+        <span class="burger__line line1"/>
+        <span class="burger__line line2"/>
+        <span class="burger__line line3"/>
     </div>
 </template>
 
@@ -27,10 +30,45 @@ watch(isActive, () => {
 
 <style lang="scss" scoped>
 .burger {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 40px;
 
-    &--active {
+  &__line {
+    height: 4px;
+    width: 100%;
+    border-radius: 10px;
+    background: black;
+  }
 
-    }
+  .line1 {
+    transition: all 500ms;
+  }
+
+  .line2 {
+    transition: opacity 500ms;
+  }
+
+  .line3 {
+    transition: all 500ms;
+  }
+
+  &--active > .line1 {
+    transform: rotate(45deg) translate(10px, 10px);
+    transition: all 500ms;
+  }
+
+  &--active > .line2 {
+    opacity: 0;
+    transition: opacity 500ms;
+  }
+
+  &--active > .line3 {
+    transform: rotate(-45deg) translate(10px, -10px);
+    transition: all 500ms;
+  }
 }
 
 </style>
