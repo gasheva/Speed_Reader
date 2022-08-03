@@ -2,13 +2,14 @@
     <Transition name="slide">
         <div class="mobile-sidebar">
             <ul class="mobile-sidebar__navigation navigation">
-                <router-link v-for="link in links" :key="link.name"
-                             :to="link.route"
-                             @click="hideSidebar"
-                             class="navigation-item">
-                    <span class="navigation-item__icon icon"></span>
-                    <span>{{ t(link.label) }}</span>
-                </router-link>
+                <li v-for="link in links" :key="link.name">
+                    <a href="" v-if="link.isPublic || (!link.isPublic && isAuth)"
+                       @click.prevent="hideSidebar(link)"
+                       class="navigation-item">
+                        <span class="navigation-item__icon icon"></span>
+                        <span>{{ t(link.label) }}</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </Transition>
@@ -23,12 +24,18 @@ export default {
 <script setup lang="ts">
 import {useI18n} from 'vue-i18n';
 import links from '@/components/app/Navigation/data/index';
+import {Link} from '@/components/app/Navigation/data/link.interface';
 import {useStore} from 'vuex';
+import {computed} from 'vue';
+import {useRouter} from 'vue-router';
 
+const router = useRouter();
 const {t} = useI18n();
 const store = useStore();
+const isAuth = computed(() => store.getters['auth/isAuth']);
 
-const hideSidebar = () => {
+const hideSidebar = (link: Link) => {
+    router.push({name: link.route});
     store.commit('setSidebarVisible', false);
 };
 </script>
