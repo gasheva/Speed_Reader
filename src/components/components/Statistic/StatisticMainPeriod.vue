@@ -2,6 +2,7 @@
     <div class="statistic-main">
         {{ selectedDate }}
         <table-base
+                class="statistic-main__table"
                 :headers="headersYearOrMonth"
                 :rows-data="data"
         />

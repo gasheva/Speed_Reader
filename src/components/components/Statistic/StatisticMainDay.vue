@@ -7,12 +7,14 @@
             Программа развития
         </div>
         <table-base
+                class="statistic-main__table"
                 :headers="headersDay"
                 :rows-data="data"
         />
 
         Дополнительные упражнения
         <table-base
+                class="statistic-main__table"
                 :headers="headersDay"
                 :rows-data="extraData"
                 :placeholder="'Нет данных за ' + getFullDate"

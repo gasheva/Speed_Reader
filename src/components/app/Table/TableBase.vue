@@ -10,8 +10,8 @@
                 :key="row.id"
                 class="table__row"
             >
-                <td v-for="colIndex in headers.length" :key="colIndex">
-                    {{ row[headers[colIndex - 1].uname] }}
+                <td v-for="colIndex in headers.length" :key="colIndex" :label="headers[colIndex - 1].label">
+                    <span>{{ row[headers[colIndex - 1].uname] }}</span>
                 </td>
             </tr>
             <tr v-if="isHideRowVisible">
@@ -55,9 +55,9 @@ const hasData = computed(() => {
         return Boolean(props.rowsData?.length);
     }
 );
-const isHideRowVisible = computed(()=>{
-    return props.rowsData?.length>props.maxVisibleRowsCount;
-})
+const isHideRowVisible = computed(() => {
+    return props.rowsData?.length > props.maxVisibleRowsCount;
+});
 
 const visibleRows = computed(() => {
     if (isHidden.value) {
@@ -157,4 +157,52 @@ th:last-child {
   border: 3px solid $grey-3;
   border-radius: $card-border-radius;
 }
+
+
+@media screen and (max-width: 600px) {
+  table th {
+    display: none;
+  }
+
+  table td {
+    display: flex;
+    align-items: center;
+  }
+
+  table td::before {
+    content: attr(label);
+    font-weight: bold;
+    width: 120px;
+    min-width: 120px;
+    padding: .5rem;
+    text-align: start;
+    border-right: 1px solid $grey-3;
+
+  }
+  td {
+    padding: 0;
+    border: none;
+    border-top: 1px solid $grey-3;
+
+    > span {
+      margin-left: .5rem;
+    }
+  }
+  tr {
+    border: none;
+
+    & > td:last-child {
+      border-bottom: 2px solid $grey-3;
+    }
+  }
+;
+  table tr:nth-child(2) td:first-child {
+    border-top: none;
+  }
+
+  table tr:last-child td:last-child {
+    border-bottom: none;
+  }
+}
+
 </style>

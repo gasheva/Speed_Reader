@@ -220,3 +220,15 @@ a {
   font-family: $montserrat;
   line-height: $text-big;
 }
+
+.statistic-main{
+  padding: 2rem;
+  &__table{
+    margin-bottom: 3rem;
+    margin-top: 0.5rem;
+  }
+}
+
+.statistic-info{
+  padding: 1rem;
+}
