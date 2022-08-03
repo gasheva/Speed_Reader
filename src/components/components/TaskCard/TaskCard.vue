@@ -64,6 +64,21 @@ const clickHandler = () => {
       opacity: .8;
     }
 
+    // For touchpad devices
+    @media only screen and (hover: none) and (pointer: coarse) {
+      &:after {
+        content: 'Restart';
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 136px;
+      }
+    }
+
     &:hover:after {
       content: 'Restart';
       position: absolute;
