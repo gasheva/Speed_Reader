@@ -103,13 +103,6 @@ const userAvatar = computed(() => store.state.auth.user?.avatar);
   height: 4rem;
   background: white;
 
-  @media screen and (max-width: $sm) {
-    position: sticky;
-    top: 0;
-    left: 0;
-    z-index: 1;
-  }
-
   &__start,
   &__end {
     display: flex;

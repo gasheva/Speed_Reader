@@ -35,7 +35,7 @@ const hideSidebar = () => {
 
 <style lang="scss" scoped>
 .mobile-sidebar {
-  position: absolute;
+  position: fixed;
   width: 70%;
   height: 100vh;
   background-color: gray;

@@ -2,7 +2,7 @@
     <div class="the-wrapper">
         <the-header class="container"/>
         <template v-if="isScreenSmall">
-            <the-mobile-sidebar v-show="isSidebarVisible"
+            <the-mobile-sidebar ref="sidebarRef" v-show="isSidebarVisible"
                                 data-test="mobileSidebar"/>
         </template>
         <router-view class="content"/>
@@ -19,10 +19,11 @@ export default {
 </script>
 <script setup lang="ts">
 import {useStore} from 'vuex';
-import {computed, defineAsyncComponent} from 'vue';
+import {computed, defineAsyncComponent, ref} from 'vue';
 import {useBreakpoint} from '@/composable/breakpoint';
 import TheHeader from '@/components/app/Navigation/TheHeader.vue';
 import TheFooter from '@/components/app/TheFooter.vue';
+import {onClickOutside} from '@vueuse/core';
 
 const TheMobileSidebar = defineAsyncComponent(() =>
     import('@/components/app/Navigation/TheMobileSidebar.vue'));
@@ -30,6 +31,14 @@ const TheMobileSidebar = defineAsyncComponent(() =>
 const store = useStore();
 let isSidebarVisible = computed(() => store.state.isSidebarVisible);
 let {isScreenSmall} = useBreakpoint();
+
+const sidebarRef = ref(null);
+onClickOutside(sidebarRef,
+    (event) => {
+        if (isSidebarVisible.value) event.stopPropagation();
+        store.commit('setSidebarVisible', false);
+    });
+
 
 </script>
 
