@@ -7,6 +7,7 @@ import {exercise} from '@/store/modules/exercise';
 import {statistic} from '@/store/modules/statistic';
 import {settings} from '@/store/modules/settings';
 import {message} from '@/store/modules/message';
+import {preference} from '@/store/modules/preference';
 
 
 const debug = process.env.NODE_ENV !== 'production';
@@ -33,6 +34,7 @@ export default createStore({
         exercise,
         statistic,
         settings,
-        message
+        message,
+        preference,
     }
 });
