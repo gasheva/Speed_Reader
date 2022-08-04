@@ -4,15 +4,18 @@
             © SpeedReader 2022
         </div>
         <a class="link link--hover-underline footer__share" href="#">Поделиться в вк </a>
+
+        <the-locale-switcher class="footer__end"/>
     </footer>
 </template>
 
 <script>
 import InputCheckbox from '@/components/app/InputCheckbox';
+import TheLocaleSwitcher from "@/components/app/Navigation/TheLocaleSwitcher.vue";
 
 export default {
     name: 'TheFooter',
-    components: {InputCheckbox},
+    components: {TheLocaleSwitcher, InputCheckbox},
 };
 </script>
 
@@ -36,6 +39,10 @@ export default {
 
   &__share {
 
+  }
+
+  &__end{
+    margin-left: auto;
   }
 }
 </style>

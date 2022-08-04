@@ -5,11 +5,13 @@
             <!--NAVIGATION-->
             <ul v-if="!isScreenSmall" class="header__navigation navigation">
                 <li v-for="link in links"
-                    :key="link.name">
+                    :key="link.name"
+                    class="navigation__item navigation-item"
+                >
                     <router-link
                             v-if="link.isPublic || (!link.isPublic && isAuth)"
                             :to="{name: link.route}"
-                            class="custom-router-link navigation__item">
+                            class="custom-router-link">
                         <span class="navigation-item__icon icon"/>
                         <span>{{ t(link.label) }}</span>
                     </router-link>
@@ -49,7 +51,6 @@
                     <span class="navigation-item__icon icon"></span>
                     <span>{{ t('join') }}</span>
                 </a>
-                <the-locale-switcher/>
             </template>
         </div>
     </header>
@@ -67,7 +68,6 @@ import {useI18n} from 'vue-i18n';
 import {useBreakpoint} from '@/composable/breakpoint';
 import {useFetchNotifications} from '@/composable/fetchNotifications';
 import links from '@/components/app/Navigation/data/index';
-import TheLocaleSwitcher from '@/components/app/Navigation/TheLocaleSwitcher.vue';
 import BurgerButton from '@/components/app/Navigation/BurgerButton.vue';
 import Bell from '@/components/app/Bell.vue';
 import Dropdown from '@/components/components/Dropdown/Dropdown.vue';
@@ -108,10 +108,11 @@ const userAvatar = computed(() => store.state.auth.user?.avatar);
     display: flex;
     flex-direction: row;
     align-items: center;
+    gap: 1.5rem;
   }
 
   &__logo {
-    padding-right: 1rem;
+    margin-right: 5rem;
   }
 }
 
@@ -120,15 +121,19 @@ const userAvatar = computed(() => store.state.auth.user?.avatar);
   justify-self: flex-end;
 
   &__item {
-    color: black
+    margin-right: 2rem;
+    font-weight: bold;
   }
+}
+
+.navigation-item {
+  color: black;
 }
 
 .logo {
   font-weight: bold;
 }
 
-/* TODO (rewrite style) */
 .user-box {
   display: flex;
   align-items: center;

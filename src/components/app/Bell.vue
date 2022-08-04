@@ -35,6 +35,7 @@ const msgCount = computed(() => 4);
     font-size: 10px;
     text-align: center;
     line-height: 1rem;
+    color: white;
   }
 }
 

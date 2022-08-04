@@ -1,7 +1,7 @@
 {
     "homePage": "Home",
     "statisticPage": "Statistic",
-    "exercisePage": "Exercise",
+    "exercisePage": "Exercises",
     "account": "Account",
     "exit": "Exit",
     "day": "0 day | {n} day | {n} days",
