@@ -10,6 +10,28 @@
                         <span>{{ t(link.label) }}</span>
                     </a>
                 </li>
+
+                <template v-if="isAuth">
+                    <li v-for="link in linksAccount">
+                        <a href=""
+                           @click.prevent="hideSidebar(link)"
+                           class="navigation-item">
+                            <span class="navigation-item__icon icon"></span>
+                            <span>{{ t('account') }}</span>
+                        </a>
+                    </li>
+                </template>
+                <li v-if="!isAuth">
+                    <a href=""
+                       @click.prevent="hideSidebar(joinLink)"
+                       class="navigation-item">
+                        <span class="navigation-item__icon icon"></span>
+                        <span>{{ t(joinLink.label) }}</span>
+                    </a>
+                </li>
+                <li v-else>
+                    <a class="bold" href="" @click="logout">{{ t('exit') }}</a>
+                </li>
             </ul>
         </div>
     </Transition>
@@ -24,9 +46,11 @@ export default {
 <script setup lang="ts">
 import {useI18n} from 'vue-i18n';
 import links from '@/components/app/Navigation/data/index';
+import linksAccount from '@/components/components/Dropdown/data/dropdownMenuUser';
+import {Link as LinkAccount} from '@/components/components/Dropdown/data/dropdownMenuUser/link.interface';
 import {Link} from '@/components/app/Navigation/data/link.interface';
 import {useStore} from 'vuex';
-import {computed} from 'vue';
+import {computed, watch} from 'vue';
 import {useRouter} from 'vue-router';
 
 const router = useRouter();
@@ -34,10 +58,21 @@ const {t} = useI18n();
 const store = useStore();
 const isAuth = computed(() => store.getters['auth/isAuth']);
 
-const hideSidebar = (link: Link) => {
+const hideSidebar = (link: Link | LinkAccount) => {
     router.push({name: link.route});
     store.commit('setSidebarVisible', false);
 };
+
+const joinLink = {
+    name: 'join',
+    label: 'join',
+    route: 'sign',
+};
+
+const logout = () => {
+    store.dispatch('auth/logout');
+};
+
 </script>
 
 <style lang="scss" scoped>

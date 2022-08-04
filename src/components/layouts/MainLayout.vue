@@ -36,10 +36,13 @@ const sidebarRef = ref(null);
 onClickOutside(sidebarRef,
     (event) => {
         if (isSidebarVisible.value) event.stopPropagation();
-        store.commit('setSidebarVisible', false);
+        if (store.state.isSidebarVisible) {
+            store.commit('setSidebarVisible', false);
+        }
     });
 
 
+const isAuth = computed(() => store.getters['auth/isAuth']);
 </script>
 
 <style lang="scss" scoped>
