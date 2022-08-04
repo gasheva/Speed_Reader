@@ -1,6 +1,5 @@
 <template>
     <div class="program">
-        <div class="program_calendar-block"></div>
         <div class="program__tasks-block">
             <span class="section-wrapper__title">{{ formatTime(currentDate, dateParams) }}</span>
             <span class="section-wrapper__text"></span>
@@ -30,7 +29,7 @@ import {useDateInterval} from '@/composable/dateInterval';
 const emit = defineEmits(['select']);
 const props = defineProps({
     tasks: {type: Object, default: []},
-})
+});
 
 const dateParams: FormatOptions = {
     format: FormatTimeTypes.dateShort,
@@ -38,9 +37,11 @@ const dateParams: FormatOptions = {
 
 const {currentDate} = useDateInterval();
 const taskCardClickHandler = (taskName: string) => {
-    emit('select', taskName)
+    emit('select', taskName);
 };
 </script>
-<style scoped>
-
+<style lang="scss" scoped>
+.program {
+  padding: 1.5rem 2.75rem 1.5rem;
+}
 </style>

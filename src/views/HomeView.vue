@@ -1,9 +1,17 @@
 <template>
     <div class="home">
-        <main-section-wrapper v-show="!isExerciseSelected">
+        <main-section-wrapper :parts="['left', 'main']" v-show="!isExerciseSelected">
+            <template #left-tile>
+                <div @click="changeTypeHandler(typeAll)">
+                    {{ typeAll.label[locale] }}
+                </div>
+                <div v-for="type in taskTypes" @click="changeTypeHandler(type)">
+                    {{ type.label[locale] }}
+                </div>
+            </template>
             <template #main-tile>
                 <exercise-program
-                        :tasks="tasks"
+                        :tasks="tasksDisplaying"
                         @select="selectCardHandler"
                 />
             </template>
@@ -26,15 +34,47 @@ import ExerciseProgram from '@/components/app/ExerciseProgram/ExerciseProgram.vu
 import {computed, onBeforeMount, ref} from 'vue';
 import {useRouter} from 'vue-router';
 import ExerciseContainer from '@/components/components/Exercises/ExerciseContainer.vue';
+import {useStore} from 'vuex';
 
 const router = useRouter();
+const store = useStore();
 
 let tasks = ref<Object[]>([]);
+const selectedType = ref('all');
+const taskTypes = ref<Object[]>([]);
+const locale = computed(() => store.getters['preference/getLocale']);
+const typeAll = {
+    id: 'all',
+    label: {
+        ru: 'Все упражнения',
+        en: 'All exercises'
+    }
+};
+
+const tasksDisplaying = computed(() => {
+    return selectedType.value === 'all' ?
+        tasks.value : tasks.value.filter(task => task.type === selectedType.value);
+});
+
+const changeTypeHandler = (type: Object) => {
+    selectedType.value = type.id;
+};
+
 onBeforeMount(async () => {
+    taskTypes.value = [
+        {
+            id: 'read',
+            label: {
+                ru: 'Чтение',
+                en: 'Read'
+            }
+        }
+    ];
     tasks.value = [
         {
             uid: Math.random().toString(),
             taskName: 'ShulteTable',
+            type: 'read',
             image: '',
             title: 'Task',
             description: 'jfksld',
@@ -44,6 +84,7 @@ onBeforeMount(async () => {
         {
             uid: Math.random().toString(),
             taskName: 'ShulteTable',
+            type: 'memory',
             image: '',
             title: 'Task',
             description: 'jfksld',
@@ -53,6 +94,7 @@ onBeforeMount(async () => {
         {
             uid: Math.random().toString(),
             taskName: 'ShulteTable',
+            type: 'read',
             image: '',
             title: 'Task',
             description: 'jfksld',
@@ -62,6 +104,7 @@ onBeforeMount(async () => {
         {
             uid: Math.random().toString(),
             taskName: 'ShulteTable',
+            type: 'read',
             image: '',
             title: 'Task',
             description: 'jfksld',
