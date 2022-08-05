@@ -1,5 +1,5 @@
 <template>
-  <a class="new-msg" href="" @click.prevent>
+  <a class="new-msg noselect" href="" @click.prevent>
     <span v-html="icons.bell"/>
     <div v-if="msgCount" class="new-msg__count danger">{{ msgCount }}</div>
   </a>

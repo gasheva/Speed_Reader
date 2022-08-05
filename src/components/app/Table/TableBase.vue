@@ -83,6 +83,8 @@ const onEnter = () => {
 
 <style lang="scss" scoped>
 .table-wrapper {
+  padding: 3px;
+  overflow: hidden;
 }
 
 .table {
