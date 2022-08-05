@@ -7,7 +7,8 @@ const state: State = {
     locale: localStorage.getItem(LS_LOCALE) || ''
 };
 const getters = {
-    getLocale: (state: State) => state.locale
+    // TODO (default locale)
+    getLocale: (state: State) => state.locale || 'ru'
 };
 
 const mutations = {

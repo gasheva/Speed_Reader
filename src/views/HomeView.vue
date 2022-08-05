@@ -2,11 +2,22 @@
     <div class="home">
         <main-section-wrapper :parts="['left', 'main']" v-show="!isExerciseSelected">
             <template #left-tile>
-                <div @click="changeTypeHandler(typeAll)">
-                    {{ typeAll.label[locale] }}
-                </div>
-                <div v-for="type in taskTypes" @click="changeTypeHandler(type)">
-                    {{ type.label[locale] }}
+                <div class="exercises-menu">
+                    <div @click="changeTypeHandler(typeAll)">
+                        <a class="exercises-menu__item" href="" @click.prevent>
+                            {{ typeAll.label[locale] }}
+                            {{ typeAll.exerciseCount }}
+                        </a>
+                    </div>
+                    <div class="exercises-menu__item"
+                         v-for="type in taskTypes"
+                         :key="type.id"
+                         @click="changeTypeHandler(type)">
+                        <a href="" @click.prevent>
+                            {{ type.label[locale] }}
+                            {{ type.exerciseCount }}
+                        </a>
+                    </div>
                 </div>
             </template>
             <template #main-tile>
@@ -35,83 +46,38 @@ import {computed, onBeforeMount, ref} from 'vue';
 import {useRouter} from 'vue-router';
 import ExerciseContainer from '@/components/components/Exercises/ExerciseContainer.vue';
 import {useStore} from 'vuex';
+import {ExerciseType} from '@/interfaces/exercises';
 
 const router = useRouter();
 const store = useStore();
 
 let tasks = ref<Object[]>([]);
 const selectedType = ref('all');
-const taskTypes = ref<Object[]>([]);
+const taskTypes = ref<ExerciseType[]>([]);
 const locale = computed(() => store.getters['preference/getLocale']);
-const typeAll = {
+const typeAll = ref<ExerciseType>({
     id: 'all',
     label: {
         ru: 'Все упражнения',
         en: 'All exercises'
-    }
-};
+    },
+    exerciseCount: 0,
+});
 
 const tasksDisplaying = computed(() => {
     return selectedType.value === 'all' ?
         tasks.value : tasks.value.filter(task => task.type === selectedType.value);
 });
 
-const changeTypeHandler = (type: Object) => {
+const changeTypeHandler = (type: ExerciseType) => {
     selectedType.value = type.id;
 };
 
 onBeforeMount(async () => {
-    taskTypes.value = [
-        {
-            id: 'read',
-            label: {
-                ru: 'Чтение',
-                en: 'Read'
-            }
-        }
-    ];
-    tasks.value = [
-        {
-            uid: Math.random().toString(),
-            taskName: 'ShulteTable',
-            type: 'read',
-            image: '',
-            title: 'Task',
-            description: 'jfksld',
-            level: '1',
-            complete: true,
-        },
-        {
-            uid: Math.random().toString(),
-            taskName: 'ShulteTable',
-            type: 'memory',
-            image: '',
-            title: 'Task',
-            description: 'jfksld',
-            level: '1',
-            complete: false,
-        },
-        {
-            uid: Math.random().toString(),
-            taskName: 'ShulteTable',
-            type: 'read',
-            image: '',
-            title: 'Task',
-            description: 'jfksld',
-            level: '1',
-            complete: false,
-        },
-        {
-            uid: Math.random().toString(),
-            taskName: 'ShulteTable',
-            type: 'read',
-            image: '',
-            title: 'Task',
-            description: 'jfksld',
-            level: '1',
-            complete: false,
-        },
-    ];
+    const taskPromise = store.dispatch('exercise/fetchTypes');
+    tasks.value = await store.dispatch('exercise/fetchExercises');
+    taskTypes.value = await taskPromise;
+    typeAll.value.exerciseCount = taskTypes.value.reduce((sum, val) => sum += val.exerciseCount, 0);
 });
 
 const currentPageName = computed(() =>
