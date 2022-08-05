@@ -4,18 +4,20 @@
             <template #left-tile>
                 <div class="exercises-menu">
                     <div @click="changeTypeHandler(typeAll)">
-                        <a class="exercises-menu__item" href="" @click.prevent>
+                        <a class="exercises-menu__item menu-item" href="" @click.prevent>
+                            <span class="menu-item__icon icon" v-html="icons.clock"/>
                             {{ typeAll.label[locale] }}
-                            {{ typeAll.exerciseCount }}
+                            <span class="menu-item__count">{{ typeAll.exerciseCount }}</span>
                         </a>
                     </div>
-                    <div class="exercises-menu__item"
-                         v-for="type in taskTypes"
+                    <span class="exercises-menu__subtitle bold">{{ t('allCategories') + ':' }}</span>
+                    <div v-for="type in taskTypes"
                          :key="type.id"
                          @click="changeTypeHandler(type)">
-                        <a href="" @click.prevent>
+                        <a class="exercises-menu__item menu-item" href="" @click.prevent>
+                            <span class="menu-item__icon icon" v-html="icons.clock"/>
                             {{ type.label[locale] }}
-                            {{ type.exerciseCount }}
+                            <span class="menu-item__count">{{ type.exerciseCount }}</span>
                         </a>
                     </div>
                 </div>
@@ -47,9 +49,12 @@ import {useRouter} from 'vue-router';
 import ExerciseContainer from '@/components/components/Exercises/ExerciseContainer.vue';
 import {useStore} from 'vuex';
 import {ExerciseType} from '@/interfaces/exercises';
+import {icons} from '@/constants/icons.constants';
+import {useI18n} from 'vue-i18n';
 
 const router = useRouter();
 const store = useStore();
+const {t} = useI18n();
 
 let tasks = ref<Object[]>([]);
 const selectedType = ref('all');
@@ -93,3 +98,41 @@ const selectCardHandler = (taskName: string) => {
 };
 
 </script>
+
+<style lang="scss" scoped>
+.exercises-menu {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  padding: 2rem 1rem;
+
+  @media screen and (max-width: $sm) {
+    padding: 1rem 2.75rem;
+  }
+
+  &  div:first-of-type &__item {
+    margin-bottom: 1.5rem;
+    margin-left: 0;
+  }
+
+  &__subtitle{
+    margin-bottom: 1rem;
+  }
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: .5rem;
+    margin-left: 1rem;
+
+    &__icon {
+      margin-right: .5rem;
+    }
+
+    &__count {
+      margin-left: auto;
+    }
+  }
+}
+
+</style>
