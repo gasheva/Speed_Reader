@@ -1,7 +1,7 @@
 <template>
     <footer class="footer container">
         <div class="footer__copyright">
-            © SpeedReader 2022
+            SpeedReader 2022
         </div>
         <a class="link link--hover-underline footer__share" href="#">{{ t('shareVk') }}</a>
 
@@ -29,6 +29,7 @@ const {t} = useI18n();
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: center;
   margin-top: auto;
   gap: 4rem;
   padding: 1rem;
@@ -48,6 +49,10 @@ const {t} = useI18n();
 
   &__end {
     margin-left: auto;
+
+    @media screen and (max-width: $sm) {
+      margin-left: 0;
+    }
   }
 }
 </style>

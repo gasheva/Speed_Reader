@@ -1,5 +1,7 @@
 <template>
-    <div class="dropdown">
+    <div class="dropdown"
+         :class="{'dropdown--locale-switcher': localeSwitcher}"
+    >
         <button class="dropdown__trigger"
                 ref="dropdownMenuRef"
                 @keydown.down="keypressHandler(DIRECTIONS.down)"
@@ -12,6 +14,8 @@
 
         <div v-show="isActive"
              class="dropdown__menu"
+             :class="{'dropdown__menu--top':menuPosition==='top'}"
+             :style="{'max-height':maxHeightRem}"
         >
             <select-base-item
                     v-for="(item, index) in menu"
@@ -32,7 +36,7 @@ export default {
 <script setup lang="ts">
 import {useToggle} from '@/composable/toggler';
 import {useStore} from 'vuex';
-import {onMounted, PropType, ref, unref, watch} from 'vue';
+import {computed, onMounted, PropType, ref, unref, watch} from 'vue';
 import {onClickOutside} from '@vueuse/core';
 import {icons} from '@/constants/icons.constants';
 import SelectBaseItem from '@/components/app/Select/SelectBaseItem.vue';
@@ -42,6 +46,17 @@ enum DIRECTIONS {up, down}
 
 const props = defineProps({
     menu: {type: Object as PropType<SelectBaseItemInterface[]>, required: true},
+    amountOfVisibleItems: {type: Number, default: 3},
+    menuPosition: {
+        type: String,
+        default: 'bottom',
+        validator: (val: string) => {
+            const values = new Set(['bottom', 'top']);
+            return values.has(val);
+        }
+    },
+    selectedItemIdx: {type: Number, default: 0},
+    localeSwitcher: {type: Boolean, default: false},
 });
 const emit = defineEmits(['select']);
 
@@ -51,7 +66,7 @@ const store = useStore();
 const currentItem = ref<Object | undefined>(undefined);
 
 onMounted(() => {
-    currentItem.value = props.menu[0];
+    currentItem.value = props.menu[props.selectedItemIdx];
     emitSelect(currentItem);
 });
 watch(() => props.menu, () => {
@@ -95,6 +110,10 @@ const keypressHandler = (direction: DIRECTIONS) => {
 const emitSelect = (item: Object) => {
     emit('select', unref(item));
 };
+
+const maxHeightRem = computed(() => {
+    return props.amountOfVisibleItems * 24 + 'px';
+});
 </script>
 
 <style lang="scss" scoped>
@@ -113,9 +132,23 @@ select {
 
 .dropdown {
   position: relative;
+
   min-width: 234px;
   width: fit-content;
   border: 2px solid black;
+
+  &--locale-switcher {
+    border: none;
+    min-width: auto;
+
+    & * {
+      font-size: $text-small !important;
+    }
+
+    & .dropdown__menu {
+      outline: 1px solid black;
+    }
+  }
 
   &__trigger {
     position: relative;
@@ -136,10 +169,14 @@ select {
     right: 0;
     width: 100%;
     margin-top: .5rem;
-    //box-shadow: 0 0 18px 0 rgb(0 0 0 / 25%);
     z-index: $dropdown-z-index;
     background: white;
     outline: 2px solid black;
+    overflow: auto;
+
+    &--top {
+      top: -63px;
+    }
   }
 
   &__item {
@@ -159,5 +196,11 @@ select {
     font-size: $text-middle;
     padding: .25rem;
   }
+}
+
+</style>
+<style>
+.dropdown--locale-switcher .dropdown__icon > svg {
+    width: 10px;
 }
 </style>
