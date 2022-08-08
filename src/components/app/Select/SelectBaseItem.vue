@@ -26,6 +26,3 @@ const props = defineProps({
 const emit = defineEmits(['mouseenter', 'click'])
 
 </script>
-<style scoped>
-
-</style>

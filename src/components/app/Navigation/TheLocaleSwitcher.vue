@@ -1,7 +1,7 @@
 <template>
-    <div class="locale-switcher">
-        <select v-model="locale">
-            <option value="ru">Russian</option>
+    <div class="locale-switcher-wrapper">
+        <select class="locale-switcher" v-model="locale">
+            <option value="ru">Русский</option>
             <option value="en">English</option>
         </select>
     </div>
@@ -31,6 +31,9 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.locale-switcher{
+  background: white;
+  cursor: pointer;
+}
 </style>

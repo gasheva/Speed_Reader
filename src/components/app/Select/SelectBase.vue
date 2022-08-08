@@ -6,7 +6,7 @@
                 @keydown.up="keypressHandler(DIRECTIONS.up)"
                 @keydown.enter="enterHandler"
                 @click="toggleMenu">
-            <span>{{ currentItem?.label || '' }}</span>
+            <span class="dropdown__selected">{{ currentItem?.label || '' }}</span>
             <span class="dropdown__icon" v-html="icons.chevronDown"/>
         </button>
 
@@ -48,16 +48,16 @@ const emit = defineEmits(['select']);
 const {isVisible: isActive, toggle: toggleMenu} = useToggle();
 const store = useStore();
 
-const currentItem = ref<Object|undefined>(undefined);
+const currentItem = ref<Object | undefined>(undefined);
 
-onMounted(()=>{
+onMounted(() => {
     currentItem.value = props.menu[0];
     emitSelect(currentItem);
 });
-watch(()=>props.menu, ()=>{
-   if(currentItem.value) return;
-   currentItem.value = props.menu[0];
-   emitSelect(currentItem);
+watch(() => props.menu, () => {
+    if (currentItem.value) return;
+    currentItem.value = props.menu[0];
+    emitSelect(currentItem);
 });
 
 const itemClickHandler = (item: Object) => {
@@ -143,6 +143,9 @@ select {
   }
 
   &__item {
+    padding: .25rem;
+    cursor: pointer;
+
     &--active {
       background-color: $grey-5;
     }
@@ -150,6 +153,11 @@ select {
     &:hover {
       //background-color: $grey-5;
     }
+  }
+
+  &__selected {
+    font-size: $text-middle;
+    padding: .25rem;
   }
 }
 </style>
