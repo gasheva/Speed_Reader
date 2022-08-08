@@ -76,7 +76,7 @@ defineExpose({open});
 
 <style lang="scss" scoped>
 .popup-base-background {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -86,12 +86,12 @@ defineExpose({open});
 }
 
 .popup-base {
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -80%);
   margin: 0 auto;
   max-width: 600px;
   height: fit-content;

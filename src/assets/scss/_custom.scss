@@ -4,6 +4,12 @@
   overflow: hidden;
 }
 
+body {
+  overflow: auto;
+  overflow: overlay;
+  height: 100vh;
+}
+
 // override router-link
 .custom-router-link.router-link-exact-active {
   color: $yellow-1 !important;
