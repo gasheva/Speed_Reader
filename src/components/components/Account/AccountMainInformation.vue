@@ -1,6 +1,6 @@
 <template>
     <div class="account-container main-info">
-        <h2 class="account-container-header">{{ t('mainInfo') }}</h2>
+        <h2 class="section-main__header">{{ t('mainInfo') }}</h2>
         <div class="main-info__photo-container">
             <div class="main-info__photo">
                 <img v-if="credits.avatar" src="" alt="">

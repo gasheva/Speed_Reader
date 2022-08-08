@@ -132,6 +132,13 @@ a {
   background-color: white;
   margin-bottom: auto;
 
+  &__header {
+    font-size: $text-big;
+    font-weight: bold;
+    font-family: $montserrat;
+    line-height: $text-big;
+    margin-bottom: 1rem;
+  }
 }
 
 .section-right, .section-left {
@@ -214,21 +221,15 @@ a {
   padding: 1.5rem 2.75rem 1.5rem;
 }
 
-.account-container-header {
-  font-size: $text-big;
-  font-weight: bold;
-  font-family: $montserrat;
-  line-height: $text-big;
-}
-
-.statistic-main{
+.statistic-main {
   padding: 2rem;
-  &__table{
+
+  &__table {
     margin-bottom: 3rem;
     margin-top: 0.5rem;
   }
 }
 
-.statistic-info{
+.statistic-info {
   padding: 1rem;
 }

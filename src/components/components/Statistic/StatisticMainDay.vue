@@ -1,23 +1,24 @@
 <template>
     <div class="statistic-main">
-        <div class="section-wrapper__title">
-            {{ 'Статистика за ' + getFullDate }}
+        <div class="section-main__header">
+            {{ t('statisticFor')+' ' + getFullDate }}
         </div>
-        <div>
-            Программа развития
+        <div class="section-main__header">
+            {{ t('program') }}
         </div>
         <table-base
                 class="statistic-main__table"
                 :headers="headersDay"
                 :rows-data="data"
         />
-
-        Дополнительные упражнения
+        <div class="section-main__header">
+            {{t('extraExercises')}}
+        </div>
         <table-base
                 class="statistic-main__table"
                 :headers="headersDay"
                 :rows-data="extraData"
-                :placeholder="'Нет данных за ' + getFullDate"
+                :placeholder="t('noDataFor')+' ' + getFullDate"
         />
     </div>
 </template>
@@ -34,6 +35,7 @@ import {Period} from '@/interfaces/periods';
 import {headersDay} from '@/constants/period';
 import {TableBaseRowInterface} from '@/components/app/Table/data/tableBase.interface';
 import {FormatOptions, formatTime, FormatTimeTypes} from '@/utils/utils';
+import {useI18n} from 'vue-i18n';
 
 
 const props = defineProps({
@@ -42,6 +44,8 @@ const props = defineProps({
     extraData: {type: Object as PropType<TableBaseRowInterface[]>, required: true},
     date: {type: Object as PropType<Date>, required: true},
 });
+
+const {t} = useI18n();
 
 const dateParams: FormatOptions = {
     format: FormatTimeTypes.dateFull,
@@ -53,5 +57,7 @@ const getFullDate = computed(() => {
 </script>
 
 <style scoped>
-
+.statistic-main > div:first-of-type {
+    margin-bottom: 2rem;
+}
 </style>

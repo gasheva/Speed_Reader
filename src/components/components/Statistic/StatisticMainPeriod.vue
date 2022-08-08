@@ -1,6 +1,8 @@
 <template>
     <div class="statistic-main">
-        {{ selectedDate }}
+        <div class="section-main__header">
+            {{t('statisticFor')+' ' + selectedDate }}
+        </div>
         <table-base
                 class="statistic-main__table"
                 :headers="headersYearOrMonth"
@@ -8,7 +10,9 @@
         />
 
         <section>
-            Статистика по упражнениям
+            <div class="section-main__header">
+                {{ t('exerciseStatistic') }}
+            </div>
             <div>
                 <select-base :menu="exercisesList" @select="changeExerciseHandler"/>
                 <LineChart
@@ -37,6 +41,7 @@ import {useStore} from 'vuex';
 
 import LineChart from '@/components/app/Charts/LineChart.vue';
 import {LineChartDataInterface} from '@/components/app/Charts/data/lineChart.interface';
+import {useI18n} from 'vue-i18n';
 
 
 const props = defineProps({
@@ -47,6 +52,7 @@ const props = defineProps({
 });
 
 const store = useStore();
+const {t} = useI18n();
 
 const selectedDate = computed(() => {
     if (props.period.id === PERIODS.year) {
@@ -73,9 +79,9 @@ onBeforeMount(async () => {
     }));
 });
 
-watch([()=>props.period, ()=>props.date], async()=>{
+watch([() => props.period, () => props.date], async () => {
     await fetchExercise(selectedExercise, props.period.id);
-})
+});
 
 const changeExerciseHandler = async (item: Object) => {
     console.log('changeExerciseHandler');
@@ -94,7 +100,7 @@ const chartData = ref<LineChartDataInterface>({
     ],
 });
 const fetchExercise = async (item: Object, period: PERIODS) => {
-    if(!item?.id) return;
+    if (!item?.id) return;
     const exerciseData = await store.dispatch('statistic/fetchExerciseForPeriodById', {id: item.id});
     chartData.value.datasets[0].data = [];
     chartData.value.labels = [];

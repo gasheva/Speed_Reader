@@ -21,5 +21,12 @@
     "cancel": "Cancel",
     "ok": "Ok",
     "messages": "Notifications",
-    "allCategories": "Categories"
+    "allCategories": "Categories",
+    "showAll": "Show all",
+    "hide": "Hide",
+    "extraExercises": "Extra exercises",
+    "program": "Program",
+    "statisticFor": "Statistic for",
+    "noDataFor": "No data for",
+    "exerciseStatistic": "Exercise Statistic"
 }

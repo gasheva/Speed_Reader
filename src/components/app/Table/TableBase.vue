@@ -17,7 +17,7 @@
             <tr v-if="isHideRowVisible">
                 <td class="table__hide-button"
                     @click="hideHandler" :colspan="headers.length">
-                    {{ isHidden ? 'Показать все' : 'Скрыть' }}
+                    {{ isHidden ? t('showAll') : t('hide') }}
                 </td>
             </tr>
         </table>
@@ -37,6 +37,7 @@ export default {
 import {computed, onBeforeUnmount, PropType, ref} from 'vue';
 import {implyModifiers} from '@/utils/modifiers';
 import {TableBaseHeaderInterface, TableBaseRowInterface} from '@/components/app/Table/data/tableBase.interface';
+import {useI18n} from 'vue-i18n';
 
 const props = defineProps({
     placeholder: {type: String, default: ''},
@@ -50,6 +51,8 @@ const props = defineProps({
     },
     maxVisibleRowsCount: {type: Number, default: 2},
 });
+
+const {t} = useI18n();
 
 const hasData = computed(() => {
         return Boolean(props.rowsData?.length);
@@ -156,7 +159,7 @@ th:last-child {
   justify-content: center;
   align-items: center;
   padding: 3rem;
-  border: 3px solid $grey-3;
+  outline: 3px solid $grey-3;
   border-radius: $card-border-radius;
 }
 

@@ -21,5 +21,12 @@
     "cancel": "Отмена",
     "ok": "Ок",
     "messages": "Уведомления",
-    "allCategories": "По категориям"
+    "allCategories": "По категориям",
+    "showAll": "Показать все",
+    "hide": "Скрыть",
+    "extraExercises": "Дополнительные упражнения",
+    "program": "Программа развития",
+    "statisticFor": "Статистика за",
+    "noDataFor": "Нет данных за",
+    "exerciseStatistic": "Статистика по упражнениям"
 }
