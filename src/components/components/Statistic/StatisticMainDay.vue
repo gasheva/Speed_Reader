@@ -1,22 +1,22 @@
 <template>
     <div class="statistic-main">
         <div class="section-main__header">
-            {{ t('statisticFor')+' ' + getFullDate }}
+            {{ t('statisticFor') + ' ' + getFullDate }}
         </div>
         <div class="section-main__header">
             {{ t('program') }}
         </div>
         <table-base
                 class="statistic-main__table"
-                :headers="headersDay"
+                :headers="headersDayDisplayed"
                 :rows-data="data"
         />
         <div class="section-main__header">
-            {{t('extraExercises')}}
+            {{ t('extraExercises') }}
         </div>
         <table-base
                 class="statistic-main__table"
-                :headers="headersDay"
+                :headers="headersDayDisplayed"
                 :rows-data="extraData"
                 :placeholder="t('noDataFor')+' ' + getFullDate"
         />
@@ -36,6 +36,7 @@ import {headersDay} from '@/constants/period';
 import {TableBaseRowInterface} from '@/components/app/Table/data/tableBase.interface';
 import {FormatOptions, formatTime, FormatTimeTypes} from '@/utils/utils';
 import {useI18n} from 'vue-i18n';
+import {useStore} from 'vuex';
 
 
 const props = defineProps({
@@ -46,10 +47,16 @@ const props = defineProps({
 });
 
 const {t} = useI18n();
+const store = useStore();
 
 const dateParams: FormatOptions = {
     format: FormatTimeTypes.dateFull,
 };
+
+const headersDayDisplayed = computed(() => {
+    return headersDay.map(dayParam => ({...dayParam, label: t(dayParam.uname)}));
+});
+
 const getFullDate = computed(() => {
     return formatTime(props.date, dateParams);
 });

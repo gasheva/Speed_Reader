@@ -39,8 +39,10 @@ import {ref, watch} from 'vue';
 import {Period, PERIODS} from '@/interfaces/periods';
 import {periods} from '@/constants/period';
 import {useStore} from 'vuex';
+import {useI18n} from 'vue-i18n';
 
 const store = useStore();
+const {t} = useI18n();
 const mainComponents = {StatisticMainDay, StatisticMainPeriod};
 const selectedPeriod = ref<Period>(periods[0]);
 const currentComponentName = ref('');
@@ -56,6 +58,10 @@ watch(() => selectedPeriod.value.id, async () => {
         : 'StatisticMainPeriod';
     currentData.value = await store.dispatch('statistic/fetchTableForPeriod', {period: selectedPeriod.value.id});
 }, {immediate: true});
+
+watch(() => store.getters['preference/getLocale'], () => {
+    selectedPeriod.value.label = t(selectedPeriod.value.uname);
+});
 
 </script>
 

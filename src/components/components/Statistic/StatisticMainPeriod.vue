@@ -5,7 +5,7 @@
         </div>
         <table-base
                 class="statistic-main__table"
-                :headers="headersYearOrMonth"
+                :headers="headersYearOrMonthDisplayed"
                 :rows-data="data"
         />
 
@@ -53,6 +53,10 @@ const props = defineProps({
 
 const store = useStore();
 const {t} = useI18n();
+
+const headersYearOrMonthDisplayed = computed(() => {
+    return headersYearOrMonth.map(param => ({...param, label: t(param.uname)}));
+});
 
 const selectedDate = computed(() => {
     if (props.period.id === PERIODS.year) {

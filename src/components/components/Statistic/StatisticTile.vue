@@ -3,7 +3,7 @@
         <div class="statistic-info__chart-wrapper">
             <section class="statistic-wrapper">
                 <DoughnutChart
-                    :data="chartData"
+                        :data="chartData"
                 />
                 <div class="calendar">
                     <calendar-picker
@@ -14,7 +14,7 @@
             </section>
         </div>
         <select-base
-                :menu="periods"
+                :menu="periodsDisplayed"
                 @select="selectPeriodHandler"
         />
     </div>
@@ -34,6 +34,8 @@ import CalendarPicker from '@/components/app/CalendarPicker/CalendarPicker.vue';
 import {Period} from '@/interfaces/periods';
 import {periods} from '@/constants/period';
 import DoughnutChart from '@/components/app/Charts/DoughnutChart.vue';
+import {useStore} from 'vuex';
+import {useI18n} from 'vue-i18n';
 
 const props = defineProps({
     selectedPeriod: {type: Object as PropType<Period>, required: true},
@@ -42,6 +44,8 @@ const props = defineProps({
     selectedDate: {type: [Object, String], required: true},
 });
 const emit = defineEmits(['selectPeriod', 'update:selectedDate']);
+const store = useStore();
+const {t} = useI18n();
 
 const date = computed({
     get() {
@@ -58,13 +62,22 @@ const propsIdsAndCounts = computed(() => {
 
 
 const chartData = ref({
-    labels: ['Выполнено по программе', 'Не выполнено по программе'],
+    labels: [t('doneByProgram'), t('notDoneByProgram')],
     datasets: [
         {
             backgroundColor: ['#BE3BCA', '#FFF'],
             data: [] as number[]
         }
     ]
+});
+
+const periodsDisplayed = computed(()=>{
+    return periods.map(period=>({...period, label: t(period.uname)}));
+});
+
+watch(() => store.getters['preference/getLocale'], () => {
+    chartData.value.labels[0] = t('doneByProgram');
+    chartData.value.labels[1] = t('notDoneByProgram');
 });
 
 watch(propsIdsAndCounts, () => {

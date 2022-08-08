@@ -6,7 +6,7 @@
             <div class="cross-icon" @click.stop="emit('remove')"/>
         </div>
         <div class="message__message text-truncate-w100">{{ message.text }}</div>
-        <span class="message__address label">{{ 'From ' + message.senderEmail }}</span>
+        <span class="message__address label">{{ t('from') + ' ' + message.senderEmail }}</span>
     </div>
 </template>
 
@@ -19,11 +19,13 @@ export default {
 import TagBase from '@/components/app/Tag/TagBase.vue';
 import {PropType} from 'vue';
 import {MessageInterface} from '@/components/app/Message/data/message.interface';
+import {useI18n} from 'vue-i18n';
 
 const props = defineProps({
     message: {type: Object as PropType<MessageInterface>, default: () => ({})},
 });
 const emit = defineEmits(['remove']);
+const {t} = useI18n();
 
 </script>
 

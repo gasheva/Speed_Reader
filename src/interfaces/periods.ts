@@ -7,5 +7,6 @@ export enum PERIODS {
 export interface Period{
     id: PERIODS,
     label: string,
+    uname: string,
     type: DatepickerProps,
 }

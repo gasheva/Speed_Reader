@@ -75,7 +75,7 @@ export function formatTime(value: Date, params: FormatOptions) {
         } else {
             const getFullDays = (dayCount: number) => {
                 const {t} = useI18n();
-                return t('day', dayCount) + ' назад';
+                return t('dayCountable', dayCount) + ' назад';
             };
             return getFullDays(diffDays);
         }

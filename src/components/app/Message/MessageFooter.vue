@@ -1,6 +1,6 @@
 <template>
     <div class="popup-message-footer">
-        {{ 'From ' + senderMail }}
+        {{ t('from') + ' ' + senderMail }}
     </div>
 </template>
 
@@ -10,9 +10,13 @@ export default {
 };
 </script>
 <script setup lang="ts">
+import {useI18n} from 'vue-i18n';
+
 const props = defineProps({
     senderMail: {type: String, default: ''},
 });
+const {t} = useI18n();
+
 </script>
 
 <style lang="scss" scoped>

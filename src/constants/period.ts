@@ -6,16 +6,19 @@ export const periods: Period[] = [
     {
         id: PERIODS.day,
         label: 'day',
+        uname: 'day',
         type: {},
     },
     {
         id: PERIODS.month,
         label: 'month',
+        uname: 'month',
         type: {monthPicker: true} as DatepickerProps,
     },
     {
         id: PERIODS.year,
         label: 'year',
+        uname: 'year',
         type: {yearPicker: true} as DatepickerProps,
     },
 ];
