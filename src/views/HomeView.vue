@@ -4,7 +4,9 @@
             <template #left-tile>
                 <div class="exercises-menu">
                     <div @click="changeTypeHandler(typeAll)">
-                        <a class="exercises-menu__item menu-item" href="" @click.prevent>
+                        <a class="exercises-menu__item menu-item"
+                           :class="{'menu-item--active':selectedType==='all'}"
+                           href="" @click.prevent>
                             <span class="menu-item__icon icon" v-html="icons.clock"/>
                             {{ typeAll.label[locale] }}
                             <span class="menu-item__count">{{ typeAll.exerciseCount }}</span>
@@ -14,11 +16,10 @@
                     <div v-for="type in taskTypes"
                          :key="type.id"
                          @click="changeTypeHandler(type)">
-                        <a class="exercises-menu__item menu-item" href="" @click.prevent>
-                            <span class="menu-item__icon icon" v-html="icons.clock"/>
-                            {{ type.label[locale] }}
-                            <span class="menu-item__count">{{ type.exerciseCount }}</span>
-                        </a>
+                        <home-menu-item
+                                :item="type"
+                                :is-active="selectedType===type.id"
+                        />
                     </div>
                 </div>
             </template>
@@ -51,6 +52,7 @@ import {useStore} from 'vuex';
 import {ExerciseType} from '@/interfaces/exercises';
 import {icons} from '@/constants/icons.constants';
 import {useI18n} from 'vue-i18n';
+import HomeMenuItem from '@/components/components/HomeMenu/HomeMenuItem.vue';
 
 const router = useRouter();
 const store = useStore();
@@ -110,28 +112,13 @@ const selectCardHandler = (taskName: string) => {
     padding: 1rem 2.75rem;
   }
 
-  &  div:first-of-type &__item {
+  & div:first-of-type &__item {
     margin-bottom: 1.5rem;
     margin-left: 0;
   }
 
-  &__subtitle{
+  &__subtitle {
     margin-bottom: 1rem;
-  }
-
-  .menu-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: .5rem;
-    margin-left: 1rem;
-
-    &__icon {
-      margin-right: .5rem;
-    }
-
-    &__count {
-      margin-left: auto;
-    }
   }
 }
 

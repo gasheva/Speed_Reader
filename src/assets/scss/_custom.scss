@@ -239,3 +239,22 @@ a {
 .statistic-info {
   padding: 1rem;
 }
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: .5rem;
+  margin-left: 1rem;
+
+  &--active {
+    font-weight: bold;
+  }
+
+  &__icon {
+    margin-right: .5rem;
+  }
+
+  &__count {
+    margin-left: auto;
+  }
+}
