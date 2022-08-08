@@ -5,6 +5,7 @@
                 v-model="selectedDate"
                 v-bind="datepickerType"
                 v-bind:hide-input-icon="true"
+                v-bind:locale="locale"
                 :clearable="false"
                 :enableTimePicker="false"
                 autoApply
@@ -30,6 +31,7 @@ import '@vuepic/vue-datepicker/dist/main.css';
 import {DatepickerProps} from '@/components/app/CalendarPicker/data/datepickerProps.interface';
 import {computed, ref, watch} from 'vue';
 import {DatePickerMonthInterface} from '@/components/app/CalendarPicker/data/datePickerMonth.interface';
+import {useStore} from 'vuex';
 
 const props = defineProps({
     datepickerType: {type: Object as () => DatepickerProps, default: ''},
@@ -37,6 +39,8 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['update:value']);
+const store = useStore();
+const locale = computed(()=>store.getters['preference/getLocale']);
 
 const convertPickerDateToDate = (_pickerDate: DatePickerMonthInterface | string | Date, _datepickerType: DatepickerProps) => {
     if (_pickerDate instanceof Date) return _pickerDate;
