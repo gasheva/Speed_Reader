@@ -16,7 +16,7 @@ const actions = {
                     type: 'Внимание',
                     time: '74',
                     count: 5,
-                    record: '893'
+                    bestTime: '893'
                 },
                 {
                     id: '2',
@@ -24,7 +24,7 @@ const actions = {
                     type: 'Внимание',
                     time: '74',
                     count: 5,
-                    record: '893'
+                    bestTime: '893'
                 },
                 {
                     id: '3',
@@ -32,7 +32,7 @@ const actions = {
                     type: 'Внимание',
                     time: '74',
                     count: 9,
-                    record: '893'
+                    bestTime: '893'
                 },
             ];
 
@@ -43,7 +43,7 @@ const actions = {
                 type: 'Внимание',
                 time: '74',
                 count: 5,
-                record: '893'
+                bestTime: '893'
             },
             {
                 id: '2',
@@ -51,7 +51,7 @@ const actions = {
                 type: 'Внимание',
                 time: '74',
                 count: 5,
-                record: '893'
+                bestTime: '893'
             },
         ];
     },
@@ -65,7 +65,7 @@ const actions = {
                     name: 'Таблица Шульте',
                     type: 'Внимание',
                     time: '74',
-                    record: '893',
+                    bestTime: '893',
                     statistic: [
                         {
                             date: new Date('01/01/2021'),
@@ -87,7 +87,7 @@ const actions = {
                     name: 'Найди пару',
                     type: 'Внимание',
                     time: '74',
-                    record: '893',
+                    bestTime: '893',
                     statistic: [
                         {
                             date: new Date('01/01/2021'),
@@ -109,7 +109,7 @@ const actions = {
                     name: 'Перпендикулярное чтение',
                     type: 'Внимание',
                     time: '74',
-                    record: '893',
+                    bestTime: '893',
                     statistic: [
                         {
                             date: new Date('01/01/2021'),
@@ -135,7 +135,7 @@ const actions = {
                 name: 'Таблица Шульте',
                 type: 'Внимание',
                 time: '74',
-                record: '893',
+                bestTime: '893',
                 statistic: [
                     {
                         date: new Date('01/01/2021'),
@@ -156,7 +156,7 @@ const actions = {
                 name: 'Найди пару',
                 type: 'Внимание',
                 time: '74',
-                record: '893',
+                bestTime: '893',
                 statistic: [
                     {
                         date: new Date('01/01/2021'),
@@ -177,7 +177,7 @@ const actions = {
                 name: 'Перпендикулярное чтение',
                 type: 'Внимание',
                 time: '74',
-                record: '893',
+                bestTime: '893',
                 statistic: [
                     {
                         date: new Date('01/01/2021'),

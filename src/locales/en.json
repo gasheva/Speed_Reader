@@ -35,7 +35,6 @@
     "type": "Type",
     "time": "Time",
     "count": "Count",
-    "record": "Best result",
     "worseTime": "Worse time",
     "bestTime": "Best time",
     "day": "Day",

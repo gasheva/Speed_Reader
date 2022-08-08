@@ -28,7 +28,7 @@ export const headersDay:TableBaseHeaderInterface[] = [
     {label: 'Тип', uname: 'type'},
     {label: 'Время', uname: 'time'},
     {label: 'Количество подходов', uname: 'count'},
-    {label: 'Рекорд', uname: 'record'}
+    {label: 'Рекорд', uname: 'bestTime'}
 ];
 
 export const headersYearOrMonth:TableBaseHeaderInterface[] = [
@@ -36,5 +36,5 @@ export const headersYearOrMonth:TableBaseHeaderInterface[] = [
     {label: 'Тип', uname: 'type'},
     {label: 'Выполнено раз', uname: 'count'},
     {label: 'Худшее время', uname: 'worseTime'},
-    {label: 'Лучшее время', uname: 'record'}
+    {label: 'Лучшее время', uname: 'bestTime'}
 ];

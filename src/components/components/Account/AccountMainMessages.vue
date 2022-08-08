@@ -1,6 +1,6 @@
 <template>
     <div class="account-container messages">
-        <h2 class="account-container-header messages__title">{{ t('messages') }}</h2>
+        <h2 class="section-main__header messages__title">{{ t('messages') }}</h2>
         <message-base v-for="message in displayingItems"
                       :message="message"
                       @remove="removeMessageHandler(message.id)"
