@@ -7,6 +7,7 @@
                       @click.stop="showMessageHandler(message.id)"/>
 
         <paginator-base
+                class="messages__paginator"
                 :currentPageValue="currentPage"
                 :last-page="pageCount"
                 @prev="prevHandler"
@@ -87,6 +88,10 @@ const openLastHandler = (): void => {
 .messages {
   &__title {
     margin-bottom: 2rem;
+  }
+
+  &__paginator{
+    margin-left: auto;
   }
 }
 </style>

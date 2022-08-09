@@ -1,10 +1,12 @@
 <template>
     <div class="paginator">
-        <button :class="{'button--disabled':isFirst}"
+        <button class="paginator__button"
+                :class="{'button--disabled':isFirst}"
                 :disabled="isFirst"
                 @click.prevent="openFirstHandler">{{ '<<' }}
         </button>
-        <button :class="{'button--disabled':isFirst}"
+        <button class="paginator__button"
+                :class="{'button--disabled':isFirst}"
                 :disabled="isFirst"
                 @click.prevent="prevHandler">{{ '<' }}
         </button>
@@ -17,11 +19,13 @@
             </span>
             <span class="paginator__label">{{ ' / ' + lastPage }}</span>
         </div>
-        <button :class="{'button--disabled':isLast}"
+        <button class="paginator__button"
+                :class="{'button--disabled':isLast}"
                 :disabled="isLast"
                 @click.prevent="nextHandler">{{ '>' }}
         </button>
-        <button :class="{'button--disabled':isLast}"
+        <button class="paginator__button"
+                :class="{'button--disabled':isLast}"
                 :disabled="isLast"
                 @click.prevent="openLastHandler">{{ '>>' }}
         </button>
@@ -104,6 +108,14 @@ watch(focused, () => {
 <style lang="scss" scoped>
 .paginator {
   display: flex;
+
+  &__button{
+
+  }
+
+ &__button + &__button{
+   margin-left: .25rem;
+  }
 
   .input {
     font-size: $text-small;
