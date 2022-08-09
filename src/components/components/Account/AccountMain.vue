@@ -9,14 +9,16 @@
                 </KeepAlive>
             </template>
             <template #left-tile>
-                <nav class="account-navigation">
-                    <ul>
-                        <li v-for="link in links">
-                            <span v-html="icons[link.icon]"/>
-                            <a href="" class="link"
+                <nav>
+                    <ul class="account-navigation">
+                        <li v-for="link in links" class="">
+                            <a href="" class="link menu-item account-navigation__item"
                                :class="{'active-link': link.componentName===currentComponentName}"
                                @click.prevent="changeNavigationHandler(link.componentName)"
-                            >{{ t(link.label) }}</a>
+                            >
+                                <span class="menu-item__icon" v-html="icons[link.icon]"/>
+                                {{ t(link.label) }}
+                            </a>
                         </li>
                     </ul>
                 </nav>
@@ -57,5 +59,9 @@ const changeNavigationHandler = (componentName: string) => {
   flex-direction: column;
   flex-wrap: nowrap;
   gap: 1rem;
+  padding: 2rem 1rem;
+
+  &__item {
+  }
 }
 </style>

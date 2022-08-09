@@ -141,6 +141,7 @@ const userAvatar = computed(() => store.state.auth.user?.avatar);
 
   &__image {
     height: 3rem;
+    margin-right: 0.5rem;
   }
 
   &__image img {

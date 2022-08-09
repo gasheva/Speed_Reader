@@ -1,43 +1,49 @@
 <template>
-  <div class="user-box">
-    <div class="user-box__image">
-      <img alt="user logo" src="@/assets/mock/mockUserLogo.png">
-    </div>
-    <div class="user-box__text">
-      <div class="">{{ mainText }}</div>
-      <div class="hint">{{ secondaryText }}</div>
-    </div>
+    <div class="user-box">
+        <div class="user-box__image">
+            <img v-if="image" alt="user logo" :src="image">
+            <span v-else v-html="icons.defaultAvatar"/>
+        </div>
+        <div class="user-box__text">
+            <div class="">{{ mainText }}</div>
+            <div class="label">{{ secondaryText }}</div>
+        </div>
 
-  </div>
+    </div>
 </template>
 
 <script lang="ts">
 export default {
-  name: "UserBox",
-  props: {
+    name: 'UserBox',
+};
+</script>
+<script setup lang="ts">
+
+import {icons} from '@/constants/icons.constants';
+
+const props = defineProps({
     image: {
-      type: String,
-      default: '',
+        type: String,
+        default: '',
     },
     mainText: {
-      type: String,
-      default: '',
+        type: String,
+        default: '',
     },
     secondaryText: {
-      type: String,
-      default: '',
+        type: String,
+        default: '',
     },
-  }
-}
+});
 </script>
 
 <style lang="scss" scoped>
-/* TODO (rewrite style) */
 .user-box {
   display: flex;
 
   &__image {
     height: 3rem;
+    margin-right: 1rem;
   }
 
   &__image img {
@@ -52,10 +58,6 @@ export default {
     justify-content: space-between;
     padding: 2px 0;
   }
-}
-
-.hint {
-  font-size: 0.75rem;
 }
 
 </style>

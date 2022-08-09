@@ -112,6 +112,10 @@ const selectCardHandler = (taskName: string) => {
     padding: 1rem 2.75rem;
   }
 
+  &__item {
+    margin-left: 1rem;
+  }
+
   & div:first-of-type &__item {
     margin-bottom: 1.5rem;
     margin-left: 0;
