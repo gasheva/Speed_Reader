@@ -5,7 +5,8 @@
             <span class="section-wrapper__text"></span>
 
             <div class="program__tasks tasks-wrapper">
-                <task-card v-for="task in tasks"
+                <task-card class="program__task"
+                           v-for="task in tasks"
                            :key="task.uid"
                            :info="task"
                            @click="taskCardClickHandler"
@@ -43,5 +44,9 @@ const taskCardClickHandler = (taskName: string) => {
 <style lang="scss" scoped>
 .program {
   padding: 1.5rem 2.75rem 1.5rem;
+
+  &__tasks{
+    margin: auto;
+  }
 }
 </style>

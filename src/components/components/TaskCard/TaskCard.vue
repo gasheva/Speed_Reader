@@ -4,7 +4,7 @@
          @click="clickHandler"
     >
         <div class="card__image">
-            <img src="" alt="('^')">
+            <img src="" alt="task image">
             {{ info.image }}
         </div>
         <div class="card__info">
@@ -47,6 +47,7 @@ const clickHandler = () => {
 
   border-radius: $card-border-radius;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
 
   &--disabled {
     & * {
@@ -67,7 +68,7 @@ const clickHandler = () => {
     // For touchpad devices
     @media only screen and (hover: none) and (pointer: coarse) {
       &:after {
-        content: 'Restart';
+        content: '';
         position: absolute;
         left: 0;
         top: 0;
@@ -76,11 +77,12 @@ const clickHandler = () => {
         justify-content: center;
         width: 100%;
         height: 136px;
+        background: url(../../../assets/img/reloadArrow.svg) no-repeat center;
       }
     }
 
     &:hover:after {
-      content: 'Restart';
+      content: '';
       position: absolute;
       left: 0;
       top: 0;
@@ -89,6 +91,7 @@ const clickHandler = () => {
       justify-content: center;
       width: 100%;
       height: 136px;
+      background: url(../../../assets/img/reloadArrow.svg) no-repeat center;
     }
   }
 
@@ -102,11 +105,12 @@ const clickHandler = () => {
   }
 
   &__info {
+    padding: 0.5rem;
     flex: 3;
   }
 
   &__footer {
-
+    padding: 0.5rem;
   }
 }
 </style>
