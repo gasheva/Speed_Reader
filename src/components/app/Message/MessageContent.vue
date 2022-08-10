@@ -43,6 +43,25 @@ const props = defineProps({
     height: 291px;
     font-size: $text-middle;
 
+    @media screen and (max-width: $sm) {
+      &{
+        width: auto;
+      }
+    }
+
+    @media screen and(max-width: $sm-extra) {
+      &{
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
+  }
+
+  @media screen and(max-width: $sm-extra) {
+    &{
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
   }
 }
 

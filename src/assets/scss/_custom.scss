@@ -242,6 +242,11 @@ a {
   display: flex;
   flex-direction: column;
   padding: 1.5rem 2.75rem 1.5rem;
+
+  @media screen and (max-width: $sm) {
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
 }
 
 .statistic-main {
