@@ -182,8 +182,12 @@ th:last-child {
     padding: .5rem;
     text-align: start;
     border-right: 1px solid $grey-3;
-
   }
+
+  .table__hide-button::before {
+    border-right: none;
+  }
+
   td {
     padding: 0;
     border: none;

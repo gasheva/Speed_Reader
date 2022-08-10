@@ -1,7 +1,7 @@
 <template>
     <div class="statistic-main">
         <div class="section-main__header">
-            {{t('statisticFor')+' ' + selectedDate }}
+            {{ t('statisticFor') + ' ' + selectedDate }}
         </div>
         <table-base
                 class="statistic-main__table"
@@ -74,10 +74,12 @@ const getMonthFormat = (_date: Date): string => {
 
 /* CHART */
 const exercisesList = ref([]);
+let exercisesListSource = [];
 let selectedExercise = null;
 onBeforeMount(async () => {
-    // TODO(maybe only names)
-    exercisesList.value = (await store.dispatch('statistic/fetchAllExercisesForPeriod')).map((item: Object) => ({
+    // TODO(maybe only names, what about local)
+    exercisesListSource = await store.dispatch('statistic/fetchAllExercisesForPeriod');
+    exercisesList.value = exercisesListSource.map((item: Object) => ({
         ...item,
         label: item.name    // TODO(interface)
     }));

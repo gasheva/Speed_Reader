@@ -47,10 +47,19 @@ const emit = defineEmits(['click']);
         background-color: white;
         color: black;
 
-        &:hover {
-            background-color: black;
-            color: white;
+      @media(hover: hover) and (pointer: fine) {
+        &:hover{
+          background-color: black;
+          color: white;
         }
+      }
+
+      @media(hover: none) and (pointer: coarse) {
+        &:active{
+          background-color: black;
+          color: white;
+        }
+      }
 
         &:disabled {
             background-color: white !important;
@@ -64,9 +73,17 @@ const emit = defineEmits(['click']);
         background-color: $black-1;
         color: white;
 
-        &:hover {
-            background-color: black;
+      @media(hover: hover) and (pointer: fine) {
+        &:hover{
+          background-color: black;
         }
+      }
+
+      @media(hover: none) and (pointer: coarse) {
+        &:active{
+          background-color: black;
+        }
+      }
 
         &:disabled {
             background-color: $grey-2 !important;
