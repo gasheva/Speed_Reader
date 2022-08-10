@@ -1,7 +1,6 @@
 <template>
     <div class="program">
         <div class="program__tasks-block">
-            <span class="section-wrapper__title">{{ formatTime(currentDate, dateParams) }}</span>
             <span class="section-wrapper__text"></span>
 
             <div class="program__tasks tasks-wrapper">
@@ -24,8 +23,7 @@ export default {
 <script setup lang="ts">
 
 import TaskCard from '@/components/components/TaskCard/TaskCard.vue';
-import {FormatOptions, formatTime, FormatTimeTypes} from '@/utils/utils';
-import {useDateInterval} from '@/composable/dateInterval';
+import {FormatOptions, FormatTimeTypes} from '@/utils/utils';
 
 const emit = defineEmits(['select']);
 const props = defineProps({
@@ -36,16 +34,13 @@ const dateParams: FormatOptions = {
     format: FormatTimeTypes.dateShort,
 };
 
-const {currentDate} = useDateInterval();
 const taskCardClickHandler = (taskName: string) => {
     emit('select', taskName);
 };
 </script>
 <style lang="scss" scoped>
 .program {
-  padding: 1.5rem 2.75rem 1.5rem;
-
-  &__tasks{
+  &__tasks {
     margin: auto;
   }
 }

@@ -1,6 +1,5 @@
 import {Module} from 'vuex';
 import {ExerciseType} from '@/interfaces/exercises';
-import {PropType} from 'vue';
 
 interface State {
 }
@@ -19,6 +18,10 @@ const actions = {
                     ru: 'Чтение',
                     en: 'Read'
                 },
+                description: {
+                    ru: 'Развитие широты взгляда',
+                    en: '',
+                },
                 exerciseCount: 4,
             },
             {
@@ -27,6 +30,10 @@ const actions = {
                     ru: 'Внимание',
                     en: 'Attention'
                 },
+                description: {
+                    ru: 'Запоминание смысла, логики, соотношения словесных элементов информации',
+                    en: '',
+                },
                 exerciseCount: 4,
             },
             {
@@ -34,6 +41,10 @@ const actions = {
                 label: {
                     ru: 'Скорость',
                     en: 'Speed'
+                },
+                description: {
+                    ru: 'Развитие скорости чтения',
+                    en: '',
                 },
                 exerciseCount: 4,
             }
