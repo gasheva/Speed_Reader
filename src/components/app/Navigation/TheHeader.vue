@@ -1,7 +1,7 @@
 <template>
     <header class="header">
         <div class="header__start">
-            <label class="header__logo logo">SpeedReader</label>
+            <label class="header__logo logo" @click="router.push({name: 'home'})">SpeedReader</label>
             <!--NAVIGATION-->
             <ul v-if="!isScreenSmall" class="header__navigation navigation">
                 <li v-for="link in links"
@@ -132,6 +132,7 @@ const userAvatar = computed(() => store.state.auth.user?.avatar);
 
 .logo {
   font-weight: bold;
+  cursor: pointer;
 }
 
 .user-box {
