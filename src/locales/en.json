@@ -42,5 +42,6 @@
     "year": "Year",
     "shareVk": "Share VK",
     "from": "From",
-    "nickname": "Nickname"
+    "nickname": "Nickname",
+    "fieldIsEmpty": "Required"
 }

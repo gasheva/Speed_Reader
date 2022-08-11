@@ -7,7 +7,9 @@
                class="input-text__input input"
                type="text"
         />
-        <span v-show="!isValid.isValid">{{ isValid.msg }}</span>
+        <span v-show="!isValid.isValid"
+              class="input-text__error"
+        >{{ isValid.msg }}</span>
     </div>
 </template>
 
@@ -19,7 +21,6 @@ export default {
 <script setup lang="ts">
 import {computed, PropType, ref} from 'vue';
 import {implyModifiers, ModifierOptions} from '@/utils/modifiers';
-import {readUsedSize} from 'chart.js/helpers';
 import {InputValidatorResultInterface, InputValidatorTypes, InputValidatorValues} from '@/interfaces/InputValidator';
 
 const props = defineProps({
@@ -134,8 +135,13 @@ const text = computed({
     }
 
     &:focus.border-danger {
-      box-shadow: inset 0 0 3px 1px red;
+      box-shadow: inset 0 0 3px 1px $red-2;
     }
+  }
+
+  &__error{
+    font-size: $text-small;
+    color: $red-2;
   }
 }
 

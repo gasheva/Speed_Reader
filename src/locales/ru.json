@@ -42,5 +42,6 @@
     "year": "Год",
     "shareVk": "Поделиться в ВК",
     "from": "От",
-    "nickname": "Имя"
+    "nickname": "Имя",
+    "fieldIsEmpty": "Необходимо заполнить"
 }

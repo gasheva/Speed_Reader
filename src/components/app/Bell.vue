@@ -40,6 +40,6 @@ const msgCount = computed(() => 4);
 }
 
 .danger {
-  background-color: $danger;
+  background-color: $red-2;
 }
 </style>

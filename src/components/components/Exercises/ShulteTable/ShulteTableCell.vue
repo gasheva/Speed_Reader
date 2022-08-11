@@ -84,7 +84,7 @@ onBeforeUnmount(() => {
   }
 
   &--wrong {
-    color: red;
+    color: $red-2;
   }
 }
 
