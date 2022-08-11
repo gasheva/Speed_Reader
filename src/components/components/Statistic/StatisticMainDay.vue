@@ -57,8 +57,9 @@ const headersDayDisplayed = computed(() => {
     return headersDay.map(dayParam => ({...dayParam, label: t(dayParam.uname)}));
 });
 
+const locale = computed(()=>store.getters['preference/getLocale'])
 const getFullDate = computed(() => {
-    return formatTime(props.date, dateParams);
+    return formatTime(props.date, dateParams, locale.value);
 });
 
 </script>

@@ -38,7 +38,7 @@ export interface FormatOptions {
     maxFullDay?: number,
 }
 
-export function formatTime(value: Date, params: FormatOptions) {
+export function formatTime(value: Date, params: FormatOptions, locale:string='ru-Ru') {
     let options: IntlDateOptions = {};
     const dateOptions = (): IntlDateOptions => ({
         day: '2-digit',
@@ -82,9 +82,6 @@ export function formatTime(value: Date, params: FormatOptions) {
 
     }
 
-    // TODO(get locale)
-    // const locale = store.getters.info.locale || 'ru-Ru';
-    const locale = 'ru-Ru';
     return new Intl.DateTimeFormat(locale, options as Intl.DateTimeFormatOptions)
         .format(new Date(value));
 }

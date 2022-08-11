@@ -65,11 +65,12 @@ const selectedDate = computed(() => {
     return getMonthFormat(props.date);
 });
 const getYearFormat = (_date: Date): string => {
-    return _date.getFullYear() + ' г.';
+    return _date.getFullYear().toString();
 };
 
+const locale = computed(()=>store.getters['preference/getLocale'])
 const getMonthFormat = (_date: Date): string => {
-    return formatTime(_date, {format: FormatTimeTypes.monthAndYear});
+    return formatTime(_date, {format: FormatTimeTypes.monthAndYear}, locale.value);
 };
 
 /* CHART */
@@ -90,7 +91,6 @@ watch([() => props.period, () => props.date], async () => {
 });
 
 const changeExerciseHandler = async (item: Object) => {
-    console.log('changeExerciseHandler');
     selectedExercise = item;
     await fetchExercise(item, props.period.id);
 };
@@ -117,8 +117,8 @@ const fetchExercise = async (item: Object, period: PERIODS) => {
 };
 
 const $_formatDateOnPeriod = (period: PERIODS, date: Date) => {
-    return period === PERIODS.month ? formatTime(date, {format: FormatTimeTypes.dateShort})
-        : formatTime(date, {format: FormatTimeTypes.monthAndYear});
+    return period === PERIODS.month ? formatTime(date, {format: FormatTimeTypes.dateShort}, locale.value)
+        : formatTime(date, {format: FormatTimeTypes.monthAndYear}, locale.value);
 };
 </script>
 
