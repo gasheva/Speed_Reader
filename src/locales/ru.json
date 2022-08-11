@@ -46,5 +46,6 @@
     "fieldIsEmpty": "Необходимо заполнить",
     "password": "Пароль",
     "forgetPassword": "Забыли пароль?",
-    "yourResults": "Ваши результаты"
+    "yourResults": "Ваши результаты",
+    "back": "Назад"
 }

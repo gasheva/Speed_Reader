@@ -46,5 +46,6 @@
     "fieldIsEmpty": "Required",
     "password": "Password",
     "forgetPassword": "Recover password?",
-    "yourResults": "Your results"
+    "yourResults": "Your results",
+    "back": "Back"
 }

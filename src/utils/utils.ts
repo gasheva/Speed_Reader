@@ -75,7 +75,7 @@ export function formatTime(value: Date, params: FormatOptions, locale:string='ru
         } else {
             const getFullDays = (dayCount: number) => {
                 const {t} = useI18n();
-                return t('dayCountable', dayCount) + ' назад';
+                return t('dayCountable', dayCount) + ' '+ t('back').toLowerCase();
             };
             return getFullDays(diffDays);
         }
