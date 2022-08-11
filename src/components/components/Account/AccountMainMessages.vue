@@ -93,6 +93,7 @@ const openLastHandler = (): void => {
 
   &__paginator {
     margin-left: auto;
+    margin-top: 1rem;
   }
 }
 </style>

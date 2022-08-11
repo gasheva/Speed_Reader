@@ -25,6 +25,13 @@ const icons = Object.freeze({
     </svg>`,
     reloadArrow: `<svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M34.9999 0C24.9154 0 15.391 4.35098 8.78662 11.8108V0.0529175H5.93154V17.3682H23.2469V14.5133H10.2458C16.3283 7.17329 25.3821 2.85508 35.0001 2.85508C52.7253 2.85508 67.1451 17.275 67.1451 35.0001C67.1451 52.7251 52.7251 67.1451 35.0001 67.1451C17.275 67.1451 2.85494 52.7251 2.85494 34.9999C2.85494 32.322 3.18534 29.6573 3.83775 27.0804L1.06922 26.3806C0.359694 29.1863 0 32.0864 0 34.9999C0 54.2989 15.701 69.9999 34.9999 69.9999C54.2989 69.9999 69.9999 54.2989 69.9999 34.9999C69.9999 15.701 54.299 0 34.9999 0Z" fill="black" fill-opacity="0.8"/>
+    </svg>`,
+    oneLeft: `<svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20.1113 1.17825L2.90039 10.0043L20.1113 16.6239" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+    </svg>`,
+    doubleLeft: `<svg width="39" height="19" viewBox="0 0 39 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M21.2017 2.06088L3.06055 10.887L21.2017 17.5065" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+    <path d="M37.0181 1.17828L18.877 10.0044L37.0181 16.6239" stroke="#000" stroke-width="2" stroke-linecap="round"/>
     </svg>`
 });
 

@@ -1,14 +1,16 @@
 <template>
     <div class="paginator">
         <button class="paginator__button"
-                :class="{'button--disabled':isFirst}"
+                :class="{'paginator__button--disabled':isFirst}"
                 :disabled="isFirst"
-                @click.prevent="openFirstHandler">{{ '<<' }}
+                @click.prevent="openFirstHandler">
+            <span class="paginator__icon" v-html="icons.doubleLeft"/>
         </button>
         <button class="paginator__button"
-                :class="{'button--disabled':isFirst}"
+                :class="{'paginator__button--disabled':isFirst}"
                 :disabled="isFirst"
-                @click.prevent="prevHandler">{{ '<' }}
+                @click.prevent="prevHandler">
+            <span class="paginator__icon" v-html="icons.oneLeft"/>
         </button>
         <div class="input">
             <span class="input__wrapper">
@@ -19,15 +21,17 @@
             </span>
             <span class="paginator__label">{{ ' / ' + lastPage }}</span>
         </div>
-        <button class="paginator__button"
-                :class="{'button--disabled':isLast}"
+        <button class="paginator__button rotate-180"
+                :class="{'paginator__button--disabled':isLast}"
                 :disabled="isLast"
-                @click.prevent="nextHandler">{{ '>' }}
+                @click.prevent="nextHandler">
+            <span class="paginator__icon" v-html="icons.oneLeft"/>
         </button>
-        <button class="paginator__button"
-                :class="{'button--disabled':isLast}"
+        <button class="paginator__button rotate-180"
+                :class="{'paginator__button--disabled':isLast}"
                 :disabled="isLast"
-                @click.prevent="openLastHandler">{{ '>>' }}
+                @click.prevent="openLastHandler">
+            <span class="paginator__icon" v-html="icons.doubleLeft"/>
         </button>
     </div>
 </template>
@@ -41,6 +45,7 @@ export default {
 
 import {computed, ref, watch} from 'vue';
 import {useFocus} from '@vueuse/core';
+import {icons} from '@/constants/icons.constants';
 
 const props = defineProps({
     currentPageValue: {type: Number, default: 1},
@@ -106,11 +111,15 @@ watch(focused, () => {
 </script>
 
 <style lang="scss" scoped>
+$paginator-icon-height: 19px;
+
 .paginator {
   display: flex;
+  gap: 0.5rem;
 
   &__button{
-
+    position: relative;
+    height: $paginator-icon-height;
   }
 
  &__button + &__button{
@@ -130,19 +139,24 @@ watch(focused, () => {
     position: absolute;
     width: 100%;
     left: 0;
-    font-size: $text-small;
+    font-size: $text-middle;
     line-height: 1rem;
     text-align: end;
   }
 
   .input__width-setter {
-    font-size: $text-small;
+    font-size: $text-middle;
     line-height: 1rem;
   }
 
   &__label {
     padding-right: 13px;
-    font-size: $text-small;
+    font-size: $text-middle;
+  }
+
+  &__icon{
+    display: inline-block;
+    height: $paginator-icon-height;
   }
 }
 
@@ -150,5 +164,14 @@ watch(focused, () => {
   &__disabled {
 
   }
+}
+
+.rotate-180{
+  transform: rotate(180deg);
+}
+</style>
+<style lang="scss">
+.paginator__button--disabled path{
+     stroke: $grey-3;
 }
 </style>
