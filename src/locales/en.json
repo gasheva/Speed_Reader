@@ -43,5 +43,7 @@
     "shareVk": "Share VK",
     "from": "From",
     "nickname": "Nickname",
-    "fieldIsEmpty": "Required"
+    "fieldIsEmpty": "Required",
+    "password": "Password",
+    "forgetPassword": "Recover password?"
 }

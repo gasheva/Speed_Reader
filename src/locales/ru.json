@@ -43,5 +43,7 @@
     "shareVk": "Поделиться в ВК",
     "from": "От",
     "nickname": "Имя",
-    "fieldIsEmpty": "Необходимо заполнить"
+    "fieldIsEmpty": "Необходимо заполнить",
+    "password": "Пароль",
+    "forgetPassword": "Забыли пароль?"
 }

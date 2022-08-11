@@ -1,7 +1,12 @@
 <template>
     <div class="registration">
-        <input-text :hint="'E-mail'" v-model:value="credits.email"/>
-        <input-text :hint="'Password'" v-model:value="credits.password"/>
+        <input-text :hint="'E-mail'"
+                    :input-validators="[inputRequiredOptions]"
+                    input-type="email"
+                    v-model:value="credits.email"/>
+        <input-text :hint="t('password')"
+                    :input-validators="[inputRequiredOptions]"
+                    v-model:value="credits.password"/>
 
         <input-checkbox :label="t('broadcastAgreement')"
                         label-side="left"
@@ -30,10 +35,13 @@ import BaseButton from '@/components/app/BaseButton.vue';
 import {useStore} from 'vuex';
 import {ref} from 'vue';
 import {useRouter} from 'vue-router';
+import {InputValidatorTypes, InputValidatorValues} from '@/interfaces/InputValidator';
 
 const {t} = useI18n();
 const store = useStore();
 const router = useRouter();
+
+const inputRequiredOptions: InputValidatorValues = {type: InputValidatorTypes.NOT_EMPTY, msg: t('fieldIsEmpty')};
 
 const credits = ref({
     email: '',

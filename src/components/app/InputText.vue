@@ -5,7 +5,7 @@
                v-model="text"
                :class="{'border-danger':!isValid.isValid}"
                class="input-text__input input"
-               type="text"
+               :type="inputType"
         />
         <span v-show="!isValid.isValid"
               class="input-text__error"
@@ -33,6 +33,14 @@ const props = defineProps({
         default: '',
     },
     value: {type: String, default: ''},
+    inputType: {
+        type: String,
+        default: 'text',
+        validator: (val: string)=>{
+            const values = new Set(['text', 'password', 'email', 'number']);
+            return values.has(val);
+        }
+    },
     modelModifiers: {
         type: Object as () => ModifierOptions,
         default: () => ({
