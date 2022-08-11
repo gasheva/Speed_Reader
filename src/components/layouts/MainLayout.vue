@@ -1,5 +1,5 @@
 <template>
-    <div class="the-wrapper">
+    <div class="the-wrapper main-wrapper">
         <the-header class="container"/>
         <template v-if="isScreenSmall">
             <the-mobile-sidebar ref="sidebarRef" v-show="isSidebarVisible"
@@ -46,14 +46,9 @@ const isAuth = computed(() => store.getters['auth/isAuth']);
 </script>
 
 <style lang="scss" scoped>
-.footer-container {
-  position: relative;
-
-  &:before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    border-top: 1px solid $grey-3;
+.main-wrapper{
+  @media screen and (min-width: $sm) {
+    border-top: 4rem solid black;
   }
 }
 </style>

@@ -38,9 +38,6 @@ a {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  @media screen and (min-width: $sm) {
-    border-top: 4rem solid black;
-  }
 }
 
 /* page body */
@@ -277,5 +274,16 @@ a {
 
   &__count {
     margin-left: auto;
+  }
+}
+
+.footer-container {
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    border-top: 1px solid $grey-3;
   }
 }

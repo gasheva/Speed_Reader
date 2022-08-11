@@ -1,7 +1,9 @@
 <template>
-    <div class="empty-content wrapper">
-        <router-view class="content"/>
-        <the-footer/>
+    <div class="the-wrapper empty-wrapper">
+        <router-view class="content container empty-wrapper__container"/>
+        <div class="footer-container">
+            <the-footer/>
+        </div>
     </div>
 </template>
 
@@ -15,12 +17,11 @@ export default {
 };
 </script>
 
-<style scoped>
-.empty-content{
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    max-width: 1180px;
-    margin: 0 auto;
+<style lang="scss" scoped>
+.empty-wrapper{
+  padding-top: 1rem;
+  &__container{
+    max-width: 1080px;
+  }
 }
 </style>

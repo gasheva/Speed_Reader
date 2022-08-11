@@ -1,6 +1,7 @@
 <template>
     <div class="sign">
         <sign-tabs
+                class="sign__buttons"
                 :current-tab="currentTab"
                 @changeTab="changeTab"/>
         <keep-alive>
@@ -38,6 +39,10 @@ const changeTab = (tabName: string) => {
   align-items: center;
 
   background-color: white;
+
+  &__buttons{
+    margin-bottom: 1rem;
+  }
 
   &__content{
     width: 100%;
