@@ -5,7 +5,7 @@
                 <li v-for="link in links" :key="link.name">
                     <a href="" v-if="link.isPublic || (!link.isPublic && isAuth)"
                        @click.prevent="hideSidebar(link)"
-                       class="navigation-item">
+                       class="navigation-item bold">
                         <span class="navigation-item__icon icon"></span>
                         <span>{{ t(link.label) }}</span>
                     </a>
@@ -15,7 +15,7 @@
                     <li v-for="link in linksAccount">
                         <a href=""
                            @click.prevent="hideSidebar(link)"
-                           class="navigation-item">
+                           class="navigation-item bold">
                             <span class="navigation-item__icon icon"></span>
                             <span>{{ t('account') }}</span>
                         </a>
@@ -24,13 +24,13 @@
                 <li v-if="!isAuth">
                     <a href=""
                        @click.prevent="hideSidebar(joinLink)"
-                       class="navigation-item">
+                       class="navigation-item bold">
                         <span class="navigation-item__icon icon"></span>
                         <span>{{ t(joinLink.label) }}</span>
                     </a>
                 </li>
                 <li v-else>
-                    <a class="bold" href="" @click="logout">{{ t('exit') }}</a>
+                    <a class="" href="" @click="logout">{{ t('exit') }}</a>
                 </li>
             </ul>
         </div>
@@ -80,16 +80,24 @@ const logout = () => {
   position: fixed;
   width: 70%;
   height: 100vh;
-  background-color: gray;
   z-index: 1;
+
+  display: flex;
+  padding-top: 3rem;
+  justify-content: center;
+  background: $grey-2;
 
   &__navigation {
     flex-direction: column;
+    text-align: center;
   }
 }
 
 .navigation {
   display: flex;
+  @media screen and (max-width: $md){
+    gap: 1rem;
+  }
 }
 
 .slide-enter-active,
