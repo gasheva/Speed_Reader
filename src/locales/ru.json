@@ -45,5 +45,6 @@
     "nickname": "Имя",
     "fieldIsEmpty": "Необходимо заполнить",
     "password": "Пароль",
-    "forgetPassword": "Забыли пароль?"
+    "forgetPassword": "Забыли пароль?",
+    "yourResults": "Ваши результаты"
 }

@@ -45,5 +45,6 @@
     "nickname": "Nickname",
     "fieldIsEmpty": "Required",
     "password": "Password",
-    "forgetPassword": "Recover password?"
+    "forgetPassword": "Recover password?",
+    "yourResults": "Your results"
 }

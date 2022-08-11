@@ -18,8 +18,10 @@
             />
         </template>
         <template #right-tile>
-            <p>Title</p>
-            <p>Description</p>
+            <div class="exercise-description">
+                <p class="exercise-description__title">Title</p>
+                <p>Description</p>
+            </div>
         </template>
     </main-section-wrapper>
 </template>
@@ -36,7 +38,6 @@ import ExerciseEnd from '@/components/components/Exercises/ExerciseEnd.vue';
 import {computed, defineAsyncComponent, ref} from 'vue';
 import {useRouter} from 'vue-router';
 import MainSectionWrapper from '@/components/app/MainSectionWrapper.vue';
-import {useBreakpoint} from '@/composable/breakpoint';
 
 const ShulteTable = defineAsyncComponent(() => import('@/components/components/Exercises/ShulteTable/ShulteTable.vue'));
 
@@ -50,23 +51,18 @@ const statuses = {start: 'start', exercise: 'exercise', tutorial: 'tutorial', en
 const currentStatus = ref(statuses.start);
 
 const finishExerciseHandler = () => {
-    console.log('finishExerciseHandler');
     currentStatus.value = statuses.end;
 };
 const startTutorialHandler = () => {
-    console.log('startTutorialHandler');
     currentStatus.value = statuses.tutorial;
 };
 const startExerciseHandler = () => {
-    console.log('startExerciseHandler');
     currentStatus.value = statuses.exercise;
 };
 const restartHandler = () => {
-    console.log('restartHandler');
     currentStatus.value = statuses.exercise;
 };
 const goToExercisesHandler = () => {
-    console.log('goToExercisesHandler');
     router.push({name: 'home'});
 };
 
@@ -75,14 +71,19 @@ const isExercisePageVisible = computed(() => currentStatus.value === statuses.ex
     currentStatus.value === statuses.tutorial);
 const isEndPageVisible = computed(() => currentStatus.value === statuses.end);
 
-let {isScreenSmall} = useBreakpoint();
-
 const parts = computed(() => {
-    // if (isScreenSmall.value) return ['main'];
     return ['main', 'right'];
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.exercise-description {
+  padding: 1rem 2rem;
 
+  &__title {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+}
 </style>
