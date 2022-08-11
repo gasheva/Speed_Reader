@@ -51,6 +51,7 @@ const messages = ref<MessageInterface[]>([]);
 const selectedMessage = ref<MessageInterface>();
 const messagePopupRef = ref({});
 
+// TODO (task results)
 onBeforeMount(async () => {
     messages.value = await store.dispatch('message/fetchMessages');
 });
@@ -90,7 +91,7 @@ const openLastHandler = (): void => {
     margin-bottom: 2rem;
   }
 
-  &__paginator{
+  &__paginator {
     margin-left: auto;
   }
 }
