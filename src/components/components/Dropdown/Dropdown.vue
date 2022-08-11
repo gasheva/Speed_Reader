@@ -1,6 +1,6 @@
 <template>
     <div class="dropdown">
-        <a class="dropdown__trigger" href="#" @click="openMenu">
+        <a class="dropdown__trigger" href="#" @click.prevent="openMenu">
             <slot name="trigger"/>
             <span v-html="chevronDown"></span>
         </a>

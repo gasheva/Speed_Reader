@@ -3,7 +3,7 @@
         <div class="footer__copyright">
             SpeedReader 2022
         </div>
-        <a class="link link--hover-underline footer__share" href="#">{{ t('shareVk') }}</a>
+        <a class="link link--hover-underline footer__share" @click.prevent href="#">{{ t('shareVk') }}</a>
 
         <the-locale-switcher class="footer__end"/>
     </footer>

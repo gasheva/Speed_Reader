@@ -1,7 +1,7 @@
 <template>
     <div class="sign-tabs">
         <div class="sign-tabs__buttons">
-            <a @click="changeTab('TheLogin')"
+            <a @click.prevent="changeTab('TheLogin')"
                class="sign-tabs__btn login-btn link"
                :class="{'sign-tabs__btn--active':'TheLogin'===activeTab,
                'sign-tabs__btn--inactive':'TheLogin'!==activeTab,
@@ -9,7 +9,7 @@
             >
                 Login
             </a>
-            <a @click="changeTab('TheRegistration')"
+            <a @click.prevent="changeTab('TheRegistration')"
                class="sign-tabs__btn registration-btn link"
                :class="{'sign-tabs__btn--active':'TheRegistration'===activeTab,
                'sign-tabs__btn--inactive':'TheRegistration'!==activeTab,

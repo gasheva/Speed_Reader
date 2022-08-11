@@ -12,7 +12,7 @@
         <div>
             <base-button style-btn="black" :text="t('login')" @click="login"/>
         </div>
-        <a class="link link--hover-underline" href="#">{{t('forgetPassword')}}</a>
+        <a class="link link--hover-underline" @click.prevent href="#">{{t('forgetPassword')}}</a>
     </div>
 </template>
 
