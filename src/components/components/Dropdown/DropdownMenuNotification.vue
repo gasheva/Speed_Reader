@@ -65,25 +65,13 @@ onMounted(() => {
     display: block;
     width: 1px;
     height: 100%;
-    background-color: #1e1e1e;
+    background-color: $grey-3;
   }
 
-  &__group {
-    position: relative;
-
-    &:after {
-      content: "";
-      position: absolute;
-      display: block;
-      height: 1px;
-      width: 100%;
-      background: black;
-      bottom: -8px;
-    }
-
-    &:last-child:after {
-      display: none;
-    }
+  &__img{
+    align-items: center;
+    display: flex;
+    padding-right: 1rem;
   }
 }
 </style>

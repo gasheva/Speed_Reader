@@ -28,9 +28,15 @@
                             <bell/>
                         </template>
                         <template #menu>
-                            <dropdown-menu-notification v-for="notification in notifications"
-                                                        :key="notification.uid"
-                                                        :notification="notification"/>
+                            <div class="header__message-menu message-menu">
+                                <div v-for="notification in notifications"
+                                     :key="notification.uid"
+                                     class="message-menu__item"
+                                >
+                                    <dropdown-menu-notification
+                                            :notification="notification"/>
+                                </div>
+                            </div>
                         </template>
                     </dropdown>
                     <dropdown>
@@ -113,6 +119,25 @@ const userAvatar = computed(() => store.state.auth.user?.avatar);
 
   &__logo {
     margin-right: 5rem;
+  }
+
+  &__message-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+}
+
+.message-menu {
+  &__item {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid $grey-3;
+    padding-top: 0.5rem;
+
+    &:last-child {
+      border-bottom: none;
+    }
   }
 }
 
