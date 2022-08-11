@@ -130,6 +130,10 @@ const userAvatar = computed(() => store.state.auth.user?.avatar);
 }
 
 .message-menu {
+  max-height: 300px;
+  overflow: auto;
+  overflow: overlay;
+
   &__item {
     padding-bottom: 1rem;
     border-bottom: 1px solid $grey-3;
