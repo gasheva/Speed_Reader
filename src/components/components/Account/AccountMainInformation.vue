@@ -11,8 +11,13 @@
             </div>
         </div>
         <div class="main-info__credits">
-            <input-text :hint="'E-mail'" v-model:value="credits.email"/>
-            <input-text :hint="'Nickname'" v-model:value="credits.nickname"/>
+            <input-text :hint="'E-mail'"
+                        :input-validators="[inputRequiredOptions]"
+                        v-model:value="credits.email"/>
+            <input-text :hint="t('nickname')"
+                        :input-validators="[inputRequiredOptions]"
+                        v-model:value="credits.nickname"
+            />
 
             <input-checkbox :label="t('broadcastAgreement')"
                             label-bold
@@ -45,9 +50,12 @@ import {useStore} from 'vuex';
 import {User} from '@/store/modules/auth';
 import {icons} from '@/constants/icons.constants';
 import ImageCropper from '@/components/app/ImageCropper/ImageCropper.vue';
+import {InputValidatorTypes, InputValidatorValues} from '@/interfaces/InputValidator';
 
 const {t} = useI18n();
 const store = useStore();
+
+const inputRequiredOptions: InputValidatorValues = {type: InputValidatorTypes.NOT_EMPTY, msg: t('fieldIsEmpty')};
 
 const credits = ref({
     email: '',
@@ -100,6 +108,7 @@ const saveChangesHandler = async () => {
 const updatePictureHandler = async () => {
     await store.dispatch('settings/postPicture');
 };
+
 </script>
 <style lang="scss" scoped>
 .main-info {

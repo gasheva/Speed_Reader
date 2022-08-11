@@ -18,7 +18,7 @@ const state: State = {
     user: {
         uid: '1',
         email: 'valhalla@mail.c',
-        nickname: '43',
+        nickname: 'Thor',
         broadcast: false,
         avatar: '',
     },
