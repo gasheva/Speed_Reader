@@ -15,12 +15,24 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import(/* webpackChunkName: "home" */ '@/views/HomeView.vue'),
                 // meta: {layout: 'main'},
             },
+            {
+                path: '/exercises/up-down-text-reading',
+                name: 'UpDownTextReading',
+                component: () => import(/* webpackChunkName: "home" */ '@/views/HomeView.vue'),
+                // meta: {layout: 'main'},
+            },
+            {
+                path: '/exercises/vertical-reading',
+                name: 'VerticalReading',
+                component: () => import(/* webpackChunkName: "home" */ '@/views/HomeView.vue'),
+                // meta: {layout: 'main'},
+            },
         ]
     },
     {
-      path: '/statistic',
-      name: 'statistic',
-        component: ()=> import(/* webpackChunkName: "statistic" */ '@/views/StatisticView.vue'),
+        path: '/statistic',
+        name: 'statistic',
+        component: () => import(/* webpackChunkName: "statistic" */ '@/views/StatisticView.vue'),
         meta: {layout: 'main', isPublic: false},
     },
     {

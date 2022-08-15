@@ -2,9 +2,9 @@
     <div class="exercise">
         <timer-base class="exercise__timer" :start-time="startTimeSec"
                     @timeout="timeoutHandler" @timeUpdated="timeUpdatedHandler"/>
+        <span class="exercise__value">{{t('currentResult') +': ' + currentVal}}</span>
 
         <div class="shulte-table">
-            <span class="exercise__value">{{t('currentResult') +': ' + currentVal}}</span>
             <div class="shulte-table__row" v-for="rowIdx in tableSize">
                 <shulte-table-cell
                         v-for="colIdx in tableSize"
@@ -120,24 +120,6 @@ const timeUpdatedHandler = (time: number): void => {
   &__row {
     display: flex;
     width: 100%;
-  }
-}
-.exercise{
-  display: flex;
-  flex-direction: column;
-  width: fit-content;
-  margin: auto;
-  padding: 1.5rem 0;
-
-  &__timer{
-    align-self: end;
-  }
-
-  &__value{
-    display: block;
-    align-self: end;
-    width: fit-content;
-    margin: .25rem 0 .25rem auto;
   }
 }
 </style>

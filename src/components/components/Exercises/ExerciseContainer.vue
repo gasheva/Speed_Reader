@@ -40,10 +40,12 @@ import {useRouter} from 'vue-router';
 import MainSectionWrapper from '@/components/app/MainSectionWrapper.vue';
 
 const ShulteTable = defineAsyncComponent(() => import('@/components/components/Exercises/ShulteTable/ShulteTable.vue'));
+const UpDownTextReading = defineAsyncComponent(() => import('@/components/components/Exercises/UpDownTextReading/UpDownTextReading.vue'));
+const VerticalReading = defineAsyncComponent(() => import('@/components/components/Exercises/VerticalReading/VerticalReading.vue'));
 
 const router = useRouter();
 
-const exercisesComponents = {ShulteTable};
+const exercisesComponents = {ShulteTable, UpDownTextReading, VerticalReading};
 const currentComponent = router.currentRoute.value.name;
 
 
