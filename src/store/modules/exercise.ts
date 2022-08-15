@@ -8,7 +8,22 @@ const state: State = {};
 
 const actions = {
     async fetchExerciseData(_: any, props: { id: string }) {
-        return {size: 4};
+        const wordAndColorMock = [
+            {colour: 'green', hex: '#bd2b2b'},
+            {colour: 'red', hex: '#1e941a'},
+            {colour: 'blue', hex: '#3c5893'},
+            {colour: 'black', hex: '#c02bc5'},
+            {colour: 'yellow', hex: '#48beb1'},
+            {colour: 'yellow', hex: '#bea648'},
+            {colour: 'yellow', hex: '#082a81'},
+            {colour: 'yellow', hex: '#0da693'},
+        ]
+        const pyramidsMock = {
+            words: ['ruwioe', 'jrwekj', 'bfj', 'fewo', 'gjrie', 'buv'],
+            separator: '|',
+            pyramidHeight: 2,
+        }
+        return pyramidsMock;
     },
     async fetchTypes(_: any): Promise<ExerciseType[]> {
         const mockTypes = [
