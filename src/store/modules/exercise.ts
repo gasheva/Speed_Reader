@@ -23,6 +23,7 @@ const actions = {
             separator: '|',
             pyramidHeight: 2,
         }
+        const mockSchulte = {size: 5};
         return pyramidsMock;
     },
     async fetchTypes(_: any): Promise<ExerciseType[]> {
