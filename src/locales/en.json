@@ -47,5 +47,6 @@
     "password": "Password",
     "forgetPassword": "Recover password?",
     "yourResults": "Your results",
-    "back": "Back"
+    "back": "Back",
+    "currentResult": "Current value"
 }
