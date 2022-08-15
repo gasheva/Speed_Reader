@@ -42,10 +42,11 @@ import MainSectionWrapper from '@/components/app/MainSectionWrapper.vue';
 const ShulteTable = defineAsyncComponent(() => import('@/components/components/Exercises/ShulteTable/ShulteTable.vue'));
 const UpDownTextReading = defineAsyncComponent(() => import('@/components/components/Exercises/UpDownTextReading/UpDownTextReading.vue'));
 const VerticalReading = defineAsyncComponent(() => import('@/components/components/Exercises/VerticalReading/VerticalReading.vue'));
+const ColourNaming = defineAsyncComponent(() => import('@/components/components/Exercises/ColourNaming/ColourNaming.vue'));
 
 const router = useRouter();
 
-const exercisesComponents = {ShulteTable, UpDownTextReading, VerticalReading};
+const exercisesComponents = {ShulteTable, UpDownTextReading, VerticalReading, ColourNaming};
 const currentComponent = router.currentRoute.value.name;
 
 

@@ -27,6 +27,12 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import(/* webpackChunkName: "home" */ '@/views/HomeView.vue'),
                 // meta: {layout: 'main'},
             },
+        {
+                path: '/exercises/colour-naming',
+                name: 'ColourNaming',
+                component: () => import(/* webpackChunkName: "home" */ '@/views/HomeView.vue'),
+                // meta: {layout: 'main'},
+            },
         ]
     },
     {
