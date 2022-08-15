@@ -43,10 +43,12 @@ const ShulteTable = defineAsyncComponent(() => import('@/components/components/E
 const UpDownTextReading = defineAsyncComponent(() => import('@/components/components/Exercises/UpDownTextReading/UpDownTextReading.vue'));
 const VerticalReading = defineAsyncComponent(() => import('@/components/components/Exercises/VerticalReading/VerticalReading.vue'));
 const ColourNaming = defineAsyncComponent(() => import('@/components/components/Exercises/ColourNaming/ColourNaming.vue'));
+const LettersPyramids = defineAsyncComponent(() => import('@/components/components/Exercises/LettersPyramids/LettersPyramids.vue'));
 
 const router = useRouter();
 
-const exercisesComponents = {ShulteTable, UpDownTextReading, VerticalReading, ColourNaming};
+const exercisesComponents = {ShulteTable, UpDownTextReading, VerticalReading,
+    ColourNaming, LettersPyramids};
 const currentComponent = router.currentRoute.value.name;
 
 

@@ -27,9 +27,15 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import(/* webpackChunkName: "home" */ '@/views/HomeView.vue'),
                 // meta: {layout: 'main'},
             },
-        {
+            {
                 path: '/exercises/colour-naming',
                 name: 'ColourNaming',
+                component: () => import(/* webpackChunkName: "home" */ '@/views/HomeView.vue'),
+                // meta: {layout: 'main'},
+            },
+            {
+                path: '/exercises/letters-pyramids',
+                name: 'LettersPyramids',
                 component: () => import(/* webpackChunkName: "home" */ '@/views/HomeView.vue'),
                 // meta: {layout: 'main'},
             },
