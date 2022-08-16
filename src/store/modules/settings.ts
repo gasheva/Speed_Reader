@@ -12,7 +12,7 @@ const actions = {
     async postUser(_: any, payload: { credits: User }) {
     },
     async postPicture(_: any, payload: { picture: string, avatar: string, userId: string }) {
-    }
+    },
 };
 
 export const settings: Module<State, any> = {
