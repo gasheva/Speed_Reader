@@ -6,6 +6,7 @@
                     v-model:value="credits.email"/>
         <input-text :hint="t('password')"
                     :input-validators="[inputRequiredOptions]"
+                    input-type="password"
                     v-model:value="credits.password"/>
 
         <input-checkbox :label="t('broadcastAgreement')"
