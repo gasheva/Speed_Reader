@@ -1,20 +1,11 @@
 <template>
     <div class="exercise">
         <div class="letters-pyramids">
-            <div class="letters-pyramids__field letters-pyramids__field--right">
-                <div class="letters-pyramids__row" v-for="currentHeight in pyramidHeight">
-                    <div class="letters-pyramids__item" v-for="i in currentHeight">
-                        {{ getWord() }}
-                    </div>
-                    <div class="letters-pyramids__item separator">|</div>
-                </div>
-            </div>
-            <div class="letters-pyramids__field letters-pyramids__field--left">
-                <div class="letters-pyramids__row" v-for="currentHeight in pyramidHeight">
-                    <div class="letters-pyramids__item" v-for="i in currentHeight">
-                        {{ getWord() }}
-                    </div>
-                </div>
+            <div class="letters-pyramids__item"
+                 :style="{'margin-right': Math.floor(currentHeight/3)+1+'em',
+                 'margin-left': currentHeight/3+'em'}"
+                 v-for="currentHeight in (wordsLength)">
+                {{ words[currentHeight - 1] }}
             </div>
         </div>
         <div class="exercise__button">
@@ -22,7 +13,6 @@
         </div>
     </div>
 </template>
-
 <script lang="ts">
 export default {
     name: 'LettersPyramids'
@@ -31,7 +21,7 @@ export default {
 <script setup lang="ts">
 import {useStore} from 'vuex';
 import {useI18n} from 'vue-i18n';
-import {onBeforeMount, shallowRef} from 'vue';
+import {computed, onBeforeMount, shallowRef} from 'vue';
 import BaseButton from '@/components/app/BaseButton.vue';
 
 const props = defineProps({
@@ -41,60 +31,53 @@ const emit = defineEmits(['finish']);
 const store = useStore();
 const {t} = useI18n();
 
-const words = shallowRef([]);
-const pyramidHeight = shallowRef<number>(0);
+const words = shallowRef<string[]>([]);
+const wordsLength = computed(() => {
+    return words.value.length;
+});
 const separator = shallowRef<string>('');
 onBeforeMount(async () => {
     const response = await store.dispatch('exercise/fetchExerciseData', {id: props.taskName});
     words.value = response.words;
-    pyramidHeight.value = response.pyramidHeight;
     separator.value = response.separator;
 });
 
-const getWord = $_getWord();
-
-function $_getWord() {
-    let wordIdx = 0;
-    return () => {
-        wordIdx += 1;
-        return words.value[wordIdx - 1];
-    };
-}
-
-const finishHandler = ()=>{
+const finishHandler = () => {
     emit('finish');
-}
+};
 </script>
 
 <style lang="scss" scoped>
+$mg: 1em;
+
 .letters-pyramids {
-  display: flex;
-  &__row {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-  }
-
-  &__field {
-    display: flex;
-    flex-direction: column;
-
-    &--left {
-      align-items: start;
-    }
-
-    &--right {
-      align-items: end;
-    }
-  }
-
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: auto;
 
   &__item {
+    display: flex;
     margin: 0 .25rem;
+  }
+
+  &__item:nth-child(3n-2) {
+    justify-self: end;
+    margin-left: 0 !important;
+  }
+
+  &__item:nth-child(3n-1) {
+    justify-self: center;
+    margin: 0 !important;
+  }
+
+  &__item:nth-child(3n) {
+    justify-self: start;
+    margin-right: 0 !important;
   }
 
   .separator {
     text-align: center;
   }
 }
+
 </style>

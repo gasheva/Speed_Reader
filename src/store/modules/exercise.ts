@@ -8,6 +8,14 @@ const state: State = {};
 
 const actions = {
     async fetchExerciseData(_: any, props: { id: string }) {
+        const wordsFormat = (words: string[])=>{
+            return words.flatMap((word: string)=> {
+                let splitted = word.split('|');
+                splitted.splice(1, 0, '|');
+                return splitted;
+            })
+        }
+
         const wordAndColorMock = [
             {colour: 'green', hex: '#bd2b2b'},
             {colour: 'red', hex: '#1e941a'},
@@ -19,12 +27,11 @@ const actions = {
             {colour: 'yellow', hex: '#0da693'},
         ]
         const pyramidsMock = {
-            words: ['ruwioe', 'jrwekj', 'bfj', 'fewo', 'gjrie', 'buv'],
+            words: ['кос|тер', 'пат|рон', 'ли|вень'],
             separator: '|',
-            pyramidHeight: 2,
         }
         const mockSchulte = {size: 5};
-        return pyramidsMock;
+        return {words: wordsFormat(pyramidsMock.words), separator: pyramidsMock.separator};
     },
     async fetchTypes(_: any): Promise<ExerciseType[]> {
         const mockTypes = [
