@@ -58,8 +58,6 @@ const popupHideHandler = (uid: string) => {
   margin: 0 auto;
   max-width: 200px;
   width: 100%;
-  overflow: auto;
-  height: 100vh;
 }
 
 .popups-enter-active,
