@@ -1,4 +1,5 @@
 <template>
+    <popup-corner-fabric ref="popupCornerRef" :message="message"/>
     <component
         :is="layout"/>
 </template>
@@ -21,9 +22,10 @@ export default {
 </script>
 <script setup lang="ts">
 import {useStore} from 'vuex';
-import {computed, onMounted, onUnmounted, ref, watch} from 'vue';
+import {computed, onMounted, onUnmounted, ref, watch, watchEffect} from 'vue';
 import {getBreakpoint} from '@/utils/utils';
 import {useRoute} from 'vue-router';
+import PopupCornerFabric from '@/components/app/Popup/PopupCornerFabric.vue';
 
 const store = useStore();
 const windowWidth = ref(window.innerWidth);
@@ -49,6 +51,23 @@ onUnmounted(() => {
 
 const route = useRoute();
 const layout = computed(() => (route.meta.layout || 'empty') + '-layout');
+
+
+// ERROR BUS
+interface MessageInterface {
+    title: string,
+    text: string,
+}
+
+const popupCornerRef = ref({});
+const message = ref<MessageInterface>({text: '', title: ''});
+
+watchEffect(()=>{
+    if(store.getters['hasMessage']){
+        message.value = store.getters['getMessage'] || {text: '', title: ''};
+    }
+})
+
 
 </script>
 

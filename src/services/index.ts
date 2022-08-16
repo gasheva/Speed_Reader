@@ -12,9 +12,13 @@ auth.interceptors.request.use(config => {
 });
 
 auth.interceptors.response.use(undefined, error => {
-    if (401 === error.response.status) {
+    if(error.response?.status === 500){
+        store.commit('setMessage', error.response.data);
+    }
+    if (error.response?.status === 401) {
         store.dispatch('auth/logout');
     }
+    store.commit('setMessage', {title: 'Some error', text:'Ooohps'});
 });
 
 export default auth;
