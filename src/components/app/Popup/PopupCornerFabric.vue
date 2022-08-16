@@ -24,22 +24,23 @@ export default {
 <script setup lang="ts">
 import PopupCorner from '@/components/app/Popup/PopupCorner.vue';
 import {PropType, ref, watch} from 'vue';
+import {MessageInterface} from '@/interfaces/programMessage.interface';
 
 const props = defineProps({
-    message: {type: Object as PropType<object>, default: () => null},
+    message: {type: Object as PropType<MessageInterface>, default: () => null},
 });
 
-const messagesDisplaying = ref<object[]>([]);
+const messagesDisplaying = ref<MessageInterface[]>([]);
 
 watch(() => props.message, () => {
     if (props.message) {
-        messagesDisplaying.value.push({...props.message, uid: Date.now()});
+        messagesDisplaying.value.push({...props.message, uid: Date.now().toString()});
     }
 });
 
 const popupHideHandler = (uid: string) => {
     messagesDisplaying.value = messagesDisplaying.value
-        .filter((msg: object) => msg.uid !== uid);
+        .filter((msg: MessageInterface) => msg.uid !== uid);
 };
 
 </script>
