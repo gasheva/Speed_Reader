@@ -115,7 +115,13 @@ const selectCardHandler = (taskName: string) => {
 .home-main {
   padding: 1.5rem 2.75rem 1.5rem;
 
+  @media screen and (max-width: $sm) {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+
   &__header {
+    padding-left: 2.75rem;
     margin-bottom: 2rem;
   }
 
