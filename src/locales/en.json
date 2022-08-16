@@ -48,5 +48,6 @@
     "forgetPassword": "Recover password?",
     "yourResults": "Your results",
     "back": "Back",
-    "currentResult": "Current value"
+    "currentResult": "Current value",
+    "finishExercise": "Finish exercise"
 }

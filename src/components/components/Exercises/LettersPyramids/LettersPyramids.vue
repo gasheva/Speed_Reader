@@ -17,6 +17,9 @@
                 </div>
             </div>
         </div>
+        <div class="exercise__button">
+            <base-button styleBtn="black" :text="t('finishExercise')" @click="finishHandler"/>
+        </div>
     </div>
 </template>
 
@@ -29,6 +32,7 @@ export default {
 import {useStore} from 'vuex';
 import {useI18n} from 'vue-i18n';
 import {onBeforeMount, shallowRef} from 'vue';
+import BaseButton from '@/components/app/BaseButton.vue';
 
 const props = defineProps({
     taskName: {type: String, required: true},
@@ -55,6 +59,10 @@ function $_getWord() {
         wordIdx += 1;
         return words.value[wordIdx - 1];
     };
+}
+
+const finishHandler = ()=>{
+    emit('finish');
 }
 </script>
 
