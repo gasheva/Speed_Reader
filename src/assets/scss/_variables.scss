@@ -11,6 +11,9 @@ $black-1: #1e1e1e;
 $red-1: red;
 $red-2: #CD0F0F;
 
+$green-1 : #38de38;
+$green-2 : #0eb30e;
+
 $yellow-1: #EDE301;
 
 $roboto: "Roboto", "Helvetica Neue", Arial, sans-serif;
@@ -20,7 +23,6 @@ $electrolize: "Electrolize", sans-serif;
 $text-small: 12px;
 $text-middle: 16px;
 $text-big: 22px;
-$task-cards-breakpoint: 626px;
 
 /* BREAKPOINTS */
 $sm-extra: 281px;
@@ -28,7 +30,8 @@ $sm: 576px;
 $md: 767px;
 $lg: 992px;
 $lg-extra: 1200px;
-
+$task-cards-breakpoint: 626px;
+$main-section-breakpoint: 885px;
 
 $card-border-radius: 3px;
 

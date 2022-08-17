@@ -6,6 +6,7 @@
                     v-model:value="credits.email"/>
         <input-text :hint="t('password')"
                     :input-validators="[inputRequiredOptions]"
+                    input-type="password"
                     v-model:value="credits.password"/>
 
         <input-checkbox :label="t('broadcastAgreement')"
@@ -49,9 +50,10 @@ const credits = ref({
     toBroadcast: true,
 });
 
-const register = async() => {
+const register = async () => {
     const isSuccess = await store.dispatch('auth/register', credits);
-    if(isSuccess) {
+    if (isSuccess) {
+        store.dispatch('auth/getUser', store.state.auth.user.uid);
         await router.push({name: 'home'});
     }
 };

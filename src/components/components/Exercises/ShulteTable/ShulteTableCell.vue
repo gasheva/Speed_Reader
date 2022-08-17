@@ -64,10 +64,10 @@ onBeforeUnmount(() => {
   align-items: center;
   justify-content: center;
 
-  width: 3.5rem;
-  max-width: 3.5rem;
-  min-width: 3.5rem;
-  height: 3.5rem;
+  width: 5.5rem;
+  max-width: 5.5rem;
+  min-width: 5.5rem;
+  height: 5.5rem;
 
   padding: 1rem;
   border: 1px solid black;
@@ -75,16 +75,23 @@ onBeforeUnmount(() => {
   font-size: 1.5rem;
   transition: color 400ms linear;
 
+  @media screen and (max-width: $sm) {
+    width: 3.5rem;
+    max-width: 3.5rem;
+    min-width: 3.5rem;
+    height: 3.5rem;
+  }
+
   &--neutral {
-    color: black;
+    background-color: white;
   }
 
   &--right {
-    color: green;
+    background-color: $green-1;
   }
 
   &--wrong {
-    color: $red-2;
+    background-color: $red-1;
   }
 }
 

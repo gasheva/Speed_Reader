@@ -1,9 +1,10 @@
 <template>
     <div class="exercise">
-        <timer-base :start-time="startTimeSec" @timeout="timeoutHandler" @timeUpdated="timeUpdatedHandler"/>
+        <timer-base class="exercise__timer" :start-time="startTimeSec"
+                    @timeout="timeoutHandler" @timeUpdated="timeUpdatedHandler"/>
+        <span class="exercise__value">{{t('currentResult') +': ' + currentVal}}</span>
 
         <div class="shulte-table">
-            {{currentVal}}
             <div class="shulte-table__row" v-for="rowIdx in tableSize">
                 <shulte-table-cell
                         v-for="colIdx in tableSize"
@@ -28,12 +29,14 @@ import {computed, onBeforeMount, ref} from 'vue';
 import ShulteTableCell from '@/components/components/Exercises/ShulteTable/ShulteTableCell.vue';
 import {ShulteData} from '@/components/components/Exercises/ShulteTable/data/shulteData.interface';
 import {useStore} from 'vuex';
+import {useI18n} from 'vue-i18n';
 
 const props = defineProps({
     taskName: {type: String, required: true},
 })
 const emit = defineEmits(['finish']);
 const store = useStore();
+const {t} = useI18n();
 
 const timeoutHandler = () => {
     onResult();
@@ -56,17 +59,26 @@ onBeforeMount(async () => {
     shuffle(shulteTable.value);
 });
 
+const locale = computed(()=> store.getters['preference/getLocale']);
+
+const getFirstLetter = (locale: string = 'ru')=>{
+    if (locale==='ru'){
+        return 1040;
+    }
+    return 65;
+}
+
 const generateTable = (arrayCapacity: number, type: string): ShulteData[] => {
     const getValue = (i: number):string=>{
         if(type==='numbers'){
             return i.toString();
         }
-        return String.fromCharCode(1039+i);
+        return String.fromCharCode(getFirstLetter(locale.value)+i);
     }
 
     const randomArray = [];
     for (let i = 1; i < arrayCapacity + 1; i++) {
-        randomArray.push({index: i, value: getValue(i)});
+        randomArray.push({index: i, value: getValue(i-1)});
     }
     return randomArray;
 };
@@ -96,7 +108,7 @@ const rightSelectHandler = () => {
 
 
 /* TIMER LOGIC */
-const startTimeSec = 5;
+const startTimeSec = 30;
 let currentTimeSec = startTimeSec;
 const timeUpdatedHandler = (time: number): void => {
     currentTimeSec = time;

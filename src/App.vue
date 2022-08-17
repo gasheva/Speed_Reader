@@ -1,6 +1,6 @@
 <template>
-    <component
-        :is="layout"/>
+    <popup-corner-fabric ref="popupCornerRef" :message="message"/>
+    <component :is="layout"/>
 </template>
 
 <script lang="ts">
@@ -21,9 +21,10 @@ export default {
 </script>
 <script setup lang="ts">
 import {useStore} from 'vuex';
-import {computed, onMounted, onUnmounted, ref, watch} from 'vue';
+import {computed, onMounted, onUnmounted, ref, watch, watchEffect} from 'vue';
 import {getBreakpoint} from '@/utils/utils';
 import {useRoute} from 'vue-router';
+import PopupCornerFabric from '@/components/app/Popup/PopupCornerFabric.vue';
 
 const store = useStore();
 const windowWidth = ref(window.innerWidth);
@@ -50,84 +51,102 @@ onUnmounted(() => {
 const route = useRoute();
 const layout = computed(() => (route.meta.layout || 'empty') + '-layout');
 
+
+// ERROR BUS
+interface MessageInterface {
+    title: string,
+    text: string,
+}
+
+const popupCornerRef = ref({});
+const message = ref<MessageInterface | undefined>(undefined);
+
+watchEffect(() => {
+    message.value = undefined;
+    if (store.getters['hasMessage']) {
+        message.value = store.getters['getMessage'] || undefined;
+    }
+});
+
+
 </script>
 
 <style lang="scss">
 /* CLEARING STYLES */
 * {
-    padding: 0;
-    margin: 0;
-    border: 0;
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 *, *:before, *:after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 :focus, :active {
-    outline: none;
+  outline: none;
 }
 
 a:focus, a:active {
-    outline: none;
+  outline: none;
 }
 
 nav, footer, header, aside {
-    display: block;
+  display: block;
 }
 
 // по дефолту они inline
 html, body {
-    height: 100%;
-    width: 100%;
-    line-height: 100%;
-    font-size: 1rem;
-    ms-text-size-adjust: 100%; // запрет изменения размера шрифта браузером
-    moz-text-size-adjust: 100%;
-    webkit-text-size-adjust: 100%;
+  height: 100%;
+  width: 100%;
+  line-height: 100%;
+  font-size: 1rem;
+  ms-text-size-adjust: 100%; // запрет изменения размера шрифта браузером
+  moz-text-size-adjust: 100%;
+  webkit-text-size-adjust: 100%;
 }
 
 input, button, textarea {
-    font-family: inherit;
+  font-family: inherit;
 }
 
 // по дефолту не наследуют
 input::-ms-clear {
-    display: none;
+  display: none;
 }
 
 // убрать крестик в инпуте
 button {
-    cursor: pointer;
-    background-color: inherit;
+  cursor: pointer;
+  background-color: inherit;
 }
 
 button::-moz-focus-inner {
-    padding: 0;
-    border: 0;
+  padding: 0;
+  border: 0;
 }
 
 a, a:visited {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 ul li {
-    list-style: none;
+  list-style: none;
 }
 
 img {
-    vertical-align: top;
+  vertical-align: top;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-size: inherit;
-    font-weight: 400;
+  font-size: inherit;
+  font-weight: 400;
 }
 </style>

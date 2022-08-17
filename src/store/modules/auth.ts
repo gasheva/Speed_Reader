@@ -1,4 +1,6 @@
 import {unref} from 'vue';
+import authApi from '@/services/index';
+import serviceApi from '@/services/index';
 
 const LS_TOKEN_FIELD_NAME = 'sp_token';
 
@@ -45,6 +47,13 @@ const mutations = {
 };
 
 const actions = {
+    async getUser({commit}: { commit: Function }, {id}: { id: string }) {
+        const resp = await serviceApi.get(`user/${id}`);
+        if (!resp) return false;
+        commit('setUser', resp.data);
+        return true;
+    },
+
     async login({commit}: { commit: Function }, credits: User & { password: string }) {
         // const mockUser = {uid: '1', email: 'beowulf@m.ru', nickname: 'Beowulf'};
         const mockToken = '123';
@@ -55,11 +64,18 @@ const actions = {
     },
 
     async register({commit}: { commit: Function }, credits: User & { password: string }) {
-        // const mockUser = {uid: '1', email: 'beowulf@m.ru', nickname: 'Beowulf'};
-        const mockToken = '123';
-        const unrefUser = unref(credits);
-        commit('setUser', unrefUser);
-        commit('setToken', mockToken);
+        const creditsUnref = unref(credits);
+        const resp = await serviceApi.post('auth',
+            {
+                login: creditsUnref.email,
+                password: creditsUnref.password,
+            });
+        if (!resp) return false;
+        commit('setUser', {
+            login: resp.data.login,
+            uid: resp.data.id
+        });
+        commit('setToken', resp.data.jwtToken);
         return true;
     },
 

@@ -47,5 +47,7 @@
     "password": "Пароль",
     "forgetPassword": "Забыли пароль?",
     "yourResults": "Ваши результаты",
-    "back": "Назад"
+    "back": "Назад",
+    "currentResult": "Текущее значение",
+    "finishExercise": "Закончить упражнение"
 }
