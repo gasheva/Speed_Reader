@@ -17,21 +17,19 @@ const actions = {
         }
 
         const wordAndColorMock = [
-            {colour: 'green', hex: '#bd2b2b'},
-            {colour: 'red', hex: '#1e941a'},
-            {colour: 'blue', hex: '#3c5893'},
-            {colour: 'black', hex: '#c02bc5'},
-            {colour: 'yellow', hex: '#48beb1'},
-            {colour: 'yellow', hex: '#bea648'},
-            {colour: 'yellow', hex: '#082a81'},
-            {colour: 'yellow', hex: '#0da693'},
+            {colour: 'green', hex: '#bd2b2b', isRight: false},
+            {colour: 'red', hex: '#1e941a', isRight: false},
+            {colour: 'blue', hex: '#3c5893', isRight: true},
+            {colour: 'black', hex: '#c02bc5', isRight: false},
+            {colour: 'yellow', hex: '#48beb1', isRight: false},
+            {colour: 'yellow', hex: '#bea648', isRight: true},
         ]
         const pyramidsMock = {
             words: ['кос|тер', 'пат|рон', 'ли|вень'],
             separator: '|',
         }
         const mockSchulte = {size: 5};
-        return {words: wordsFormat(pyramidsMock.words), separator: pyramidsMock.separator};
+        return wordAndColorMock;
     },
     async fetchTypes(_: any): Promise<ExerciseType[]> {
         const mockTypes = [

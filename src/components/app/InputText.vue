@@ -1,6 +1,7 @@
 <template>
     <div class="input-text">
         <label v-show="hint" class="input-text__label label">{{ hint }}</label>
+        <!-- TODO(trim?) -->
         <input ref="inputRef"
                v-model="text"
                :class="{'border-danger':!isValid.isValid}"
@@ -36,7 +37,7 @@ const props = defineProps({
     inputType: {
         type: String,
         default: 'text',
-        validator: (val: string)=>{
+        validator: (val: string) => {
             const values = new Set(['text', 'password', 'email', 'number']);
             return values.has(val);
         }
@@ -147,7 +148,7 @@ const text = computed({
     }
   }
 
-  &__error{
+  &__error {
     font-size: $text-small;
     color: $red-2;
   }
