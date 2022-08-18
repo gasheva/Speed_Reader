@@ -40,8 +40,8 @@ import {icons} from '@/constants/icons.constants';
 import {defineAsyncComponent, ref} from 'vue';
 import {useI18n} from 'vue-i18n';
 
-const AccountMainInformation = defineAsyncComponent(() => import('@/components/components/Account/AccountMainInformation.vue'));
-const AccountMainMessages = defineAsyncComponent(() => import('@/components/components/Account/AccountMainMessages.vue'));
+const AccountMainInformation = defineAsyncComponent(() => import(/* webpackChunkName: "AccountMainInformation" */'@/components/components/Account/AccountMainInformation.vue'));
+const AccountMainMessages = defineAsyncComponent(() => import(/* webpackChunkName: "AccountMainMessages" */'@/components/components/Account/AccountMainMessages.vue'));
 
 const {t} = useI18n();
 

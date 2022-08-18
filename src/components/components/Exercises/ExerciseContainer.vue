@@ -39,11 +39,11 @@ import {computed, defineAsyncComponent, ref} from 'vue';
 import {useRouter} from 'vue-router';
 import MainSectionWrapper from '@/components/app/MainSectionWrapper.vue';
 
-const ShulteTable = defineAsyncComponent(() => import('@/components/components/Exercises/ShulteTable/ShulteTable.vue'));
-const UpDownTextReading = defineAsyncComponent(() => import('@/components/components/Exercises/UpDownTextReading/UpDownTextReading.vue'));
-const VerticalReading = defineAsyncComponent(() => import('@/components/components/Exercises/VerticalReading/VerticalReading.vue'));
-const ColourNaming = defineAsyncComponent(() => import('@/components/components/Exercises/ColourNaming/ColourNaming.vue'));
-const LettersPyramids = defineAsyncComponent(() => import('@/components/components/Exercises/LettersPyramids/LettersPyramids.vue'));
+const ShulteTable = defineAsyncComponent(() => import(/* webpackChunkName: "ShulteTable" */'@/components/components/Exercises/ShulteTable/ShulteTable.vue'));
+const UpDownTextReading = defineAsyncComponent(() => import(/* webpackChunkName: "UpDownTextReading" */'@/components/components/Exercises/UpDownTextReading/UpDownTextReading.vue'));
+const VerticalReading = defineAsyncComponent(() => import(/* webpackChunkName: "VerticalReading" */'@/components/components/Exercises/VerticalReading/VerticalReading.vue'));
+const ColourNaming = defineAsyncComponent(() => import(/* webpackChunkName: "ColourNaming" */'@/components/components/Exercises/ColourNaming/ColourNaming.vue'));
+const LettersPyramids = defineAsyncComponent(() => import(/* webpackChunkName: "LettersPyramids" */'@/components/components/Exercises/LettersPyramids/LettersPyramids.vue'));
 
 const router = useRouter();
 

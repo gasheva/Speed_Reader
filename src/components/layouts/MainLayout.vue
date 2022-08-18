@@ -26,7 +26,7 @@ import TheFooter from '@/components/app/TheFooter.vue';
 import {onClickOutside} from '@vueuse/core';
 
 const TheMobileSidebar = defineAsyncComponent(() =>
-    import('@/components/app/Navigation/TheMobileSidebar.vue'));
+    import(/* webpackChunkName: "TheMobileSidebar" */'@/components/app/Navigation/TheMobileSidebar.vue'));
 
 const store = useStore();
 let isSidebarVisible = computed(() => store.state.isSidebarVisible);
