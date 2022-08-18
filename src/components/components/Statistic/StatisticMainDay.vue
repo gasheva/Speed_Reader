@@ -3,6 +3,7 @@
         <div class="section-main__header">
             {{ t('statisticFor') + ' ' + getFullDate }}
         </div>
+        <calendar-base/>
         <div class="section-main__header">
             {{ t('program') }}
         </div>
@@ -37,6 +38,7 @@ import {TableBaseRowInterface} from '@/components/app/Table/data/tableBase.inter
 import {FormatOptions, formatTime, FormatTimeTypes} from '@/utils/utils';
 import {useI18n} from 'vue-i18n';
 import {useStore} from 'vuex';
+import CalendarBase from '@/components/app/Calendar/CalendarBase.vue';
 
 
 const props = defineProps({
