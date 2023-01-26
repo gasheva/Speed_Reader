@@ -1,0 +1,6 @@
+version: "3.4"
+services:
+  speed-reader:
+    build: ./Speed_Reader
+    ports:
+      - "8080:8080"
