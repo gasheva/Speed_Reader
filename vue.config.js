@@ -2,6 +2,10 @@ const {defineConfig} = require('@vue/cli-service');
 
 module.exports       = defineConfig({
     transpileDependencies: true,
+    // devServer:{
+    //     host: true,
+    //     port: 8080,
+    // },
     //You can get info in this file: node_modules/@vue/cli-service/lib/config/base.js
     chainWebpack: config => {
         config
